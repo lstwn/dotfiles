@@ -97,17 +97,3 @@
         state: link
       loop: "{{ vscode_links }}"
 
-    # todo move out of link
-    - name: Get remote hostname
-      ansible.builtin.command: hostname
-      register: hostname
-    - name: Generate SSH keypair
-      ansible.builtin.user:
-        name: "{{ ansible_env.USER }}"
-        state: present
-        generate_ssh_key: yes
-        ssh_key_type: ed25519
-        ssh_key_file: ".ssh/id_ed25519"
-        ssh_key_comment: "{{ hostname.stdout }}"
-        ssh_key_passphrase: "{{ ssh_key_passphrase }}"
-        force: no
