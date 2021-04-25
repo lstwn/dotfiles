@@ -1,0 +1,304 @@
+{
+  "window.titleBarStyle": "custom",
+  "window.menuBarVisibility": "toggle",
+  "window.autoDetectColorScheme": true,
+  "workbench.preferredDarkColorTheme": "GitHub Dark",
+  "workbench.preferredLightColorTheme": "GitHub Light",
+  "workbench.editor.enablePreview": false,
+  "workbench.editor.closeEmptyGroups": true,
+  "workbench.editor.highlightModifiedTabs": true,
+  "workbench.editor.limit.enabled": true,
+  "workbench.editor.limit.perEditorGroup": true,
+  "workbench.editor.limit.value": 8,
+  "workbench.colorCustomizations": {
+    "[Atom One Dark]": {
+      "terminal.ansiBlack": "#282c34",
+      "terminal.ansiRed": "#e06c75",
+      "terminal.ansiGreen": "#98c379",
+      "terminal.ansiYellow": "#e5c07b",
+      "terminal.ansiBlue": "#61afef",
+      "terminal.ansiMagenta": "#c678dd",
+      "terminal.ansiCyan": "#56b6c2",
+      "terminal.ansiWhite": "#abb2bf",
+      "terminal.ansiBrightBlack": "#545862",
+      "terminal.ansiBrightRed": "#e06c75",
+      "terminal.ansiBrightGreen": "#98c379",
+      "terminal.ansiBrightYellow": "#e5c07b",
+      "terminal.ansiBrightBlue": "#61afef",
+      "terminal.ansiBrightMagenta": "#c678dd",
+      "terminal.ansiBrightCyan": "#56b6c2",
+      "terminal.ansiBrightWhite": "#c8ccd4"
+    },
+    "[Atom One Light]": {
+      "terminal.ansiBlack": "#282c34",
+      "terminal.ansiRed": "#e06c75",
+      "terminal.ansiGreen": "#98c379",
+      "terminal.ansiYellow": "#e5c07b",
+      "terminal.ansiBlue": "#61afef",
+      "terminal.ansiMagenta": "#c678dd",
+      "terminal.ansiCyan": "#56b6c2",
+      "terminal.ansiWhite": "#abb2bf",
+      "terminal.ansiBrightBlack": "#545862",
+      "terminal.ansiBrightRed": "#e06c75",
+      "terminal.ansiBrightGreen": "#98c379",
+      "terminal.ansiBrightYellow": "#e5c07b",
+      "terminal.ansiBrightBlue": "#61afef",
+      "terminal.ansiBrightMagenta": "#c678dd",
+      "terminal.ansiBrightCyan": "#56b6c2",
+      "terminal.ansiBrightWhite": "#c8ccd4"
+    },
+    "[SynthWave '84]": {
+      "terminal.ansiBlack": "#181818",
+      "terminal.ansiRed": "#FE4450",
+      "terminal.ansiGreen": "#72F1B8",
+      "terminal.ansiYellow": "#FF8B39",
+      "terminal.ansiBlue": "#19D0EE",
+      "terminal.ansiMagenta": "#E65ED9",
+      "terminal.ansiCyan": "#36F9F6",
+      "terminal.ansiWhite": "#BBBBBB",
+      "terminal.ansiBrightBlack": "#495495",
+      "terminal.ansiBrightRed": "#FE4450",
+      "terminal.ansiBrightGreen": "#72F1B8",
+      "terminal.ansiBrightYellow": "#FF8B39",
+      "terminal.ansiBrightBlue": "#19D0EE",
+      "terminal.ansiBrightMagenta": "#E65ED9",
+      "terminal.ansiBrightCyan": "#36F9F6",
+      "terminal.ansiBrightWhite": "#BBBBBB"
+    },
+    "[Ubuntu]": {
+      "terminal.ansiBlack": "#181818",
+      "terminal.ansiRed": "#E95420",
+      "terminal.ansiGreen": "#3DB14E",
+      "terminal.ansiYellow": "#F99B11",
+      "terminal.ansiBlue": "#19B6EE",
+      "terminal.ansiMagenta": "#924D8B",
+      "terminal.ansiCyan": "#34E2E2",
+      "terminal.ansiWhite": "#D7D7D7",
+      "terminal.ansiBrightBlack": "#666666",
+      "terminal.ansiBrightRed": "#E95420",
+      "terminal.ansiBrightGreen": "#3DB14E",
+      "terminal.ansiBrightYellow": "#F99B11",
+      "terminal.ansiBrightBlue": "#19B6EE",
+      "terminal.ansiBrightMagenta": "#924D8B",
+      "terminal.ansiBrightCyan": "#34E2E2",
+      "terminal.ansiBrightWhite": "#878787"
+    },
+    "terminal.ansiBlack": "#3A3D41",
+    "terminal.ansiRed": "#d16969",
+    "terminal.ansiGreen": "#4EC9B0",
+    "terminal.ansiYellow": "#d7ba7d",
+    "terminal.ansiBlue": "#569cd6",
+    "terminal.ansiMagenta": "#646695",
+    "terminal.ansiCyan": "#51B6C4",
+    "terminal.ansiWhite": "#C8C8C8",
+    "terminal.ansiBrightBlack": "#3A3D41",
+    "terminal.ansiBrightRed": "#d16969",
+    "terminal.ansiBrightGreen": "#4EC9B0",
+    "terminal.ansiBrightYellow": "#d7ba7d",
+    "terminal.ansiBrightBlue": "#569cd6",
+    "terminal.ansiBrightMagenta": "#646695",
+    "terminal.ansiBrightCyan": "#51B6C4",
+    "terminal.ansiBrightWhite": "#C8C8C8"
+  },
+  "terminal.integrated.drawBoldTextInBrightColors": false,
+  "terminal.integrated.copyOnSelection": true,
+  "terminal.integrated.cursorStyle": "block",
+  "terminal.integrated.cursorBlinking": false,
+  "terminal.integrated.fontSize": 14,
+  "breadcrumbs.enabled": true,
+  "editor.fontFamily": "'DejaVu Sans Mono', 'monospace'",
+  "editor.fontSize": 14,
+  "editor.formatOnType": true,
+  "editor.cursorSurroundingLines": 10,
+  "editor.suggestSelection": "first",
+  "editor.renderWhitespace": "all",
+  "editor.wordWrap": "on",
+  "editor.cursorBlinking": "solid",
+  "editor.foldingHighlight": true,
+  "editor.rulers": [80],
+  "editor.tabSize": 4,
+  "editor.acceptSuggestionOnEnter": "off",
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": false,
+    "strings": true
+  },
+  "editor.semanticHighlighting.enabled": "configuredByTheme",
+  "zenMode.hideLineNumbers": false,
+  "zenMode.hideStatusBar": false,
+  "zenMode.hideTabs": false,
+  "git.enableSmartCommit": true,
+  "git.autofetch": true,
+  "markdown.preview.fontSize": 15,
+  "markdown.preview.fontFamily": "'DejaVu Sans', -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'Ubuntu', 'Droid Sans', sans-serif",
+  "markdown.preview.scrollEditorWithPreview": false,
+  "telemetry.enableTelemetry": false,
+  "vim.showmodename": true,
+  "vim.debug.silent": true,
+  "vim.useSystemClipboard": true,
+  "vim.easymotion": true,
+  "vim.incsearch": true,
+  "vim.highlightedyank.enable": true,
+  "vim.highlightedyank.color": "rgba(120, 120, 120, 0.5)",
+  "vim.highlightedyank.duration": 500,
+  "vim.useCtrlKeys": true,
+  "vim.leader": ",",
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["g", "d"],
+      "commands": ["editor.action.peekDefinition"]
+    },
+    {
+      "before": ["g", "y"],
+      "commands": ["editor.action.goToTypeDefinition"]
+    },
+    {
+      "before": ["g", "r"],
+      "commands": ["editor.action.referenceSearch.trigger"]
+    },
+    {
+      "before": ["]", "g"],
+      "commands": ["editor.action.marker.nextInFiles"]
+    },
+    {
+      "before": ["[", "g"],
+      "commands": ["editor.action.marker.prevInFiles"]
+    },
+    {
+      "before": ["<leader>", "r", "n"],
+      "commands": ["editor.action.rename"]
+    },
+    {
+      "before": ["<leader>", "f"],
+      "commands": ["workbench.action.quickOpen"]
+    },
+    {
+      "before": ["<leader>", "e"],
+      "commands": ["workbench.view.explorer"]
+    },
+    {
+      "before": ["<leader>", "g"],
+      "commands": ["workbench.view.scm"]
+    },
+    {
+      "before": ["<leader>", "r"],
+      "commands": ["workbench.action.replaceInFiles"]
+    },
+    {
+      "before": ["<leader>", "c"],
+      "commands": ["workbench.action.terminal.focus"]
+    },
+    {
+      "before": ["<leader>", "d"],
+      "commands": ["workbench.actions.view.problems"]
+    },
+    {
+      "before": ["<leader>", "o"],
+      "commands": ["workbench.action.gotoSymbol"]
+    },
+    {
+      "before": ["<leader>", "s"],
+      "commands": ["workbench.action.showAllSymbols"]
+    },
+    {
+      "before": [":"],
+      "commands": ["workbench.action.showCommands"]
+    },
+  ],
+  "files.associations": {
+    "*.txt": "markdown",
+    "*.csv": "CSV (pipe)",
+    "*.prisma": "graphql"
+  },
+  "[markdown]": {
+    "editor.wordWrap": "on",
+    "editor.quickSuggestions": true,
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "latex-workshop.view.pdf.viewer": "tab",
+  "latex-workshop.latex.outDir": "build",
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "lualatex ➞ biber ➞ lualatex",
+      "tools": ["lualatex", "biber", "lualatex"]
+    },
+    {
+      "name": "latexmk (with lualatex)",
+      "tools": ["lualatexmk"]
+    }
+  ],
+  "latex-workshop.latex.tools": [
+    {
+      "name": "lualatex",
+      "command": "lualatex",
+      "args": [
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "-output-format=pdf",
+        "-output-directory=%OUTDIR%",
+        "%DOC%"
+      ],
+      "env": {}
+    },
+    {
+      "name": "biber",
+      "command": "biber",
+      "args": ["%OUTDIR%/%DOCFILE%"],
+      "env": {}
+    },
+    {
+      "name": "lualatexmk",
+      "command": "latexmk",
+      "args": [
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "-lualatex",
+        "-outdir=%OUTDIR%",
+        "%DOC%"
+      ],
+      "env": {}
+    }
+  ],
+  "terminal.integrated.shell.linux": "/usr/bin/tmux",
+  "todo-tree.highlights.enabled": true,
+  "todo-tree.tree.showScanModeButton": false,
+  "[vue]": {
+    "editor.defaultFormatter": "octref.vetur"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "yaml.schemas": {
+    "file:///home/lstwn/.vscode/extensions/atlassian.atlascode-2.6.6/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+  },
+  "Notes.notesLocation": "/home/lstwn/Documents/Notes",
+  "[dart]": {
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.rulers": [80],
+    "editor.selectionHighlight": false,
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.suggestSelection": "first",
+    "editor.tabCompletion": "onlySnippets",
+    "editor.wordBasedSuggestions": false
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "cSpell.enabled": false,
+  "workbench.colorTheme": "GitHub Dark",
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "rust-analyzer.inlayHints.enable": false,
+  "workbench.activityBar.visible": false,
+  "terminal.integrated.commandsToSkipShell": [
+    "-workbench.action.quickOpen"
+  ],
+}

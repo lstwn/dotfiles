@@ -1,0 +1,53 @@
+[user]
+	name = Leo
+	email = lstwn@mailbox.org
+[merge]
+	tool = vimdiff
+[diff]
+    tool = vimdiff
+[alias]
+    slog = log --abbrev-commit --pretty=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'
+    mlog = log --graph --abbrev-commit --pretty=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)%n' --stat
+    llog = log --graph --abbrev-commit --pretty=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)%n' --stat --patch
+    slog = log --abbrev-commit --date=relative
+    mlog = log --abbrev-commit --date=relative --stat
+    llog = log --abbrev-commit --date=relative --stat --patch
+    last = log -1 HEAD --stat --patch
+    unstage = reset HEAD --
+    undo = checkout --
+    wdiff = diff --stat --patch
+    cdiff = diff --cached --stat --patch
+[pull]
+	rebase = false
+[core]
+    pager = delta
+[pager]
+    # status = true
+    # commit = true
+    # push = true
+[delta]
+    features = line-numbers decorations # side-by-side
+    syntax-theme = base16
+    plus-style = syntax
+    plus-emph-style = black green
+    plus-non-emph-style = syntax
+    minus-style = syntax
+	minus-emph-style = black red
+	minus-non-emph-style = syntax
+	zero-style = syntax
+    paging = always
+[delta "decorations"]
+    commit-style = raw
+    commit-decoration-style = ul ol yellow
+    file-style = black blue
+    file-decoration-style = ul ol black
+    hunk-header-style = syntax
+    hunk-header-decoration-style = ul ol black
+[delta "line-numbers"]
+	line-numbers-zero-style = brightblack
+    line-numbers-minus-style = red
+    line-numbers-plus-style = green
+    line-numbers-left-style = black
+    line-numbers-right-style = black
+[interactive]
+    diffFilter = delta --color-only

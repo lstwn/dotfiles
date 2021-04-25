@@ -1,0 +1,316 @@
+
+###############################################################
+# This configuration file lets you
+# - define new commands
+# - change the shortcut or triggering keys of built-in verbs
+# - change the colors
+# - set default values for flags
+# - set special behaviors on specific paths
+# - and more...
+#
+# Configuration documentation is available at
+#     https://dystroy.org/broot
+#
+# Note about the TOML format: single value properties must be
+# before arrays (skins, verbs)
+###############################################################
+
+###############################################################
+# Default flags
+# You can set up flags you want broot to start with by
+# default, for example `default_flags="ihp"` if you usually want
+# to see hidden and gitignored files and the permissions (then
+# if you don't want the hidden files you can launch `br -H`)
+# A popular flag is the `g` one which displays git related info.
+#
+default_flags = "g"
+
+###############################################################
+# Date/Time format
+# If you want to change the format for date/time, uncomment the
+# following line and change it according to
+# https://docs.rs/chrono/0.4.11/chrono/format/strftime/index.html
+#
+date_time_format = "%Y-%m-%d %R"
+
+###############################################################
+# Whether to mark the selected line with a triangle
+#
+# show_selection_mark = true
+
+###############################################################
+# Column order
+# cols_order, if specified, must be a permutation of the following
+# array. You should keep the name at the end as it has a variable
+# length.
+#
+cols_order = [
+	"mark",
+	"permission",
+	"date",
+	"size",
+	"count",
+	"git",
+	"branch",
+	"name",
+]
+
+###############################################################
+# True Colors
+# If this parameter isn't set, broot tries to automatically
+# determine whether true colors (24 bits) are available.
+# As this process is unreliable, you may uncomment this setting
+# and set it to false or true if you notice the colors in
+# previewed images are too off.
+# true_colors = false
+
+###############################################################
+# Icons
+# If you want to display icons in broot, uncomment this line
+# (see https://dystroy.org/broot/icons for installation and
+# troubleshooting)
+# icon_theme = "vscode"
+
+###############################################################
+# Verbs and shortcuts
+# You can define your own commands which would be applied to
+# the selection.
+
+[[verbs]]
+name = "tail_lines"
+invocation = "tl {lines_count}"
+external = "tail -f -n {lines_count} {file}"
+
+[[verbs]]
+name = "batf"
+invocation = "batf {lines_count}"
+external = "batf {file} {lines_count}"
+from_shell = true
+apply_to = "file"
+
+[[verbs]]
+invocation = "edit"
+external = "vim +{line} {file}"
+leave_broot = false
+
+[[verbs]]
+invocation = "touch {subpath}"
+external = "touch {directory}/{subpath}"
+leave_broot = false
+
+[[verbs]]
+invocation = "create {subpath}"
+external = "$EDITOR {directory}/{subpath}"
+leave_broot = false
+
+[[verbs]]
+invocation = "git_log"
+shortcut = "gl"
+leave_broot = false
+external = "git log --patch {file}"
+apply_to = "any"
+
+[[verbs]]
+invocation = "git_diff"
+shortcut = "gd"
+leave_broot = false
+external = "git diff -- {file}"
+apply_to = "file"
+
+[[verbs]]
+invocation = "git_add"
+shortcut = "ga"
+leave_broot = false
+external = "git add {file}"
+
+[[verbs]]
+name = "git_commit"
+invocation = "git_commit {commit_message}"
+shortcut = "gc"
+leave_broot = false
+external = "git commit -m '{commit_message}'"
+
+[[verbs]]
+name = "git_commit_no_verify"
+invocation = "git_commit_no_verify {commit_message}"
+shortcut = "gcnv"
+leave_broot = false
+external = "git commit -m '{commit_message}' --no-verify"
+
+[[verbs]]
+name = "git_push"
+invocation = "git_push"
+shortcut = "gp"
+leave_broot = false
+external = "git push"
+
+[[verbs]]
+name = "git_push_no_verify"
+invocation = "git_push_no_verify"
+shortcut = "gpnv"
+leave_broot = false
+external = "git push --no-verify"
+
+[[verbs]]
+invocation = "git_status"
+leave_broot = false
+external = "git status"
+
+[[verbs]]
+name = "view"
+invocation = "view"
+keys = ["v", "ctrl-p"]
+external = "bat --paging=always {file}"
+leave_broot = false
+apply_to = "file"
+
+[[verbs]]
+invocation = "terminal"
+shortcut = "term"
+external = "$SHELL"
+set_working_dir = true
+leave_broot = false
+
+[[verbs]]
+invocation = "home"
+key = "ctrl-home"
+internal = ":focus ~"
+
+[[verbs]]
+key = "ctrl-j"
+internal = ":line_down"
+
+[[verbs]]
+key = "ctrl-k"
+internal = ":line_up"
+
+[[verbs]]
+key = "ctrl-h"
+internal = ":panel_left"
+
+[[verbs]]
+key = "ctrl-l"
+internal = ":panel_right"
+
+[[verbs]]
+key = "ctrl-f"
+internal = ":page_down"
+
+[[verbs]]
+key = "ctrl-b"
+internal = ":page_up"
+
+[[verbs]]
+keys = ["g", "ctrl-u"]
+internal = ":select_first"
+
+[[verbs]]
+keys = ["G", "ctrl-d"]
+internal = ":select_last"
+
+[[verbs]]
+keys = ["ctrl-q"]
+internal = ":close_panel_cancel"
+
+# [[verbs]]
+# key = "ctrl-p"
+# execution = ":toggle_preview"
+
+###############################################################
+# Special paths
+# If some paths must be handled specially, uncomment (and change
+# this section as per the examples
+#
+# [special-paths]
+# "/media/slow-backup-disk" = "no-enter"
+# "/home/dys/useless" = "hide"
+# "/home/dys/my-link-I-want-to-explore" = "enter"
+#
+[special-paths]
+"*/.git" = "no-enter"
+
+###############################################################
+# Skin
+# If you want to change the colors of broot,
+# uncomment the following bloc and start messing
+# with the various values.
+#
+[skin]
+default = "none none"
+tree = "ansi(0) None Bold"
+file = "None None / ansi(0) None"
+directory = "ansi(4) none Bold / ansi(0) None Bold"
+exe = "ansi(6) None / ansi(0) None Bold"
+link = "ansi(5) None / ansi(0) None Bold"
+pruning = "ansi(0) None Italic Bold"
+perm__ = "ansi(0) None Bold"
+perm_r = "ansi(3) None"
+perm_w = "ansi(1) None"
+perm_x = "ansi(2) None"
+owner = "ansi(8) None Bold"
+group = "ansi(8) None"
+count = "ansi(6) None"
+dates = "ansi(5) None"
+# sparse = "ansi(214) None"
+# content_extract = "ansi(29) None"
+content_match = "Yellow None"
+git_branch = "ansi(3) None"
+git_insertions = "ansi(2) None"
+git_deletions = "ansi(1) None"
+git_status_current = "ansi(4) None"
+git_status_modified = "ansi(3) None"
+git_status_new = "ansi(2) None"
+git_status_ignored = "ansi(0) None"
+git_status_conflicted = "ansi(5) None"
+git_status_other = "ansi(4) None"
+selected_line = "None ansi(0) / None None"
+char_match = "ansi(3) None"
+file_error = "ansi(1) None"
+flag_label = "None None"
+flag_value = "None None Bold"
+input = "None None"
+status_error = "ansi(0) ansi(1)"
+status_job = "ansi(0) ansi(3)"
+status_normal = "ansi(8) ansi(0)"
+status_italic = "ansi(0) ansi(2)"
+status_bold = "ansi(0) ansi(4)"
+status_code = "ansi(15) ansi(0)"
+status_ellipsis = "ansi(8) ansi(0)"
+purpose_normal = "None None"
+purpose_italic = "ansi(2) None"
+purpose_bold = "ansi(3) None Bold"
+purpose_ellipsis = "None None"
+# scrollbar_track = "gray(7) None / gray(4) None"
+# scrollbar_thumb = "gray(22) None / gray(14) None"
+help_paragraph = "None None"
+help_bold = "ansi(3) None Bold"
+help_italic = "ansi(2) None"
+help_code = "ansi(15) ansi(0)"
+help_headers = "ansi(0) ansi(4)"
+help_table_border = "ansi(0) None"
+# preview = "ansi(15) none"
+# preview_line_number = "ansi(0) ansi(0)"
+preview_match = "ansi(0) ansi(0)"
+# hex_null = "gray(11) None"
+# hex_ascii_graphic = "gray(18) None"
+# hex_ascii_whitespace = "ansi(143) None"
+# hex_ascii_other = "ansi(215) None"
+# hex_non_ascii = "ansi(167) None"
+
+# syntax_theme = "base16-eighties.dark"
+
+# You may find explanations and other skins on
+#  https://dystroy.org/broot/skins
+# for example a skin suitable for white backgrounds
+
+
+###############################################################
+# File Extension Colors
+#
+# uncomment and modify the next section if you want to color
+# file name depending on their extension
+#
+# [ext-colors]
+# png = "rgb(255, 128, 75)"
+# rs = "yellow"
+

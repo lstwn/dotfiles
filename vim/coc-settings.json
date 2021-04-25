@@ -1,0 +1,18 @@
+{
+  "coc.preferences.useQuickfixForLocations": true,
+  "suggest.languageSourcePriority": 200,
+  "diagnostic.infoSign": "i",
+  "diagnostic.hintSign": "i",
+  "diagnostic.warningSign": ">",
+  "diagnostic.errorSign": "x",
+  "eslint.autoFixOnSave": true,
+  "latex.lint.onSave": true,
+  "latex.lint.onChange": false,
+  "latex.build.onSave": true,
+  "latex.build.executable": "latexmk",
+  "latex.build.args": [
+      "-lualatex",
+      "-outdir=build"
+  ],
+  "latex.build.outputDirectory": "build"
+}

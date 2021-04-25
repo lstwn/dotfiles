@@ -1,0 +1,113 @@
+---
+- name: Link dotfiles
+  hosts: localhost
+  connection: local
+  vars:
+    - tmux_basepath: "{{ ansible_env.HOME }}"
+    - tmux_links:
+      - { src: "{{ playbook_dir }}/tmux/tmux",               dest: "{{ tmux_basepath }}/.tmux.conf" }
+    - fish_basepath: "{{ ansible_env.HOME }}/.config/fish"
+    - fish_links:
+      - { src: "{{ playbook_dir }}/fish/config.fish",        dest: "{{ fish_basepath }}/config.fish" }
+      - { src: "{{ playbook_dir }}/fish/functions",          dest: "{{ fish_basepath }}/functions" }
+    - vim_basepath: "{{ ansible_env.HOME }}/.vim"
+    - vim_links:
+      - { src: "{{ playbook_dir }}/vim/autoload",            dest: "{{ vim_basepath }}/autoload" }
+      - { src: "{{ playbook_dir }}/vim/ftplugin",            dest: "{{ vim_basepath }}/ftplugin" }
+      - { src: "{{ playbook_dir }}/vim/plugin",              dest: "{{ vim_basepath }}/plugin" }
+      - { src: "{{ playbook_dir }}/vim/coc-settings.json",   dest: "{{ vim_basepath }}/coc-settings.json" }
+      - { src: "{{ playbook_dir }}/vim/vimrc",               dest: "{{ vim_basepath }}/vimrc" }
+    - git_basepath: "{{ ansible_env.HOME }}"
+    - git_links:
+      - { src: "{{ playbook_dir }}/git/gitconfig",           dest: "{{ git_basepath }}/.gitconfig" }
+    - broot_basepath: "{{ ansible_env.HOME }}/.config/broot"
+    - broot_links:
+      - { src: "{{ playbook_dir }}/broot/conf.toml",         dest: "{{ broot_basepath }}/conf.toml" }
+    - vscode_basepath: "{{ ansible_env.HOME }}/.config/Code/User"
+    - vscode_links:
+      - { src: "{{ playbook_dir }}/vscode/settings.json",    dest: "{{ vscode_basepath }}/settings.json" }
+      - { src: "{{ playbook_dir }}/vscode/keybindings.json", dest: "{{ vscode_basepath }}/keybindings.json" }
+      - { src: "{{ playbook_dir }}/vscode/snippets",         dest: "{{ vscode_basepath }}/snippets" }
+  tasks:
+    - name: Link tmux
+      when: tmux_links is defined
+      ansible.builtin.file:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        state: link
+      loop: "{{ tmux_links }}"
+
+    - name: Create fish basepath
+      when: fish_basepath is defined
+      ansible.builtin.file:
+        path: "{{ fish_basepath }}"
+        state: directory
+    - name: Link fish
+      when: fish_links is defined
+      ansible.builtin.file:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        state: link
+      loop: "{{ fish_links }}"
+
+    - name: Create vim basepath
+      when: vim_basepath is defined
+      ansible.builtin.file:
+        path: "{{ vim_basepath }}"
+        state: directory
+    - name: Link vim
+      when: vim_links is defined
+      ansible.builtin.file:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        state: link
+      loop: "{{ vim_links }}"
+
+    - name: Link git
+      when: git_links is defined
+      ansible.builtin.file:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        state: link
+      loop: "{{ git_links }}"
+
+    - name: Create broot basepath
+      when: broot_basepath is defined
+      ansible.builtin.file:
+        path: "{{ broot_basepath }}"
+        state: directory
+    - name: Link broot
+      when: broot_links is defined
+      ansible.builtin.file:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        state: link
+      loop: "{{ broot_links }}"
+
+    - name: Create vscode basepath
+      when: vscode_basepath is defined
+      ansible.builtin.file:
+        path: "{{ vscode_basepath }}"
+        state: directory
+    - name: Link vscode
+      when: vscode_links is defined
+      ansible.builtin.file:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        state: link
+      loop: "{{ vscode_links }}"
+
+    # todo move out of link
+    - name: Get remote hostname
+      ansible.builtin.command: hostname
+      register: hostname
+    - name: Generate SSH keypair
+      ansible.builtin.user:
+        name: "{{ ansible_env.USER }}"
+        state: present
+        generate_ssh_key: yes
+        ssh_key_type: ed25519
+        ssh_key_file: ".ssh/id_ed25519"
+        ssh_key_comment: "{{ hostname.stdout }}"
+        ssh_key_passphrase: "{{ ssh_key_passphrase }}"
+        force: no

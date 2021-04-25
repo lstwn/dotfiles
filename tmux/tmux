@@ -1,0 +1,90 @@
+# vim like keybindings and mouse mode and enable vim focus events
+set-window-option -g mode-keys vi
+set-option -g mouse on
+set -g focus-events on
+set -sg escape-time 10
+set -sa terminal-overrides ',xterm-256color:RGB'
+
+# make copy mode more vim like and copy to system clipboard
+bind N copy-mode
+bind -T copy-mode-vi i     send-keys -X cancel
+bind -T copy-mode-vi a     send-keys -X cancel
+bind -T copy-mode-vi q     send-keys -X cancel
+bind i paste-buffer
+bind -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "wl-copy"
+bind -T copy-mode-vi y     send-keys -X copy-pipe "wl-copy"
+bind -T copy-mode-vi v     send-keys -X begin-selection
+
+# enable activity alerts and color settings
+#setw -g monitor-activity on
+set -g visual-activity off
+set -g default-terminal "tmux-256color"
+
+# set appropriate titles
+set-window-option -g automatic-rename on
+set-option -g set-titles on
+set -g set-titles-string "#{session_name} #(echo $USER)@#H:#{pane_current_path} [#{session_windows}]"
+
+# allow ctrl+b for other things, set prefix and pass on to other apps
+unbind C-b
+set-option -g prefix C-e
+bind-key C-e send-prefix
+set -g repeat-time 1000
+
+# easy reload with <prefix> r
+bind R source-file ~/.tmux.conf \; display "Reloaded"
+
+# use <prefix> s/v for horizontal/vertical split
+bind s split-window -c "#{pane_current_path}" -v
+bind v split-window -c "#{pane_current_path}" -h
+
+# use <prefix> hjkl for pane navigation
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
+bind H select-pane -L \; swap-pane -s !
+bind J select-pane -D \; swap-pane -s !
+bind K select-pane -U \; swap-pane -s !
+bind L select-pane -R \; swap-pane -s !
+bind q kill-pane
+bind e last-pane
+bind m resize-pane -Z
+
+# resize panes more easily
+bind < resize-pane -L 5
+bind > resize-pane -R 5
+bind - resize-pane -D 5
+bind + resize-pane -U 5
+bind ! resize-pane -y 5
+bind -r Space next-layout
+
+# theming
+set -g status-style                     fg=default,bg=default
+set -g message-style                    fg=black,bg=yellow
+set -g message-command-style            fg=black,bg=yellow
+set -g window-status-style              fg=brightblack,bg=black
+set -g window-status-current-style      fg=black,bg=blue
+set -g window-status-activity-style     fg=black,bg=blue
+set -g pane-active-border-style         fg=black,bg=default
+set -g pane-border-style                fg=black,bg=default
+
+set -g base-index 1
+set -g pane-base-index 1
+
+# status line format
+set -g status on
+set -g status-position bottom
+set -g status-interval 10
+set -g status-keys vi
+set -g status-justify left
+set -g status-left "#[bg=magenta,fg=black] #S "
+set -g status-left-length 20
+set -g status-right '#[bg=cyan,fg=black] %H:%M %a %d. %b %Y '
+set -g status-right-length 40
+set -g window-status-separator ""
+set -g window-status-format " #I #W [#P] "
+set -g window-status-current-format " #I #W [#P] "
+
+# message duration length
+set -g display-time 1250
