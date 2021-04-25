@@ -43,7 +43,7 @@
         path: "{{ fish_basepath }}"
         state: directory
     - name: Link fish
-      when: fish_links is defined
+      when: fish_basepath is defined and fish_links is defined
       ansible.builtin.file:
         src: "{{ item.src }}"
         dest: "{{ item.dest }}"
@@ -56,7 +56,7 @@
         path: "{{ vim_basepath }}"
         state: directory
     - name: Link vim
-      when: vim_links is defined
+      when: vim_basepath is defined and vim_links is defined
       ansible.builtin.file:
         src: "{{ item.src }}"
         dest: "{{ item.dest }}"
@@ -77,7 +77,7 @@
         path: "{{ broot_basepath }}"
         state: directory
     - name: Link broot
-      when: broot_links is defined
+      when: broot_basepath is defined and broot_links is defined
       ansible.builtin.file:
         src: "{{ item.src }}"
         dest: "{{ item.dest }}"
@@ -90,7 +90,7 @@
         path: "{{ vscode_basepath }}"
         state: directory
     - name: Link vscode
-      when: vscode_links is defined
+      when: vscode_basepath is defined and vscode_links is defined
       ansible.builtin.file:
         src: "{{ item.src }}"
         dest: "{{ item.dest }}"
