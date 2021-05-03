@@ -38,7 +38,7 @@ Plug 'tpope/vim-eunuch'
 Plug 'https://gitlab.com/lstwn/broot.vim'
 " ux improvements
 Plug 'tmux-plugins/vim-tmux-focus-events'
-Plug 'https://gitlab.com/lstwn/terminal.vim'
+Plug 'lstwn/terminal.vim'
 Plug 'https://gitlab.com/lstwn/lightstl.vim'
 Plug 'dhruvasagar/vim-table-mode'
 
@@ -48,6 +48,16 @@ call plug#end()
 " Options                             "
 """""""""""""""""""""""""""""""""""""""
 
+let s:os = system("uname")
+let s:is_mac = s:os == "Darwin\n" ? 1 : 0
+let s:is_linux = s:os == "Linux\n" ? 1 : 0
+
+if s:is_mac
+    set clipboard=unnamed
+endif
+if s:is_linux
+    set clipboard=unnamedplus
+endif
 set hidden " swap changed buffers without !
 set confirm " displays an option on what to do instead of a plain error
 set ignorecase " case-insensitive search by default
@@ -57,7 +67,6 @@ set incsearch
 set hlsearch
 set shortmess-=S " show amount of search results
 set foldmethod=manual
-set clipboard=unnamedplus " which clipboard is used to yank (only works with Xorg)
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -187,6 +196,12 @@ command! -nargs=0 -bar BufOnly silent %bd | silent e# | silent bd#
 
 let g:broot_replace_netrw = 1
 let g:loaded_netrwPlugin = 1
+if s:is_mac
+    let g:broot_open_command = "open"
+endif
+if s:is_linux
+    let g:broot_open_command = "xdg-open"
+endif
 let g:broot_vim_conf = [
     \ 'default_flags = "gh"',
     \ 'modal = true',
