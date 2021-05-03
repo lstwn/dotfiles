@@ -23,7 +23,7 @@
     - broot_basepath: "{{ ansible_env.HOME }}/.config/broot"
     - broot_links:
       - { src: "{{ playbook_dir }}/broot/conf.toml",         dest: "{{ broot_basepath }}/conf.toml" }
-    - vscode_basepath: "{{ ansible_env.HOME }}/.config/Code/User"
+    #- vscode_basepath: "{{ ansible_env.HOME }}/.config/Code/User"
     - vscode_links:
       - { src: "{{ playbook_dir }}/vscode/settings.json",    dest: "{{ vscode_basepath }}/settings.json" }
       - { src: "{{ playbook_dir }}/vscode/keybindings.json", dest: "{{ vscode_basepath }}/keybindings.json" }
