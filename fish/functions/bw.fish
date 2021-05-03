@@ -20,29 +20,13 @@ function bw --description "Bitwarden wrapper to make unlocking Bitwarden for the
                     else
                         set PASSWORD (command bw get $argv[2..(count $argv)])
                     end
-                    wl-copy "$PASSWORD$TOTP"
-                    printf "%s" "$PASSWORD$TOTP" | xsel -ib
-                    return
-                end
-            case 'note'
-                if test (count $argv) -ge 2
-                    bw enable
-                    if not set ITEM (command bw get item $argv[2])
-                    or not type -q -f jq
-                        return
+                    switch (uname)
+                        case Linux
+                            wl-copy "$PASSWORD$TOTP"
+                            printf "%s" "$PASSWORD$TOTP" | xsel -ib
+                        case Darwin
+                            printf "%s" "$PASSWORD$TOTP" | pbcopy
                     end
-                    set ID (echo "$ITEM" | jq -r '.id')
-                    set TMP_PATH "/tmp/bw_$ID"
-                    echo "$ITEM" | jq -r '.notes' > "$TMP_PATH"
-                    echo (date +'%Y-%m-%d|%H:%M ') >> "$TMP_PATH"
-                    $EDITOR "$TMP_PATH"
-                    set NEW_NOTE (cat "$TMP_PATH")
-                    for LINE in $NEW_NOTE
-                        set STRING "$STRING$LINE\n"
-                    end
-                    set STRING (string trim --chars=\\n "$STRING")
-                    set UPDATED (echo "$ITEM" | jq -r ".notes = \"$STRING\"" | bw encode)
-                    command bw edit item "$ID" "$UPDATED" > /dev/null && rm "$TMP_PATH"
                     return
                 end
             case '*'
@@ -50,7 +34,7 @@ function bw --description "Bitwarden wrapper to make unlocking Bitwarden for the
         end
     else
         command bw
-        echo "INFO: bw enable bw copy and bw note are custom aliases"
+        echo "INFO: bw enable bw copy are custom aliases"
     end
 end
 
