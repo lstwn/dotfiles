@@ -2,6 +2,6 @@ function fish_user_key_bindings --description "Place all user keybindings in her
     bind -M insert \ck history-search-backward
     bind -M insert \cj history-search-forward
     bind -M insert \ca accept-autosuggestion
-    bind -M insert \ea forward-word
+    bind -M insert \cn forward-word
 end
 
