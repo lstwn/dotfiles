@@ -18,7 +18,7 @@ bind -T copy-mode-vi v     send-keys -X begin-selection
 # enable activity alerts and color settings
 #setw -g monitor-activity on
 set -g visual-activity off
-#set -g default-terminal "tmux-256color"
+set -g default-terminal "xterm-256color"
 
 # set appropriate titles
 set-window-option -g automatic-rename on
