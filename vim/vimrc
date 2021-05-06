@@ -174,15 +174,16 @@ call maphelper#apply('<leader>X', ':call popup_clear()<CR>', 'n', 1)
 call maphelper#apply('<leader>R', ':source $MYVIMRC<CR>:filetype detect<CR>:echo "Reloaded"<CR>', 'n', 1)
 call maphelper#apply('<leader>b', ':Clap buffers<CR>', 'nt', 1)
 call maphelper#apply('<leader>f', ':Clap files<CR>', 'nt', 1)
-call maphelper#apply('-', ':Clap files %:p:h<CR>', 'n', 1)
-call maphelper#apply('~', ':Clap files ~<CR>', 'n', 1)
-call maphelper#apply('<leader>e', ':Explore<CR>', 'n', 1)
+call maphelper#apply('<leader>e', ':Explore<CR>', 'nt', 1)
+call maphelper#apply('~', ':Explore ~<CR>', 'n', 1)
+call maphelper#apply('-', ':Explore %:p:h<CR>', 'n', 1)
 call maphelper#apply('<leader>rg', ':Clap grep2<CR>', 'n', 1)
 call maphelper#apply('<leader>c', ':terminal<CR>', 'n', 1)
 call maphelper#apply('<leader>g', ':terminal git wdiff<CR>', 'n', 1)
 call maphelper#apply('<leader>d', ':Clap coc_diagnostics<CR>', 'n', 1)
 call maphelper#apply('<leader>o', ':Clap coc_outline<CR>', 'n', 1)
 call maphelper#apply('<leader>s', ':Clap coc_symbols<CR>', 'n', 1)
+call maphelper#apply('<leader><tab>', ':b#<CR>', 'nt', 1)
 
 """""""""""""""""""""""""""""""""""""""
 " Commands                            "
@@ -352,10 +353,23 @@ endfunction
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gdd :call CocAction('jumpDefinition')<CR>
+nmap <silent> gds :call CocAction('jumpDefinition', 'split')<CR>
+nmap <silent> gdv :call CocAction('jumpDefinition', 'vsplit')<CR>
+nmap <silent> gdt :call CocAction('jumpDefinition', 'tabedit')<CR>
+
+nmap <silent> gyy :call CocAction('jumpTypeDefinition')<CR>
+nmap <silent> gys :call CocAction('jumpTypeDefinition', 'split')<CR>
+nmap <silent> gyv :call CocAction('jumpTypeDefinition', 'vsplit')<CR>
+nmap <silent> gyt :call CocAction('jumpTypeDefinition', 'tabedit')<CR>
+
+nmap <silent> gii :call CocAction('jumpImplementation')<CR>
+nmap <silent> gis :call CocAction('jumpImplementation', 'split')<CR>
+nmap <silent> giv :call CocAction('jumpImplementation', 'vsplit')<CR>
+nmap <silent> git :call CocAction('jumpImplementation', 'tabedit')<CR>
+
 nmap <silent> gr <Plug>(coc-references)
+
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -369,8 +383,8 @@ xmap <leader>f  <Plug>(coc-format-selected)
 if has('nvim-0.4.0') || has('patch-8.2.0750')
   nnoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-d>"
   nnoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-u>"
-  inoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-  inoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  inoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<CR>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<CR>" : "\<Left>"
   vnoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-d>"
   vnoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-u>"
 endif
