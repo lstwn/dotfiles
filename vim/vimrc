@@ -337,7 +337,8 @@ let g:coc_snippet_next = '<c-j>'
 let g:coc_snippet_prev = '<c-k>'
 
 " Use gh show documentation in preview window.
-nnoremap <silent> gh :call <SID>show_documentation()<CR>
+nnoremap <silent> gH :call <SID>show_documentation()<CR>
+nnoremap <silent> gh :call CocActionAsync('diagnosticInfo')<CR>
 
 function! s:show_documentation()
     if (index(['vim','help'], &filetype) >= 0)

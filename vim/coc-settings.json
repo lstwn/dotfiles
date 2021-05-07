@@ -1,6 +1,7 @@
 {
   "coc.preferences.useQuickfixForLocations": true,
   "suggest.languageSourcePriority": 200,
+  "diagnostic.enableMessage": "jump",
   "diagnostic.infoSign": "i",
   "diagnostic.hintSign": "i",
   "diagnostic.warningSign": ">",
