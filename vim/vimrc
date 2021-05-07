@@ -16,14 +16,15 @@ call plug#begin('~/.vim/plugged')
 
 " syntactic lang support
 Plug 'rust-lang/rust.vim'
-Plug 'cespare/vim-toml'
+" Plug 'cespare/vim-toml'
 Plug 'stephpy/vim-yaml'
 Plug 'mechatroner/rainbow_csv'
-Plug 'dag/vim-fish'
-Plug 'HerringtonDarkholme/yats.vim' " ts syntax highlighting
-Plug 'posva/vim-vue'
-Plug 'jparise/vim-graphql'
+" Plug 'dag/vim-fish'
+" Plug 'HerringtonDarkholme/yats.vim' " ts syntax highlighting
+" Plug 'posva/vim-vue'
+" Plug 'jparise/vim-graphql'
 Plug 'pantharshit00/vim-prisma'
+Plug 'sheerun/vim-polyglot'
 " semantic lang support
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'honza/vim-snippets'
