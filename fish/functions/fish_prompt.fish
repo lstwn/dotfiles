@@ -49,23 +49,23 @@ function fish_prompt --description 'Write out the prompt'
         set git_info $branch
 
         set basedir         (git rev-parse --show-toplevel 2>/dev/null)
-        set untracked_files (git ls-files -o --exclude-from=.gitignore $basedir 2>/dev/null | wc -l)
+        set untracked_files (string trim (git ls-files -o --exclude-from=.gitignore $basedir 2>/dev/null | wc -l))
         if test $untracked_files -gt 0
             set git_info $git_info "$untracked_files untracked"
         end
-        set unstaged_files  (git diff --name-only 2>/dev/null | wc -l)
+        set unstaged_files  (string trim (git diff --name-only 2>/dev/null | wc -l))
         if test $unstaged_files -gt 0
             set git_info $git_info "$unstaged_files unstaged"
         end
-        set staged_files    (git diff --name-only --cached 2>/dev/null | wc -l)
+        set staged_files    (string trim (git diff --name-only --cached 2>/dev/null | wc -l))
         if test $staged_files -gt 0
             set git_info $git_info "$staged_files staged"
         end
-        set conflict_files  (git diff --name-only --diff-filter=U 2>/dev/null | wc -l)
+        set conflict_files  (string trim (git diff --name-only --diff-filter=U 2>/dev/null | wc -l))
         if test $conflict_files -gt 0
             set git_info $git_info "$conflict_files conflicted"
         end
-        set amount_stashs   (git stash list | wc -l)
+        set amount_stashs   (string trim (git stash list | wc -l))
         if test $amount_stashs -gt 0
             set git_info $git_info "$amount_stashs stashed"
         end
@@ -96,15 +96,20 @@ function fish_prompt --description 'Write out the prompt'
         (__fish_prompt_exit_status) \
         (__fish_prompt_command_prefix))
 
-    set visible_length (string length (echo $prompt | sed 's/\x1B\[[0-9;]*[JKmsu]//g'))
+    # TODO: rewrite such that functions return just content strings
+    # add function that "coats" the content with spaces
+    # add function that "coats" the spaced content with colors
+    # assemble and echo based on length of spaced contents
 
-    if test $visible_length -gt $COLUMNS
-        set prompt (printf '%s%s%s\f\r%s' \
-            (__fish_prompt_working_dir) \
-            (__fish_prompt_git_branch 20) \
-            (__fish_prompt_exit_status) \
-            (__fish_prompt_command_prefix))
-    end
+    # set visible_length (string length (echo $prompt | sed 's/\x1B\[[0-9;]*[JKmsu]//g'))
+
+    # if test $visible_length -gt $COLUMNS
+    #     set prompt (printf '%s%s%s\f\r%s' \
+    #         (__fish_prompt_working_dir) \
+    #         (__fish_prompt_git_branch 20) \
+    #         (__fish_prompt_exit_status) \
+    #         (__fish_prompt_command_prefix))
+    # end
 
     echo $prompt
 end
