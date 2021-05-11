@@ -2,33 +2,40 @@ function fish_prompt --description 'Write out the prompt'
 	#Save the return status of the previous command
     set stat $status
 
+    function __fish_prompt_wrap_item;
+        if test (count $argv) -eq 1
+            printf " %s " "$argv[1]"
+        end
+    end
+
+    function __fish_prompt_coat
+        if test "$argv[3]" != ""
+            printf "%s%s%s" (set_color --background $argv[1] $argv[2]) $argv[3] (set_color normal)
+        else
+            echo -s ""
+        end
+    end
+
     function __fish_prompt_exit_status --inherit-variable stat --description "Print the exit status of the previous command";
         if test $stat -gt 0
-            echo (set_color --background red black) $stat (set_color normal)
-        else
-            echo (set_color normal)
+            __fish_prompt_wrap_item $stat
         end
     end
 
     function __fish_prompt_time --description "Print the current time";
-        echo (set_color --background brblack; set_color white) (date "+%H:%M:%S") (set_color normal)
+        __fish_prompt_wrap_item (date "+%H:%M:%S")
     end
 
     function __fish_prompt_user --description "Print the current user";
-        switch "$USER"
-            case root toor
-                echo (set_color --background yellow black) $USER (set_color normal)
-            case '*'
-                echo (set_color --background green black) $USER (set_color normal)
-        end
+        __fish_prompt_wrap_item $USER
     end
 
     function __fish_prompt_hostname --description "Print the hostname";
-        echo (set_color --background red black) (hostname) (set_color normal)
+        __fish_prompt_wrap_item (hostname)
     end
 
     function __fish_prompt_working_dir --description "Print the current working directory";
-        echo (set_color --background blue black) (prompt_pwd) (set_color normal)
+        __fish_prompt_wrap_item (prompt_pwd)
     end
 
     function __fish_prompt_git_branch --description "Print the git branch of the current folder" --argument-names 'max_len';
@@ -40,9 +47,9 @@ function fish_prompt --description 'Write out the prompt'
 
         set branch (git rev-parse --abbrev-ref HEAD 2>/dev/null)
         if test -z $branch
-            echo (set_color normal)
             return
         end
+
         if test (string length $branch) -ge $MAX_BRANCH_LEN
             set branch (string sub --length $MAX_BRANCH_LEN $branch)
         end
@@ -80,37 +87,39 @@ function fish_prompt --description 'Write out the prompt'
             end
         end
 
-        echo (set_color --background yellow black) $string (set_color normal)
+        __fish_prompt_wrap_item $string
     end
 
     function __fish_prompt_command_prefix --description "Print chars before the command";
-        echo (set_color -o yellow)" > "(set_color normal)
+        __fish_prompt_wrap_item ">"
     end
 
-    set prompt (printf '%s%s%s%s%s%s\f\r%s' \
-        (__fish_prompt_time) \
-        (__fish_prompt_user) \
-        (__fish_prompt_hostname) \
-        (__fish_prompt_working_dir) \
-        (__fish_prompt_git_branch) \
-        (__fish_prompt_exit_status) \
-        (__fish_prompt_command_prefix))
+    set prompt (printf "%s%s%s%s%s%s" \
+       (__fish_prompt_time) \
+       (__fish_prompt_user) \
+       (__fish_prompt_hostname) \
+       (__fish_prompt_working_dir) \
+       (__fish_prompt_git_branch) \
+       (__fish_prompt_exit_status))
+    set mode_prompt_length (string length (__fish_mode_prompt))
+    set prompt_length (string length (echo $prompt))
 
-    # TODO: rewrite such that functions return just content strings
-    # add function that "coats" the content with spaces
-    # add function that "coats" the spaced content with colors
-    # assemble and echo based on length of spaced contents
+    if test (math $mode_prompt_length + $prompt_length + 1) -gt $COLUMNS
+        printf "%s%s%s\f\r%s" \
+           (__fish_prompt_coat blue black (__fish_prompt_working_dir)) \
+           (__fish_prompt_coat yellow black (__fish_prompt_git_branch 20)) \
+           (__fish_prompt_coat red black (__fish_prompt_exit_status)) \
+           (__fish_prompt_coat normal yellow (__fish_prompt_command_prefix))
+    else
+        printf "%s%s%s%s%s%s\f\r%s" \
+           (__fish_prompt_coat brblack white (__fish_prompt_time)) \
+           (__fish_prompt_coat green black (__fish_prompt_user)) \
+           (__fish_prompt_coat red black (__fish_prompt_hostname)) \
+           (__fish_prompt_coat blue black (__fish_prompt_working_dir)) \
+           (__fish_prompt_coat yellow black (__fish_prompt_git_branch 20)) \
+           (__fish_prompt_coat red black (__fish_prompt_exit_status)) \
+           (__fish_prompt_coat normal yellow (__fish_prompt_command_prefix))
+    end
 
-    # set visible_length (string length (echo $prompt | sed 's/\x1B\[[0-9;]*[JKmsu]//g'))
-
-    # if test $visible_length -gt $COLUMNS
-    #     set prompt (printf '%s%s%s\f\r%s' \
-    #         (__fish_prompt_working_dir) \
-    #         (__fish_prompt_git_branch 20) \
-    #         (__fish_prompt_exit_status) \
-    #         (__fish_prompt_command_prefix))
-    # end
-
-    echo $prompt
+    return
 end
-
