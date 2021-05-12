@@ -10,10 +10,14 @@ bind N copy-mode
 bind -T copy-mode-vi i     send-keys -X cancel
 bind -T copy-mode-vi a     send-keys -X cancel
 bind -T copy-mode-vi q     send-keys -X cancel
-bind i paste-buffer
-bind -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "wl-copy"
-bind -T copy-mode-vi y     send-keys -X copy-pipe "wl-copy"
 bind -T copy-mode-vi v     send-keys -X begin-selection
+bind i paste-buffer
+if-shell "uname | grep -q 'Darwin'" "\
+        bind -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel 'pbcopy'; \
+        bind -T copy-mode-vi y     send-keys -X copy-pipe 'pbcopy'"
+if-shell "uname | grep -q 'Linux'" "\
+        bind -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel 'wl-copy'; \
+        bind -T copy-mode-vi y     send-keys -X copy-pipe 'wl-copy'"
 
 # enable activity alerts and color settings
 #setw -g monitor-activity on
