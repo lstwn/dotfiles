@@ -56,7 +56,7 @@ function fish_prompt --description 'Write out the prompt'
         set git_info $branch
 
         set basedir         (git rev-parse --show-toplevel 2>/dev/null)
-        set untracked_files (string trim (git ls-files -o --exclude-from=.gitignore $basedir 2>/dev/null | wc -l))
+        set untracked_files (string trim (git ls-files -o --exclude-standard $basedir 2>/dev/null | wc -l))
         if test $untracked_files -gt 0
             set git_info $git_info "$untracked_files untracked"
         end
