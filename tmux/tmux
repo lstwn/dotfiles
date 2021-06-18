@@ -14,10 +14,12 @@ bind -T copy-mode-vi v     send-keys -X begin-selection
 bind i paste-buffer
 if-shell "uname | grep -q 'Darwin'" "\
         bind -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel 'pbcopy'; \
-        bind -T copy-mode-vi y     send-keys -X copy-pipe 'pbcopy'"
+        bind -T copy-mode-vi y     send-keys -X copy-pipe 'pbcopy'; \
+        bind y run 'tmux save-buffer - | pbcopy'"
 if-shell "uname | grep -q 'Linux'" "\
         bind -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel 'wl-copy'; \
-        bind -T copy-mode-vi y     send-keys -X copy-pipe 'wl-copy'"
+        bind -T copy-mode-vi y     send-keys -X copy-pipe 'wl-copy' \
+        bind y run 'tmux save-buffer - | wl-copy'"
 
 # enable activity alerts and color settings
 #setw -g monitor-activity on
