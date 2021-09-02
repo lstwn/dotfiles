@@ -10,6 +10,13 @@
     - fish_links:
       - { src: "{{ playbook_dir }}/fish/config.fish",        dest: "{{ fish_basepath }}/config.fish" }
       - { src: "{{ playbook_dir }}/fish/functions",          dest: "{{ fish_basepath }}/functions" }
+    - nvim_basepath: "{{ ansible_env.HOME }}/.config/nvim"
+    - nvim_links:
+      - { src: "{{ playbook_dir }}/nvim/ftdetect",           dest: "{{ nvim_basepath }}/ftdetect" }
+      - { src: "{{ playbook_dir }}/nvim/ftplugin",           dest: "{{ nvim_basepath }}/ftplugin" }
+      - { src: "{{ playbook_dir }}/nvim/lua",                dest: "{{ nvim_basepath }}/lua" }
+      - { src: "{{ playbook_dir }}/nvim/plugin",             dest: "{{ nvim_basepath }}/plugin" }
+      - { src: "{{ playbook_dir }}/nvim/init.vim",           dest: "{{ nvim_basepath }}/init.vim" }
     - vim_basepath: "{{ ansible_env.HOME }}/.vim"
     - vim_links:
       - { src: "{{ playbook_dir }}/vim/autoload",            dest: "{{ vim_basepath }}/autoload" }
@@ -49,6 +56,19 @@
         dest: "{{ item.dest }}"
         state: link
       loop: "{{ fish_links }}"
+
+    - name: Create nvim basepath
+      when: nvim_basepath is defined
+      ansible.builtin.file:
+        path: "{{ nvim_basepath }}"
+        state: directory
+    - name: Link nvim
+      when: nvim_basepath is defined and nvim_links is defined
+      ansible.builtin.file:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        state: link
+      loop: "{{ nvim_links }}"
 
     - name: Create vim basepath
       when: vim_basepath is defined
