@@ -38,7 +38,7 @@ set -g fish_pager_color_description white             # the color of the complet
 #set -g fish_pager_color_secondary              # the background color of the every second completion
 
 # vim default editor
-set -x EDITOR "vim"
+set -x EDITOR "nvim"
 set -x VISUAL $EDITOR
 set -x PAGER "less"
 

@@ -2,7 +2,9 @@
 	name = Leo
 	email = lstwn@mailbox.org
 [merge]
-	tool = vimdiff
+	tool = fugitive
+[mergetool "fugitive"]
+    cmd = nvim -f -c \"Gvdiffsplit!\" \"$MERGED\"
 [diff]
     tool = vimdiff
 [alias]

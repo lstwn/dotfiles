@@ -7,14 +7,18 @@
   "diagnostic.warningSign": ">",
   "diagnostic.errorSign": "x",
   "eslint.autoFixOnSave": true,
-  "coc.preferences.formatOnSaveFiletypes": ["javascript", "typescript"],
+  "coc.preferences.formatOnSaveFiletypes": ["javascript", "typescript", "graphql"],
   "latex.lint.onSave": true,
   "latex.lint.onChange": false,
   "latex.build.onSave": true,
   "latex.build.executable": "latexmk",
-  "latex.build.args": [
-      "-lualatex",
-      "-outdir=build"
-  ],
-  "latex.build.outputDirectory": "build"
+  "latex.build.args": ["-lualatex", "-outdir=build"],
+  "latex.build.outputDirectory": "build",
+  "languageserver": {
+    "graphql": {
+      "command": "graphql-lsp",
+      "args": ["server", "-m", "stream"],
+      "filetypes": ["typescript", "graphql"]
+    }
+  }
 }

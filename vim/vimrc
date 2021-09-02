@@ -50,9 +50,9 @@ call plug#end()
 " Options                             "
 """""""""""""""""""""""""""""""""""""""
 
-let s:os = system("uname")
-let s:is_mac = s:os == "Darwin\n" ? 1 : 0
-let s:is_linux = s:os == "Linux\n" ? 1 : 0
+let s:os = trim(system("uname"))
+let s:is_mac = s:os == "Darwin" ? 1 : 0
+let s:is_linux = s:os == "Linux" ? 1 : 0
 
 if s:is_mac
     set clipboard=unnamed
@@ -175,11 +175,11 @@ call maphelper#apply('<leader>0', ':tablast<CR>', 'nt', 1)
 call maphelper#apply('<leader>X', ':call popup_clear()<CR>', 'n', 1)
 call maphelper#apply('<leader>R', ':source $MYVIMRC<CR>:filetype detect<CR>:echo "Reloaded"<CR>', 'n', 1)
 call maphelper#apply('<leader>b', ':Clap buffers<CR>', 'nt', 1)
-call maphelper#apply('<leader>f', ':Clap files<CR>', 'nt', 1)
+call maphelper#apply('<leader>f', ":Clap files ++finder=fd --type=file --hidden --exclude='.git'<CR>", 'nt', 1)
 call maphelper#apply('<leader>e', ':Explore<CR>', 'nt', 1)
 call maphelper#apply('~', ':Explore ~<CR>', 'n', 1)
 call maphelper#apply('-', ':Explore %:p:h<CR>', 'n', 1)
-call maphelper#apply('<leader>rg', ':Clap grep2<CR>', 'n', 1)
+call maphelper#apply('<leader>rg', ':Clap grep +no-cache<CR>', 'n', 1)
 call maphelper#apply('<leader>c', ':terminal<CR>', 'n', 1)
 call maphelper#apply('<leader>g', ':terminal git wdiff<CR>', 'n', 1)
 call maphelper#apply('<leader>d', ':Clap coc_diagnostics<CR>', 'n', 1)

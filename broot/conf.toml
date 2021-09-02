@@ -24,6 +24,7 @@
 # A popular flag is the `g` one which displays git related info.
 #
 default_flags = "g"
+modal = true
 
 ###############################################################
 # Date/Time format

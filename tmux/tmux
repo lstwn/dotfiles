@@ -24,7 +24,7 @@ if-shell "uname | grep -q 'Linux'" "\
 # enable activity alerts and color settings
 #setw -g monitor-activity on
 set -g visual-activity off
-set -g default-terminal "xterm-256color"
+set-option -g default-terminal "xterm-256color"
 
 # set appropriate titles
 set-window-option -g automatic-rename on
