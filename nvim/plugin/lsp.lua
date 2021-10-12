@@ -47,6 +47,8 @@ local luafmt = {
     formatStdin = true,
 }
 
+local rustfmt = {formatCommand = "rustfmt", formatStdin = true}
+
 local languages = {
     lua = {luafmt},
     typescript = {eslint, prettier},
@@ -59,7 +61,7 @@ local languages = {
     scss = {prettier},
     css = {prettier},
     markdown = {prettier},
-    -- rust = {rustfmt}
+    -- rust = {rustfmt},
 }
 
 lspconfig.efm.setup {
