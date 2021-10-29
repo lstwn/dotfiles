@@ -8,7 +8,7 @@ endfunction
 
 augroup on_save
   autocmd!
-  autocmd BufWritePre *.js,*.ts,*.rs,*.py,*.c,*.lua call g:OnSave()
+  autocmd BufWritePre *.js,*.ts,*.rs,*.py,*.c,*.lua,*.md call g:OnSave()
 augroup end
 ]], false)
 
@@ -38,8 +38,12 @@ local eslint = {
 }
 
 local prettier = {
-    formatCommand = "./node_modules/.bin/prettier --stdin-filepath ${INPUT}",
+    formatCommand = "prettierd \"${INPUT}\"",
     formatStdin = true,
+    env = {
+        string.format("PRETTIERD_DEFAULT_CONFIG=%s", vim.fn
+            .expand("~/.config/nvim/utils/linter-config/.prettierrc.json")),
+    },
 }
 
 local luafmt = {
