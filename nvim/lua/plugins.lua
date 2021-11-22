@@ -22,6 +22,7 @@ return require("packer").startup(function(use)
     use "rust-lang/rust.vim"
     use "pantharshit00/vim-prisma"
     use "martinda/Jenkinsfile-vim-syntax"
+    use {"plasticboy/vim-markdown", requires = {"godlygeek/tabular"}}
     use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
     -- semantic lang support
     use "neovim/nvim-lspconfig"

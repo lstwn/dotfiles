@@ -71,96 +71,129 @@ time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
   ["Jenkinsfile-vim-syntax"] = {
     loaded = true,
-    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/Jenkinsfile-vim-syntax"
+    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/Jenkinsfile-vim-syntax",
+    url = "https://github.com/martinda/Jenkinsfile-vim-syntax"
   },
   ["broot.vim"] = {
     loaded = true,
-    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/broot.vim"
+    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/broot.vim",
+    url = "https://github.com/lstwn/broot.vim"
   },
   ["galaxyline.nvim"] = {
     loaded = true,
-    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/galaxyline.nvim"
+    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/galaxyline.nvim",
+    url = "/Users/lstwn/Projects/galaxyline.nvim"
   },
   ["gitsigns.nvim"] = {
     config = { "\27LJ\2\n6\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\rgitsigns\frequire\0" },
     loaded = true,
-    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/gitsigns.nvim"
+    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
+    url = "https://github.com/lewis6991/gitsigns.nvim"
   },
   ["nvim-compe"] = {
     loaded = true,
-    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/nvim-compe"
+    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/nvim-compe",
+    url = "https://github.com/hrsh7th/nvim-compe"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
-    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
+    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
+    url = "https://github.com/neovim/nvim-lspconfig"
   },
   ["nvim-treesitter"] = {
     loaded = true,
-    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/nvim-treesitter"
+    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
+    url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
   ["nvim-web-devicons"] = {
     loaded = true,
-    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/nvim-web-devicons"
+    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
+    url = "https://github.com/kyazdani42/nvim-web-devicons"
   },
   ["packer.nvim"] = {
     loaded = true,
-    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/packer.nvim"
+    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/packer.nvim",
+    url = "https://github.com/wbthomason/packer.nvim"
   },
   ["plenary.nvim"] = {
     loaded = true,
-    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/plenary.nvim"
+    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/plenary.nvim",
+    url = "https://github.com/nvim-lua/plenary.nvim"
   },
   ["popup.nvim"] = {
     loaded = true,
-    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/popup.nvim"
+    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/popup.nvim",
+    url = "https://github.com/nvim-lua/popup.nvim"
   },
   ["rust.vim"] = {
     loaded = true,
-    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/rust.vim"
+    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/rust.vim",
+    url = "https://github.com/rust-lang/rust.vim"
+  },
+  tabular = {
+    loaded = true,
+    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/tabular",
+    url = "https://github.com/godlygeek/tabular"
   },
   ["telescope.nvim"] = {
     loaded = true,
-    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/telescope.nvim"
+    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/telescope.nvim",
+    url = "https://github.com/nvim-telescope/telescope.nvim"
   },
   ["terminal.vim"] = {
     loaded = true,
-    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/terminal.vim"
+    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/terminal.vim",
+    url = "https://github.com/lstwn/terminal.vim"
   },
   ultisnips = {
     loaded = true,
-    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/ultisnips"
+    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/ultisnips",
+    url = "https://github.com/SirVer/ultisnips"
   },
   ["vim-commentary"] = {
     loaded = true,
-    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/vim-commentary"
+    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/vim-commentary",
+    url = "https://github.com/tpope/vim-commentary"
   },
   ["vim-eunuch"] = {
     loaded = true,
-    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/vim-eunuch"
+    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/vim-eunuch",
+    url = "https://github.com/tpope/vim-eunuch"
   },
   ["vim-fugitive"] = {
     loaded = true,
-    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/vim-fugitive"
+    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/vim-fugitive",
+    url = "https://github.com/tpope/vim-fugitive"
+  },
+  ["vim-markdown"] = {
+    loaded = true,
+    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/vim-markdown",
+    url = "https://github.com/plasticboy/vim-markdown"
   },
   ["vim-prisma"] = {
     loaded = true,
-    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/vim-prisma"
+    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/vim-prisma",
+    url = "https://github.com/pantharshit00/vim-prisma"
   },
   ["vim-snippets"] = {
     loaded = true,
-    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/vim-snippets"
+    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/vim-snippets",
+    url = "https://github.com/honza/vim-snippets"
   },
   ["vim-surround"] = {
     loaded = true,
-    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/vim-surround"
+    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/vim-surround",
+    url = "https://github.com/tpope/vim-surround"
   },
   ["vim-table-mode"] = {
     loaded = true,
-    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/vim-table-mode"
+    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/vim-table-mode",
+    url = "https://github.com/dhruvasagar/vim-table-mode"
   },
   ["vim-unimpaired"] = {
     loaded = true,
-    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/vim-unimpaired"
+    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/vim-unimpaired",
+    url = "https://github.com/tpope/vim-unimpaired"
   }
 }
 
