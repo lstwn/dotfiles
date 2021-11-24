@@ -71,7 +71,7 @@ local languages = {
 lspconfig.efm.setup {
     init_options = {documentFormatting = true, codeAction = true},
     on_attach = on_attach,
-    settings = {languages = languages},
+    settings = {rootMarkers = {".git/", ".obsidian/"}, languages = languages},
     filetypes = vim.tbl_keys(languages),
 }
 lspconfig.rust_analyzer.setup {on_attach = on_attach}
