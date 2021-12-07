@@ -26,9 +26,16 @@ return require("packer").startup(function(use)
     use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
     -- semantic lang support
     use "neovim/nvim-lspconfig"
-    use "hrsh7th/nvim-compe"
     use "SirVer/ultisnips"
     use "honza/vim-snippets"
+    use {
+        "hrsh7th/nvim-cmp",
+        requires = {
+            "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-buffer", "hrsh7th/cmp-path",
+            "hrsh7th/cmp-cmdline", "quangnguyen30192/cmp-nvim-ultisnips",
+            "hrsh7th/cmp-nvim-lua",
+        },
+    }
     -- fuzzy finder
     use "nvim-lua/popup.nvim"
     use {
