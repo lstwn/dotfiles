@@ -13,6 +13,9 @@ augroup end
 ]], false)
 
 local lspconfig = require("lspconfig")
+local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp
+                                                                     .protocol
+                                                                     .make_client_capabilities())
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -73,8 +76,12 @@ lspconfig.efm.setup {
     on_attach = on_attach,
     settings = {rootMarkers = {".git/", ".obsidian/"}, languages = languages},
     filetypes = vim.tbl_keys(languages),
+    capabilities = capabilities,
 }
-lspconfig.rust_analyzer.setup {on_attach = on_attach}
+lspconfig.rust_analyzer.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+}
 lspconfig.tsserver.setup {
     settings = {documentFormatting = false},
     on_attach = function(client, bufnr)
@@ -96,6 +103,7 @@ lspconfig.tsserver.setup {
             description = "Organize Imports",
         },
     },
+    capabilities = capabilities,
 }
 -- https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)
 local sumneko_root_path = vim.fn.stdpath("data") .. "/lua-language-server"
@@ -133,15 +141,16 @@ lspconfig.sumneko_lua.setup {
             },
         },
     },
+    capabilities = capabilities,
 }
-lspconfig.pyright.setup {on_attach = on_attach}
-lspconfig.html.setup {on_attach = on_attach}
-lspconfig.cssls.setup {on_attach = on_attach}
-lspconfig.jsonls.setup {on_attach = on_attach}
-lspconfig.yamlls.setup {on_attach = on_attach}
-lspconfig.vuels.setup {on_attach = on_attach}
-lspconfig.graphql.setup {on_attach = on_attach}
-lspconfig.prismals.setup {on_attach = on_attach}
-lspconfig.bashls.setup {on_attach = on_attach}
-lspconfig.vimls.setup {on_attach = on_attach}
-lspconfig.texlab.setup {on_attach = on_attach}
+lspconfig.pyright.setup {on_attach = on_attach, capabilities = capabilities}
+lspconfig.html.setup {on_attach = on_attach, capabilities = capabilities}
+lspconfig.cssls.setup {on_attach = on_attach, capabilities = capabilities}
+lspconfig.jsonls.setup {on_attach = on_attach, capabilities = capabilities}
+lspconfig.yamlls.setup {on_attach = on_attach, capabilities = capabilities}
+lspconfig.vuels.setup {on_attach = on_attach, capabilities = capabilities}
+lspconfig.graphql.setup {on_attach = on_attach, capabilities = capabilities}
+lspconfig.prismals.setup {on_attach = on_attach, capabilities = capabilities}
+lspconfig.bashls.setup {on_attach = on_attach, capabilities = capabilities}
+lspconfig.vimls.setup {on_attach = on_attach, capabilities = capabilities}
+lspconfig.texlab.setup {on_attach = on_attach, capabilities = capabilities}
