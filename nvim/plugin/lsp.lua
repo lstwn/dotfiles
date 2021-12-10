@@ -30,18 +30,24 @@ local on_attach = function(client, bufnr)
     require("mappings").lsp(bufnr)
 end
 
+-- NOTE: when having any problems with formatting/linting try running 'eslint_d restart'.
+-- A failing eslint_d might affect prettier, too!
 local eslint = {
-    -- lintCommand = "./node_modules/.bin/eslint -f unix --stdin --stdin-filename ${INPUT}",
     lintCommand = "eslint_d -f unix --stdin --stdin-filename ${INPUT}",
+    -- lintCommand = "./node_modules/.bin/eslint -f unix --stdin --stdin-filename ${INPUT}",
     lintStdin = true,
     lintFormats = {"%f:%l:%c: %m"},
     lintIgnoreExitCode = true,
-    formatCommand = "eslint_d --fix-to-stdout --stdin --stdin-filename=${INPUT}",
+    formatCommand = "eslint_d --fix-to-stdout --stdin --stdin-filename ${INPUT}",
+    -- formatCommand = "./node_modules/.bin/eslint --fix-to-stdout --stdin --stdin-filename ${INPUT}",
     formatStdin = true,
 }
 
+-- NOTE: when having any problems with formatting/linting try running 'eslint_d restart'.
+-- A failing eslint_d might affect prettier, too!
 local prettier = {
-    formatCommand = "prettierd \"${INPUT}\"",
+    formatCommand = "prettierd ${INPUT}",
+    -- formatCommand = "./node_modules/.bin/prettier ${INPUT}",
     formatStdin = true,
     env = {
         string.format("PRETTIERD_DEFAULT_CONFIG=%s", vim.fn
@@ -143,6 +149,7 @@ lspconfig.sumneko_lua.setup {
     },
     capabilities = capabilities,
 }
+
 lspconfig.pyright.setup {on_attach = on_attach, capabilities = capabilities}
 lspconfig.html.setup {on_attach = on_attach, capabilities = capabilities}
 lspconfig.cssls.setup {on_attach = on_attach, capabilities = capabilities}
