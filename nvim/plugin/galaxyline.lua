@@ -125,22 +125,25 @@ galaxyline.section.left = {
 local no_file_format_modes = set {mode.modes.terminal, mode.modes.command}
 local no_file_format_buftypes = set {"quickfix"}
 
+local diagnostic = vim.diagnostic
+local diagnostic_types = {
+    {type = diagnostic.severity.HINT, name = "H"},
+    {type = diagnostic.severity.INFO, name = "I"},
+    {type = diagnostic.severity.WARN, name = "W"},
+    {type = diagnostic.severity.ERROR, name = "E"},
+}
+
 galaxyline.section.right = {
     {
         name = "Diagnostics",
         priority = 60,
         condition = has_active_lsp,
         provider = function()
-            local diagnostic_types = {
-                {type = "Hint", name = "H"}, {type = "Information", name = "I"},
-                {type = "Warning", name = "W"}, {type = "Error", name = "E"},
-            }
-
             local diagnostics = {}
             for i = 1, #diagnostic_types do
                 local type = diagnostic_types[i].type
                 local name = diagnostic_types[i].name
-                local count = vim.lsp.diagnostic.get_count(0, type)
+                local count = #diagnostic.get(0, {severity = type})
                 if count ~= 0 then
                     diagnostics[i] = count .. name
                 else

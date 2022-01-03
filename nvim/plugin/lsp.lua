@@ -3,7 +3,7 @@ function g:OnSave()
   if exists(":OrganizeImports")
     OrganizeImports
   endif
-  lua vim.lsp.buf.formatting_sync(nil, 1000)
+  lua vim.lsp.buf.formatting_sync(nil, 2000)
 endfunction
 
 augroup on_save
