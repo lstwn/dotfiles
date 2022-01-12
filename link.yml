@@ -10,20 +10,7 @@
     - fish_links:
       - { src: "{{ playbook_dir }}/fish/config.fish",        dest: "{{ fish_basepath }}/config.fish" }
       - { src: "{{ playbook_dir }}/fish/functions",          dest: "{{ fish_basepath }}/functions" }
-    - nvim_basepath: "{{ ansible_env.HOME }}/.config/nvim"
-    - nvim_links:
-      - { src: "{{ playbook_dir }}/nvim/ftdetect",           dest: "{{ nvim_basepath }}/ftdetect" }
-      - { src: "{{ playbook_dir }}/nvim/ftplugin",           dest: "{{ nvim_basepath }}/ftplugin" }
-      - { src: "{{ playbook_dir }}/nvim/lua",                dest: "{{ nvim_basepath }}/lua" }
-      - { src: "{{ playbook_dir }}/nvim/plugin",             dest: "{{ nvim_basepath }}/plugin" }
-      - { src: "{{ playbook_dir }}/nvim/init.vim",           dest: "{{ nvim_basepath }}/init.vim" }
-    - vim_basepath: "{{ ansible_env.HOME }}/.vim"
-    - vim_links:
-      - { src: "{{ playbook_dir }}/vim/autoload",            dest: "{{ vim_basepath }}/autoload" }
-      - { src: "{{ playbook_dir }}/vim/ftplugin",            dest: "{{ vim_basepath }}/ftplugin" }
-      - { src: "{{ playbook_dir }}/vim/plugin",              dest: "{{ vim_basepath }}/plugin" }
-      - { src: "{{ playbook_dir }}/vim/coc-settings.json",   dest: "{{ vim_basepath }}/coc-settings.json" }
-      - { src: "{{ playbook_dir }}/vim/vimrc",               dest: "{{ vim_basepath }}/vimrc" }
+    - nvim_config_folder: "{{ ansible_env.HOME }}/.config/nvim"
     - git_basepath: "{{ ansible_env.HOME }}"
     - git_links:
       - { src: "{{ playbook_dir }}/git/gitconfig",           dest: "{{ git_basepath }}/.gitconfig" }
@@ -36,7 +23,7 @@
       - { src: "{{ playbook_dir }}/vscode/keybindings.json", dest: "{{ vscode_basepath }}/keybindings.json" }
       - { src: "{{ playbook_dir }}/vscode/snippets",         dest: "{{ vscode_basepath }}/snippets" }
   tasks:
-    - name: Link tmux
+    - name: link tmux
       when: tmux_links is defined
       ansible.builtin.file:
         src: "{{ item.src }}"
@@ -44,12 +31,12 @@
         state: link
       loop: "{{ tmux_links }}"
 
-    - name: Create fish basepath
+    - name: create fish basepath
       when: fish_basepath is defined
       ansible.builtin.file:
         path: "{{ fish_basepath }}"
         state: directory
-    - name: Link fish
+    - name: link fish
       when: fish_basepath is defined and fish_links is defined
       ansible.builtin.file:
         src: "{{ item.src }}"
@@ -57,33 +44,14 @@
         state: link
       loop: "{{ fish_links }}"
 
-    - name: Create nvim basepath
-      when: nvim_basepath is defined
+    - name: link nvim folder
+      when: nvim_config_folder is defined
       ansible.builtin.file:
-        path: "{{ nvim_basepath }}"
-        state: directory
-    - name: Link nvim
-      when: nvim_basepath is defined and nvim_links is defined
-      ansible.builtin.file:
-        src: "{{ item.src }}"
-        dest: "{{ item.dest }}"
+        src: "{{ playbook_dir }}/nvim"
+        dest: "{{ nvim_config_folder }}"
         state: link
-      loop: "{{ nvim_links }}"
 
-    - name: Create vim basepath
-      when: vim_basepath is defined
-      ansible.builtin.file:
-        path: "{{ vim_basepath }}"
-        state: directory
-    - name: Link vim
-      when: vim_basepath is defined and vim_links is defined
-      ansible.builtin.file:
-        src: "{{ item.src }}"
-        dest: "{{ item.dest }}"
-        state: link
-      loop: "{{ vim_links }}"
-
-    - name: Link git
+    - name: link git
       when: git_links is defined
       ansible.builtin.file:
         src: "{{ item.src }}"
@@ -91,12 +59,12 @@
         state: link
       loop: "{{ git_links }}"
 
-    - name: Create broot basepath
+    - name: create broot basepath
       when: broot_basepath is defined
       ansible.builtin.file:
         path: "{{ broot_basepath }}"
         state: directory
-    - name: Link broot
+    - name: link broot
       when: broot_basepath is defined and broot_links is defined
       ansible.builtin.file:
         src: "{{ item.src }}"
@@ -104,12 +72,12 @@
         state: link
       loop: "{{ broot_links }}"
 
-    - name: Create vscode basepath
+    - name: create vscode basepath
       when: vscode_basepath is defined
       ansible.builtin.file:
         path: "{{ vscode_basepath }}"
         state: directory
-    - name: Link vscode
+    - name: link vscode
       when: vscode_basepath is defined and vscode_links is defined
       ansible.builtin.file:
         src: "{{ item.src }}"
