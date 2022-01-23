@@ -58,12 +58,11 @@ M.lsp = function(bufnr)
     buf_set_keymap("n", "gh", "<cmd>lua vim.lsp.buf.hover()<CR>", keymap_options)
     buf_set_keymap("n", "gH", "<cmd>lua vim.lsp.buf.signature_help()<CR>",
         keymap_options)
-    buf_set_keymap("n", "gl",
-        "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>",
+    buf_set_keymap("n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>",
         keymap_options)
-    buf_set_keymap("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>",
+    buf_set_keymap("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>",
         keymap_options)
-    buf_set_keymap("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>",
+    buf_set_keymap("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>",
         keymap_options)
     buf_set_keymap("n", "<leader>wa",
         "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", keymap_options)

@@ -8,7 +8,7 @@ endfunction
 
 augroup on_save
   autocmd!
-  autocmd BufWritePre *.js,*.ts,*.rs,*.py,*.c,*.lua,*.md call g:OnSave()
+  autocmd BufWritePre *.js,*.ts,*.vue,*.rs,*.py,*.c,*.lua,*.md call g:OnSave()
 augroup end
 ]], false)
 
@@ -68,6 +68,7 @@ local languages = {
     javascript = {eslint, prettier},
     typescriptreact = {eslint, prettier},
     javascriptreact = {eslint, prettier},
+    vue = {eslint, prettier},
     yaml = {prettier},
     json = {prettier},
     html = {prettier},
