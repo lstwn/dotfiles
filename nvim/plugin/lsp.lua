@@ -8,7 +8,7 @@ endfunction
 
 augroup on_save
   autocmd!
-  autocmd BufWritePre *.js,*.ts,*.vue,*.rs,*.py,*.c,*.lua,*.md call g:OnSave()
+  autocmd BufWritePre *.js,*.ts,*.vue,*.rs,*.py,*.c,*.lua,*.md,*.json,*.html,*.css call g:OnSave()
 augroup end
 ]], false)
 
@@ -68,7 +68,7 @@ local languages = {
     javascript = {eslint, prettier},
     typescriptreact = {eslint, prettier},
     javascriptreact = {eslint, prettier},
-    vue = {eslint, prettier},
+    vue = {prettier, eslint},
     yaml = {prettier},
     json = {prettier},
     html = {prettier},
@@ -99,6 +99,7 @@ lspconfig.tsserver.setup {
     commands = {
         OrganizeImports = {
             function()
+                if vim.bo.filetype ~= "typescript" then return end
                 local method = "workspace/executeCommand"
                 local bufnr = vim.api.nvim_get_current_buf()
                 local params = {
@@ -154,11 +155,25 @@ lspconfig.sumneko_lua.setup {
 lspconfig.pyright.setup {on_attach = on_attach, capabilities = capabilities}
 lspconfig.html.setup {on_attach = on_attach, capabilities = capabilities}
 lspconfig.cssls.setup {on_attach = on_attach, capabilities = capabilities}
-lspconfig.jsonls.setup {on_attach = on_attach, capabilities = capabilities}
+lspconfig.jsonls.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    init_options = {provideFormatter = false},
+}
 lspconfig.yamlls.setup {on_attach = on_attach, capabilities = capabilities}
-lspconfig.vuels.setup {on_attach = on_attach, capabilities = capabilities}
+-- lspconfig.vuels.setup {on_attach = on_attach, capabilities = capabilities}
+lspconfig.volar.setup {
+    on_attach = function(client, bufnr)
+        on_attach(client, bufnr)
+        client.resolved_capabilities.document_formatting = false
+        client.resolved_capabilities.document_range_formatting = false
+    end,
+    on_attach,
+    capabilities = capabilities,
+}
 lspconfig.graphql.setup {on_attach = on_attach, capabilities = capabilities}
 lspconfig.prismals.setup {on_attach = on_attach, capabilities = capabilities}
 lspconfig.bashls.setup {on_attach = on_attach, capabilities = capabilities}
 lspconfig.vimls.setup {on_attach = on_attach, capabilities = capabilities}
 lspconfig.texlab.setup {on_attach = on_attach, capabilities = capabilities}
+lspconfig.tailwindcss.setup {on_attach = on_attach, capabilities = capabilities}
