@@ -9,7 +9,6 @@ function bw --description "Bitwarden wrapper to make unlocking Bitwarden for the
                 while not is_bw_enabled
                     set -x -g BW_SESSION (command bw unlock --raw)
                 end
-                command bw sync
                 return
             case 'copy'
                 if test (count $argv) -ge 2
