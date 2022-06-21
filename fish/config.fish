@@ -68,6 +68,7 @@ end
 # launch tmux if shell is interactive and no tmux nesting
 if status is-interactive
 and not set -q TMUX
+and test "$TERM_PROGRAM" != "vscode"
     exec tmux
 end
 
