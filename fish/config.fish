@@ -65,10 +65,11 @@ if test (type npm 2>/dev/null)
     set -x MANPATH "$NPM_GLOBAL_DIR/share/man:"(manpath)
 end
 
+string match -q "$TERM_PROGRAM" "vscode"
+and . (code --locate-shell-integration-path fish)
+
 # launch tmux if shell is interactive and no tmux nesting
 if status is-interactive
 and not set -q TMUX
-and test "$TERM_PROGRAM" != "vscode"
     exec tmux
 end
-

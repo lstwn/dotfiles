@@ -59,4 +59,5 @@ return require("packer").startup(function(use)
     use "lstwn/terminal.vim"
     use "~/Projects/galaxyline.nvim"
     use "dhruvasagar/vim-table-mode"
+    use "tpope/vim-abolish"
 end)
