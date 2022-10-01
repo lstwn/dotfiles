@@ -182,12 +182,12 @@ galaxyline.section.right = {
             return {filetype, encode, format}
         end,
         formatter = join_and_wrap_sequence,
-        highlight = "StatusLineFile",
+        highlight = "StatusLineLoc",
     }, {
         name = "Location",
         priority = 70,
         provider = function() return file.line_column_position() end,
         formatter = wrap,
-        highlight = active_inactive_highlight("StatusLineLoc", "StatusLineNC"),
+        highlight = active_inactive_highlight("StatusLineFile", "StatusLineNC"),
     },
 }

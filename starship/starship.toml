@@ -1,0 +1,52 @@
+format = """
+$time\
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_status\
+$status
+[>](reset) 
+"""
+
+# Disable the blank line at the start of the prompt
+add_newline = false
+
+[username]
+show_always = true
+style_user = "fg:black bg:green"
+style_root = "fg:black bg:red"
+format = '[ $user ]($style)'
+
+[directory]
+style = "fg:black bg:blue"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[hostname]
+ssh_only = false
+style = "fg:black bg:red"
+format = "[ $hostname ]($style)"
+trim_at = "."
+disabled = false
+
+[git_branch]
+style = "fg:black bg:yellow"
+format = '[ $branch ]($style)'
+
+[git_status]
+style = "fg:black bg:yellow"
+format = '[$all_status$ahead_behind ]($style)'
+
+[status]
+style = "fg:black bg:red"
+success_symbol = "" # leave empty to only show in error case
+format = '[ $common_meaning$signal_name$maybe_int ]($style)'
+disabled = false
+
+[time]
+disabled = false
+time_format = "%R" # Hour:Minute Format
+style = "fg:black bg:purple"
+format = '[ ](bold $style)[$time ]($style)'

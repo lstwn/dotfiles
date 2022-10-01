@@ -87,7 +87,7 @@ set -g status-keys vi
 set -g status-justify left
 set -g status-left "#[bg=magenta,fg=black] #S "
 set -g status-left-length 20
-set -g status-right '#[bg=cyan,fg=black] %H:%M %a %d. %b %Y '
+set -g status-right '#[bg=blue,fg=black] %H:%M %a %d. %b %Y '
 set -g status-right-length 40
 set -g window-status-separator ""
 set -g window-status-format " #I #W [#P] "
