@@ -17,7 +17,7 @@ format = '[ $user ]($style)'
 
 [directory]
 style = "fg:black bg:blue"
-format = "[ $path ]($style)"
+format = '[ ](bold $style)[$path ]($style)'
 truncation_length = 3
 truncation_symbol = "…/"
 
