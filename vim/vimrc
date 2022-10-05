@@ -37,7 +37,8 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
 " file manager
-Plug 'https://gitlab.com/lstwn/broot.vim'
+" Plug 'lstwn/broot.vim'
+Plug '~/Projects/broot.vim'
 " ux improvements
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'lstwn/terminal.vim'

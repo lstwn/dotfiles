@@ -1,4 +1,4 @@
-export def "bw enable" [] {
+export def-env "bw enable" [] {
     let value = ($env | get --ignore-errors BW_SESSION)
     let-env BW_SESSION = if ($value == null || ($value | str trim) == "") {
         (^bw unlock --raw)

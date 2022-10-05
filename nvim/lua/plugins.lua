@@ -40,7 +40,10 @@ return require("packer").startup(function(use)
     use "nvim-lua/popup.nvim"
     use {
         "nvim-telescope/telescope.nvim",
-        requires = {{"nvim-lua/plenary.nvim"}, {"kyazdani42/nvim-web-devicons"}},
+        requires = {
+            {"nvim-lua/plenary.nvim"}, {"kyazdani42/nvim-web-devicons"},
+            {"nvim-telescope/telescope-ui-select.nvim"},
+        },
     }
     -- vim sane defaults
     use "tpope/vim-commentary"
@@ -54,9 +57,11 @@ return require("packer").startup(function(use)
         requires = {"nvim-lua/plenary.nvim"},
         config = function() require("gitsigns").setup() end,
     }
-    use "lstwn/broot.vim"
+    -- use "lstwn/broot.vim"
+    use "~/Projects/broot.vim"
     -- ux improvements
-    use "lstwn/terminal.vim"
+    -- use "lstwn/terminal.vim"
+    use "~/Projects/terminal.vim"
     use "~/Projects/galaxyline.nvim"
     use "dhruvasagar/vim-table-mode"
     use "tpope/vim-abolish"

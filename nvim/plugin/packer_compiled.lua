@@ -82,7 +82,7 @@ _G.packer_plugins = {
   ["broot.vim"] = {
     loaded = true,
     path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/broot.vim",
-    url = "https://github.com/lstwn/broot.vim"
+    url = "/Users/lstwn/Projects/broot.vim"
   },
   ["cmp-buffer"] = {
     loaded = true,
@@ -170,6 +170,11 @@ _G.packer_plugins = {
     path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/tabular",
     url = "https://github.com/godlygeek/tabular"
   },
+  ["telescope-ui-select.nvim"] = {
+    loaded = true,
+    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/telescope-ui-select.nvim",
+    url = "https://github.com/nvim-telescope/telescope-ui-select.nvim"
+  },
   ["telescope.nvim"] = {
     loaded = true,
     path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/telescope.nvim",
@@ -178,7 +183,7 @@ _G.packer_plugins = {
   ["terminal.vim"] = {
     loaded = true,
     path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/terminal.vim",
-    url = "https://github.com/lstwn/terminal.vim"
+    url = "/Users/lstwn/Projects/terminal.vim"
   },
   ultisnips = {
     loaded = true,

@@ -93,7 +93,7 @@ lspconfig.tsserver.setup {
     settings = {documentFormatting = false},
     on_attach = function(client, bufnr)
         -- This makes sure tsserver is not used for formatting (I prefer prettier)
-        client.resolved_capabilities.document_formatting = false
+        client.server_capabilities.documentFormattingProvider = false
         on_attach(client, bufnr)
     end,
     commands = {
@@ -165,8 +165,8 @@ lspconfig.yamlls.setup {on_attach = on_attach, capabilities = capabilities}
 lspconfig.volar.setup {
     on_attach = function(client, bufnr)
         on_attach(client, bufnr)
-        client.resolved_capabilities.document_formatting = false
-        client.resolved_capabilities.document_range_formatting = false
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormatting = false
     end,
     on_attach,
     capabilities = capabilities,
