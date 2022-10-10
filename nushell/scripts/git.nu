@@ -1,5 +1,5 @@
 def "nu-complete git branches" [] {
-  ^git branch | lines | each { |line| $line | str replace '\* ' "" | str trim }
+  ^git branch --all | lines | each { |line| $line | str replace '\* ' "" | str replace 'remotes/origin/' "" | str trim }
 }
 
 def "nu-complete git remotes" [] {
