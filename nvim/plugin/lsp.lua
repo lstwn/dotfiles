@@ -178,3 +178,4 @@ lspconfig.vimls.setup {on_attach = on_attach, capabilities = capabilities}
 lspconfig.texlab.setup {on_attach = on_attach, capabilities = capabilities}
 lspconfig.tailwindcss.setup {on_attach = on_attach, capabilities = capabilities}
 lspconfig.jdtls.setup {on_attach = on_attach, capabilities = capabilities}
+lspconfig.astro.setup {on_attach = on_attach, capabilities = capabilities}

@@ -52,11 +52,7 @@ return require("packer").startup(function(use)
     use "tpope/vim-surround"
     -- git and files
     use "tpope/vim-fugitive"
-    use {
-        "lewis6991/gitsigns.nvim",
-        requires = {"nvim-lua/plenary.nvim"},
-        config = function() require("gitsigns").setup() end,
-    }
+    use {"lewis6991/gitsigns.nvim", requires = {"nvim-lua/plenary.nvim"}}
     -- use "lstwn/broot.vim"
     use "~/Projects/broot.vim"
     -- ux improvements
