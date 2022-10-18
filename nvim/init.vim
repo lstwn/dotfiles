@@ -66,6 +66,7 @@ set cursorline
 set signcolumn=yes
 set fillchars=eob:\ 
 set number relativenumber
+set shell=sh
 augroup optiontweaks
     autocmd!
     autocmd TermOpen * startinsert | setlocal nonumber norelativenumber signcolumn=no colorcolumn=0
