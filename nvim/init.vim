@@ -188,6 +188,6 @@ let g:broot_vim_conf = [
     \ '',
 	\ '[[verbs]]',
     \ 'key = "enter"',
-    \ 'execution = ":print_path"',
+    \ 'external = "echo +{line} {file}"',
     \ 'apply_to = "file"',
     \ ]

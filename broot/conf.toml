@@ -1,4 +1,3 @@
-
 ###############################################################
 # This configuration file lets you
 # - define new commands
@@ -91,7 +90,7 @@ apply_to = "file"
 
 [[verbs]]
 invocation = "edit"
-external = "vim +{line} {file}"
+external = "$EDITOR +{line} {file}"
 leave_broot = false
 
 [[verbs]]

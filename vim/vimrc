@@ -200,21 +200,15 @@ command! -nargs=0 -bar BufOnly silent %bd | silent e# | silent bd#
 
 let g:broot_replace_netrw = 1
 let g:loaded_netrwPlugin = 1
-if s:is_mac
-    let g:broot_open_command = "open"
-endif
-if s:is_linux
-    let g:broot_open_command = "xdg-open"
-endif
-let g:broot_vim_conf = [
-    \ 'default_flags = "gh"',
-    \ 'modal = true',
-    \ '',
-	\ '[[verbs]]',
-    \ 'key = "enter"',
-    \ 'execution = ":print_path"',
-    \ 'apply_to = "file"',
-    \ ]
+" let g:broot_vim_conf = [
+"     \ 'default_flags = "gh"',
+"     \ 'modal = true',
+"     \ '',
+" 	\ '[[verbs]]',
+"     \ 'key = "enter"',
+"     \ 'execution = ":print_path"',
+"     \ 'apply_to = "file"',
+"     \ ]
 
 """""""""""""""""""""""""""""""""""""""
 " lightstl.vim                        "
