@@ -12,10 +12,12 @@ lua require('plugins')
 " Options                             "
 """""""""""""""""""""""""""""""""""""""
 
+let s:is_mac = 0
+let s:is_linux = 0
 if has("mac")
     let s:is_mac = 1
 endif
-if has("unix")
+if has("linux")
     let s:is_linux = 1
 endif
 
@@ -180,12 +182,6 @@ endif
 
 let g:broot_replace_netrw = 1
 let g:loaded_netrwPlugin = 1
-if s:is_mac
-    let g:broot_open_command = "open"
-endif
-if s:is_linux
-    let g:broot_open_command = "xdg-open"
-endif
 let g:broot_vim_conf = [
     \ 'default_flags = "gh"',
     \ 'modal = true',
