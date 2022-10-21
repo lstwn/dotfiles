@@ -68,7 +68,7 @@ set cursorline
 set signcolumn=yes
 set fillchars=eob:\ 
 set number relativenumber
-set shell=sh
+" set shell=sh
 augroup optiontweaks
     autocmd!
     autocmd TermOpen * startinsert | setlocal nonumber norelativenumber signcolumn=no colorcolumn=0
@@ -182,6 +182,8 @@ endif
 
 let g:broot_replace_netrw = 1
 let g:loaded_netrwPlugin = 1
+let g:broot_shell_command = "sh -c"
+let g:broot_redirect_command = ">"
 let g:broot_vim_conf = [
     \ 'default_flags = "gh"',
     \ 'modal = true',
