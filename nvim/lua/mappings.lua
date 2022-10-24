@@ -21,7 +21,7 @@ M.own = function()
 
     -- terminal keymaps
     vim.api.nvim_set_keymap("t", "<C-w>N", [[<C-\><C-n>]], {noremap = true})
-    vim.api.nvim_set_keymap("t", "<C-w>c", [[<C-\><C-n><C-w>c]],
+    vim.api.nvim_set_keymap("t", "<C-w>c", [[<C-\><C-n><cmd>tabnew %<cr>]],
         {noremap = true})
     vim.api.nvim_set_keymap("t", "<C-w>n", [[<cmd>tabnext<cr>]],
         {noremap = true})
