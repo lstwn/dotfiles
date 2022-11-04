@@ -62,7 +62,7 @@ let-env NU_PLUGIN_DIRS = [
 # let-env PATH = ($env.PATH | split row (char esep) | prepend '/some/path')
 
 let-env PATH = (
-    ['/sbin', '/usr/local/bin', '~/.cargo/bin', '~/.npm/global/bin', '~/.local/bin']
+    ['/sbin', '/usr/local/bin', '~/.cargo/bin', '~/.npm/global/bin', '~/.local/bin', '~/Library/Python/3.9/bin']
     | where ($it | path exists) 
     | prepend $env.PATH
 )

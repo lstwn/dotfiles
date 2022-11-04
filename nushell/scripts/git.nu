@@ -10,6 +10,10 @@ def "nu-complete git log" [] {
   ^git log --pretty=%h | lines | each { |line| $line | str trim }
 }
 
+def "nu-complete git add" [] {
+  ^git ls-files --exclude-standard --others --modified | lines | each { |line| $line | str trim }
+}
+
 # Check out git branches and files
 export extern "git checkout" [
   ...targets: string@"nu-complete git branches"   # name of the branch or files to checkout
@@ -134,4 +138,14 @@ export extern "git switch" [
   --quiet(-q)                                     # suppress feedback messages
   --recurse-submodules                            # update the contents of sub-modules
   --track(-t)                                     # set "upstream" configuration
+]
+
+# Add files to the working tree
+export extern "git add" [
+  ...pathspecs: string@"nu-complete git add"      # files to add content from
+  --verbose(-v)                                   # be more verbose
+  --interactive(-i)                               # interactive mode
+  --dry-run(-n)                                   # perform a dry run
+  --force(-f)                                     # force updates
+  --all(-A)                                       # adds, modifies, and removes index entries to match the working tree
 ]
