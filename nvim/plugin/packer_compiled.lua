@@ -124,6 +124,16 @@ _G.packer_plugins = {
     path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
     url = "https://github.com/lewis6991/gitsigns.nvim"
   },
+  ["markdown-preview.nvim"] = {
+    loaded = true,
+    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/markdown-preview.nvim",
+    url = "https://github.com/iamcco/markdown-preview.nvim"
+  },
+  ["mkdnflow.nvim"] = {
+    loaded = true,
+    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/mkdnflow.nvim",
+    url = "https://github.com/jakewvincent/mkdnflow.nvim"
+  },
   ["nvim-cmp"] = {
     loaded = true,
     path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/nvim-cmp",
@@ -163,11 +173,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/rust.vim",
     url = "https://github.com/rust-lang/rust.vim"
-  },
-  tabular = {
-    loaded = true,
-    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/tabular",
-    url = "https://github.com/godlygeek/tabular"
   },
   ["telescope-ui-select.nvim"] = {
     loaded = true,
@@ -209,11 +214,6 @@ _G.packer_plugins = {
     path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/vim-fugitive",
     url = "https://github.com/tpope/vim-fugitive"
   },
-  ["vim-markdown"] = {
-    loaded = true,
-    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/vim-markdown",
-    url = "https://github.com/plasticboy/vim-markdown"
-  },
   ["vim-prisma"] = {
     loaded = true,
     path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/vim-prisma",
@@ -228,11 +228,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/vim-surround",
     url = "https://github.com/tpope/vim-surround"
-  },
-  ["vim-table-mode"] = {
-    loaded = true,
-    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/vim-table-mode",
-    url = "https://github.com/dhruvasagar/vim-table-mode"
   },
   ["vim-unimpaired"] = {
     loaded = true,
