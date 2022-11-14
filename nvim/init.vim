@@ -182,6 +182,7 @@ endif
 
 let g:broot_replace_netrw = 1
 let g:loaded_netrwPlugin = 1
+let g:broot_open_command = "osopen"
 let g:broot_shell_command = "sh -c"
 let g:broot_redirect_command = ">"
 let g:broot_vim_conf = [
