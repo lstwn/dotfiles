@@ -194,3 +194,9 @@ let g:broot_vim_conf = [
     \ 'external = "echo +{line} {file}"',
     \ 'apply_to = "file"',
     \ ]
+
+"""""""""""""""""""""""""""""""""""""""
+" vimtex                              "
+"""""""""""""""""""""""""""""""""""""""
+
+let g:vimtex_compiler_method = "tectonic"
