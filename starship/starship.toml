@@ -42,7 +42,7 @@ format = '[$all_status$ahead_behind ]($style)'
 [status]
 style = "fg:black bg:red"
 success_symbol = "" # leave empty to only show in error case
-format = '[ $common_meaning$signal_name$maybe_int ]($style)'
+format = '[ $common_meaning$signal_name ($status) ]($style)'
 disabled = false
 
 [time]
