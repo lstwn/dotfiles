@@ -42,37 +42,39 @@ set -x EDITOR "nvim"
 set -x VISUAL $EDITOR
 set -x PAGER "less"
 
+# brew path
+if test -d /usr/local/bin
+    fish_add_path "/usr/local/bin"
+end
+
 # rust path
 if test -d ~/.cargo/bin
-    set -x PATH "$HOME/.cargo/bin" $PATH
+    fish_add_path "$HOME/.cargo/bin"
 end
 
 # python path
 if test -d ~/.local/bin
-    set -x PATH "$HOME/.local/bin" $PATH
-end
-
-# yarn path
-if test (type yarn 2>/dev/null)
-    set -x PATH (yarn global bin) $PATH
+    fish_add_path "$HOME/.local/bin"
 end
 
 # npm path
 if test (type npm 2>/dev/null)
     set -x NPM_GLOBAL_DIR "$HOME/.npm/global"
-    set -x PATH "$NPM_GLOBAL_DIR/bin" $PATH
+    fish_add_path "$NPM_GLOBAL_DIR/bin"
     set -e MANPATH
     set -x MANPATH "$NPM_GLOBAL_DIR/share/man:"(manpath)
 end
 
-string match -q "$TERM_PROGRAM" "vscode"
-and . (code --locate-shell-integration-path fish)
-
-# launch tmux if shell is interactive and no tmux nesting
+# starship prompt and vscode integration for interactive sessions
 if status is-interactive
-and not set -q TMUX
-    exec tmux
+    string match -q "$TERM_PROGRAM" "vscode"
+    and . (code --locate-shell-integration-path fish)
+    starship init fish | source
 end
 
-# starship prompt
-starship init fish | source
+# launch tmux if shell is interactive and not in vscode while respecting nesting
+if status is-interactive
+and not set -q TMUX
+and not string match -q "$TERM_PROGRAM" "vscode"
+    exec tmux
+end
