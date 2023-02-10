@@ -129,11 +129,6 @@ _G.packer_plugins = {
     path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/markdown-preview.nvim",
     url = "https://github.com/iamcco/markdown-preview.nvim"
   },
-  ["mkdnflow.nvim"] = {
-    loaded = true,
-    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/mkdnflow.nvim",
-    url = "https://github.com/jakewvincent/mkdnflow.nvim"
-  },
   ["nvim-cmp"] = {
     loaded = true,
     path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/nvim-cmp",

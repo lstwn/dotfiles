@@ -175,6 +175,7 @@ lspconfig.graphql.setup {on_attach = on_attach, capabilities = capabilities}
 lspconfig.prismals.setup {on_attach = on_attach, capabilities = capabilities}
 lspconfig.bashls.setup {on_attach = on_attach, capabilities = capabilities}
 lspconfig.vimls.setup {on_attach = on_attach, capabilities = capabilities}
+lspconfig.marksman.setup {on_attach = on_attach, capabilities = capabilities}
 lspconfig.texlab.setup {
     on_attach = on_attach,
     capabilities = capabilities,
@@ -192,3 +193,4 @@ lspconfig.tailwindcss.setup {on_attach = on_attach, capabilities = capabilities}
 lspconfig.jdtls.setup {on_attach = on_attach, capabilities = capabilities}
 lspconfig.astro.setup {on_attach = on_attach, capabilities = capabilities}
 lspconfig.clangd.setup {on_attach = on_attach, capabilities = capabilities}
+

@@ -23,11 +23,6 @@ return require("packer").startup(function(use)
     use "pantharshit00/vim-prisma"
     use "martinda/Jenkinsfile-vim-syntax"
     use "lervag/vimtex"
-    use({
-        "jakewvincent/mkdnflow.nvim",
-        -- rocks = "luautf8", -- Ensures optional luautf8 dependency is installed
-        requires = {"iamcco/markdown-preview.nvim"},
-    })
     use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
     -- semantic lang support
     use "neovim/nvim-lspconfig"
@@ -65,4 +60,8 @@ return require("packer").startup(function(use)
     use "~/Projects/terminal.vim"
     use "~/Projects/galaxyline.nvim"
     use "tpope/vim-abolish"
+    use({
+        "iamcco/markdown-preview.nvim",
+        run = function() vim.fn["mkdp#util#install"]() end,
+    })
 end)
