@@ -3,7 +3,7 @@ function g:OnSave()
   if exists(":OrganizeImports")
     OrganizeImports
   endif
-  lua vim.lsp.buf.formatting_sync(nil, 2000)
+  lua vim.lsp.buf.format()
 endfunction
 
 augroup on_save
@@ -14,8 +14,8 @@ augroup end
 
 local lspconfig = require("lspconfig")
 local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp
-                                                                      .protocol
-                                                                      .make_client_capabilities())
+.protocol
+.make_client_capabilities())
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -36,7 +36,7 @@ local eslint = {
     lintCommand = "eslint_d -f unix --stdin --stdin-filename ${INPUT}",
     -- lintCommand = "./node_modules/.bin/eslint -f unix --stdin --stdin-filename ${INPUT}",
     lintStdin = true,
-    lintFormats = {"%f:%l:%c: %m"},
+    lintFormats = { "%f:%l:%c: %m" },
     lintIgnoreExitCode = true,
     formatCommand = "eslint_d --fix-to-stdout --stdin --stdin-filename ${INPUT}",
     -- formatCommand = "./node_modules/.bin/eslint --fix-to-stdout --stdin --stdin-filename ${INPUT}",
@@ -51,7 +51,7 @@ local prettier = {
     formatStdin = true,
     env = {
         string.format("PRETTIERD_DEFAULT_CONFIG=%s", vim.fn
-            .expand("~/.config/nvim/utils/linter-config/.prettierrc.json")),
+        .expand("~/.config/nvim/utils/linter-config/.prettierrc.json")),
     },
 }
 
@@ -60,28 +60,27 @@ local luafmt = {
     formatStdin = true,
 }
 
-local rustfmt = {formatCommand = "rustfmt", formatStdin = true}
+local rustfmt = { formatCommand = "rustfmt", formatStdin = true }
 
 local languages = {
-    lua = {luafmt},
-    typescript = {eslint, prettier},
-    javascript = {eslint, prettier},
-    typescriptreact = {eslint, prettier},
-    javascriptreact = {eslint, prettier},
-    vue = {prettier, eslint},
-    yaml = {prettier},
-    json = {prettier},
-    html = {prettier},
-    scss = {prettier},
-    css = {prettier},
-    markdown = {prettier},
+    typescript = { eslint, prettier },
+    javascript = { eslint, prettier },
+    typescriptreact = { eslint, prettier },
+    javascriptreact = { eslint, prettier },
+    vue = { prettier, eslint },
+    yaml = { prettier },
+    json = { prettier },
+    html = { prettier },
+    scss = { prettier },
+    css = { prettier },
+    markdown = { prettier },
     -- rust = {rustfmt},
 }
 
 lspconfig.efm.setup {
-    init_options = {documentFormatting = true, codeAction = true},
+    init_options = { documentFormatting = true, codeAction = true },
     on_attach = on_attach,
-    settings = {rootMarkers = {".git/", ".obsidian/"}, languages = languages},
+    settings = { rootMarkers = { ".git/", ".obsidian/" }, languages = languages },
     filetypes = vim.tbl_keys(languages),
     capabilities = capabilities,
 }
@@ -90,7 +89,7 @@ lspconfig.rust_analyzer.setup {
     capabilities = capabilities,
 }
 lspconfig.tsserver.setup {
-    settings = {documentFormatting = false},
+    settings = { documentFormatting = false },
     on_attach = function(client, bufnr)
         -- This makes sure tsserver is not used for formatting (I prefer prettier)
         client.server_capabilities.documentFormattingProvider = false
@@ -104,7 +103,7 @@ lspconfig.tsserver.setup {
                 local bufnr = vim.api.nvim_get_current_buf()
                 local params = {
                     command = "_typescript.organizeImports",
-                    arguments = {vim.api.nvim_buf_get_name(0)},
+                    arguments = { vim.api.nvim_buf_get_name(0) },
                 }
                 vim.lsp.buf_request_sync(bufnr, method, params, 1000)
             end,
@@ -113,54 +112,39 @@ lspconfig.tsserver.setup {
     },
     capabilities = capabilities,
 }
--- https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)
-local sumneko_root_path = vim.fn.stdpath("data") .. "/lua-language-server"
-local sumneko_binary
 
-if vim.fn.has("mac") == 1 then
-    sumneko_binary = sumneko_root_path .. "/bin/macOS/lua-language-server"
-elseif vim.fn.has("unix") == 1 then
-    sumneko_binary = sumneko_root_path .. "/bin/Linux/lua-language-server"
-else
-    print("Unsupported system for sumneko")
-end
-
-lspconfig.sumneko_lua.setup {
-    cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
+lspconfig.lua_ls.setup {
     on_attach = on_attach,
+    capabilities = capabilities,
     settings = {
         Lua = {
             runtime = {
                 -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
                 version = "LuaJIT",
-                -- Setup your lua path
-                path = vim.split(package.path, ";"),
             },
             diagnostics = {
                 -- Get the language server to recognize the `vim` global
-                globals = {"vim"},
+                globals = { "vim" },
             },
             workspace = {
                 -- Make the server aware of Neovim runtime files
-                library = {
-                    [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                    [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
-                },
+                library = vim.api.nvim_get_runtime_file("", true),
             },
+            -- Do not send telemetry data containing a randomized but unique identifier
+            telemetry = { enable = false },
         },
     },
-    capabilities = capabilities,
 }
 
-lspconfig.pyright.setup {on_attach = on_attach, capabilities = capabilities}
-lspconfig.html.setup {on_attach = on_attach, capabilities = capabilities}
-lspconfig.cssls.setup {on_attach = on_attach, capabilities = capabilities}
+lspconfig.pyright.setup { on_attach = on_attach, capabilities = capabilities }
+lspconfig.html.setup { on_attach = on_attach, capabilities = capabilities }
+lspconfig.cssls.setup { on_attach = on_attach, capabilities = capabilities }
 lspconfig.jsonls.setup {
     on_attach = on_attach,
     capabilities = capabilities,
-    init_options = {provideFormatter = false},
+    init_options = { provideFormatter = false },
 }
-lspconfig.yamlls.setup {on_attach = on_attach, capabilities = capabilities}
+lspconfig.yamlls.setup { on_attach = on_attach, capabilities = capabilities }
 -- lspconfig.vuels.setup {on_attach = on_attach, capabilities = capabilities}
 lspconfig.volar.setup {
     on_attach = function(client, bufnr)
@@ -171,11 +155,11 @@ lspconfig.volar.setup {
     on_attach,
     capabilities = capabilities,
 }
-lspconfig.graphql.setup {on_attach = on_attach, capabilities = capabilities}
-lspconfig.prismals.setup {on_attach = on_attach, capabilities = capabilities}
-lspconfig.bashls.setup {on_attach = on_attach, capabilities = capabilities}
-lspconfig.vimls.setup {on_attach = on_attach, capabilities = capabilities}
-lspconfig.marksman.setup {on_attach = on_attach, capabilities = capabilities}
+lspconfig.graphql.setup { on_attach = on_attach, capabilities = capabilities }
+lspconfig.prismals.setup { on_attach = on_attach, capabilities = capabilities }
+lspconfig.bashls.setup { on_attach = on_attach, capabilities = capabilities }
+lspconfig.vimls.setup { on_attach = on_attach, capabilities = capabilities }
+lspconfig.marksman.setup { on_attach = on_attach, capabilities = capabilities }
 lspconfig.texlab.setup {
     on_attach = on_attach,
     capabilities = capabilities,
@@ -183,14 +167,13 @@ lspconfig.texlab.setup {
         texlab = {
             build = {
                 executable = "tectonic",
-                args = {"-X", "build", "--keep-logs", "--keep-intermediates"},
+                args = { "-X", "build", "--keep-logs", "--keep-intermediates" },
                 onSave = true,
             },
         },
     },
 }
-lspconfig.tailwindcss.setup {on_attach = on_attach, capabilities = capabilities}
-lspconfig.jdtls.setup {on_attach = on_attach, capabilities = capabilities}
-lspconfig.astro.setup {on_attach = on_attach, capabilities = capabilities}
-lspconfig.clangd.setup {on_attach = on_attach, capabilities = capabilities}
-
+lspconfig.tailwindcss.setup { on_attach = on_attach, capabilities = capabilities }
+lspconfig.jdtls.setup { on_attach = on_attach, capabilities = capabilities }
+lspconfig.astro.setup { on_attach = on_attach, capabilities = capabilities }
+lspconfig.clangd.setup { on_attach = on_attach, capabilities = capabilities }

@@ -21,8 +21,8 @@ telescope.setup {
         layout_config = {
             height = 0.7,
             width = 0.9,
-            horizontal = {mirror = false},
-            vertical = {mirror = false},
+            horizontal = { mirror = false },
+            vertical = { mirror = false },
         },
         file_sorter = sorters.get_fuzzy_file,
         file_ignore_patterns = {},
@@ -31,7 +31,7 @@ telescope.setup {
         color_devicons = true,
         use_less = true,
         path_display = {},
-        set_env = {["COLORTERM"] = "truecolor"}, -- default = nil,
+        set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
         file_previewer = previewers.vim_buffer_cat.new,
         grep_previewer = previewers.vim_buffer_vimgrep.new,
         qflist_previewer = previewers.vim_buffer_qflist.new,
@@ -57,10 +57,10 @@ telescope.setup {
         buffers = {
             show_all_buffers = true,
             sort_lastused = true,
-            mappings = {i = {["<C-x>"] = actions.delete_buffer}},
+            mappings = { i = { ["<C-x>"] = actions.delete_buffer } },
         },
     },
-    extensions = {["ui-select"] = {require("telescope.themes").get_cursor {}}},
+    extensions = { ["ui-select"] = { require("telescope.themes").get_dropdown {} } },
 }
 
 require("telescope").load_extension("ui-select")
