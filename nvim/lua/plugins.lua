@@ -1,5 +1,5 @@
 local install_path = vim.fn.stdpath("data") ..
-                         "/site/pack/packer/start/packer.nvim"
+    "/site/pack/packer/start/packer.nvim"
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
     vim.fn.system({
         "git", "clone", "--depth", "1",
@@ -23,7 +23,7 @@ return require("packer").startup(function(use)
     use "pantharshit00/vim-prisma"
     use "martinda/Jenkinsfile-vim-syntax"
     use "lervag/vimtex"
-    use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
+    use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
     -- semantic lang support
     use "neovim/nvim-lspconfig"
     use "SirVer/ultisnips"
@@ -41,10 +41,10 @@ return require("packer").startup(function(use)
     use {
         "nvim-telescope/telescope.nvim",
         requires = {
-            {"nvim-lua/plenary.nvim"}, {"kyazdani42/nvim-web-devicons"},
-            {"nvim-telescope/telescope-ui-select.nvim"},
+            { "nvim-lua/plenary.nvim" }, { "kyazdani42/nvim-web-devicons" },
         },
     }
+    use { 'stevearc/dressing.nvim' }
     -- vim sane defaults
     use "tpope/vim-commentary"
     use "tpope/vim-unimpaired"
@@ -52,7 +52,7 @@ return require("packer").startup(function(use)
     use "tpope/vim-surround"
     -- git and files
     use "tpope/vim-fugitive"
-    use {"lewis6991/gitsigns.nvim", requires = {"nvim-lua/plenary.nvim"}}
+    use { "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" } }
     -- use "lstwn/broot.vim"
     use "~/Projects/broot.vim"
     -- ux improvements

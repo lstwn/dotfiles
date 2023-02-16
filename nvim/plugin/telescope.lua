@@ -60,7 +60,4 @@ telescope.setup {
             mappings = { i = { ["<C-x>"] = actions.delete_buffer } },
         },
     },
-    extensions = { ["ui-select"] = { require("telescope.themes").get_dropdown {} } },
 }
-
-require("telescope").load_extension("ui-select")
