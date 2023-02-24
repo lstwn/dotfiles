@@ -66,15 +66,18 @@ if test (type npm 2>/dev/null)
 end
 
 # starship prompt and vscode integration for interactive sessions
-if status is-interactive
+if status --is-interactive
     string match -q "$TERM_PROGRAM" "vscode"
     and . (code --locate-shell-integration-path fish)
     starship init fish | source
 end
-
-# launch tmux if shell is interactive and not in vscode while respecting nesting
-if status is-interactive
+ 
+if status --is-interactive
+# no tmux nesting
 and not set -q TMUX
+# no tmux when a terminal is launched in vscode
 and not string match -q "$TERM_PROGRAM" "vscode"
+# no tmux when vscode tries to resolve shell if launched from GUI
+and not set -q VSCODE_PID
     exec tmux
 end

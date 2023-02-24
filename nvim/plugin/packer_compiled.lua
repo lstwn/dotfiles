@@ -209,6 +209,11 @@ _G.packer_plugins = {
     path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/vim-fugitive",
     url = "https://github.com/tpope/vim-fugitive"
   },
+  ["vim-marked"] = {
+    loaded = true,
+    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/vim-marked",
+    url = "https://github.com/itspriddle/vim-marked"
+  },
   ["vim-prisma"] = {
     loaded = true,
     path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/vim-prisma",

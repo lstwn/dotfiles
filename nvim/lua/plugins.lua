@@ -60,6 +60,7 @@ return require("packer").startup(function(use)
     use "~/Projects/terminal.vim"
     use "~/Projects/galaxyline.nvim"
     use "tpope/vim-abolish"
+    use "itspriddle/vim-marked"
     use({
         "iamcco/markdown-preview.nvim",
         run = function() vim.fn["mkdp#util#install"]() end,
