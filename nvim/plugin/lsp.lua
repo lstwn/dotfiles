@@ -12,10 +12,35 @@ augroup on_save
 augroup end
 ]], false)
 
+-- set borders for lsp floats in line with dressing.nvim and telescope
+-- see :h nvim_open_win() and search for border for available options
+local preferred_border = "rounded"
+
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+    vim.lsp.handlers.hover, {
+        border = preferred_border
+    }
+)
+
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+    vim.lsp.handlers.signature_help, {
+        border = preferred_border
+    }
+)
+
+vim.diagnostic.config {
+    float = { border = preferred_border }
+}
+
+require('lspconfig.ui.windows').default_options = {
+    border = preferred_border
+}
+
+
 local lspconfig = require("lspconfig")
 local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp
-.protocol
-.make_client_capabilities())
+    .protocol
+    .make_client_capabilities())
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -51,12 +76,13 @@ local prettier = {
     formatStdin = true,
     env = {
         string.format("PRETTIERD_DEFAULT_CONFIG=%s", vim.fn
-        .expand("~/.config/nvim/utils/linter-config/.prettierrc.json")),
+            .expand("~/.config/nvim/utils/linter-config/.prettierrc.json")),
     },
 }
 
 local luafmt = {
-    formatCommand = "lua-format --no-align-args --no-align-parameter --extra-sep-at-table-end --single-quote-to-double-quote",
+    formatCommand =
+    "lua-format --no-align-args --no-align-parameter --extra-sep-at-table-end --single-quote-to-double-quote",
     formatStdin = true,
 }
 
