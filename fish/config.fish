@@ -81,3 +81,10 @@ and not string match -q "$TERM_PROGRAM" "vscode"
 and not set -q VSCODE_PID
     exec tmux
 end
+
+# pnpm
+set -gx PNPM_HOME "/Users/lstwn/Library/pnpm"
+if not string match -q -- $PNPM_HOME $PATH
+  set -gx PATH "$PNPM_HOME" $PATH
+end
+# pnpm end
