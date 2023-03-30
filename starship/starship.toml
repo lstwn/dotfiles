@@ -1,10 +1,13 @@
 format = """
-$time\
+$battery\
 $username\
 $hostname\
 $directory\
 $git_branch\
+$git_commit\
+$git_state\
 $git_status\
+$cmd_duration\
 $status
 [>](reset) 
 """
@@ -18,35 +21,75 @@ style_user = "fg:black bg:green"
 style_root = "fg:black bg:red"
 format = '[ $user ]($style)'
 
-[directory]
-style = "fg:black bg:blue"
-format = "[ $path ]($style)"
-truncation_length = 3
-truncation_symbol = "…/"
-
 [hostname]
+disabled = false
 ssh_only = false
 style = "fg:black bg:red"
 format = "[ $hostname ]($style)"
 trim_at = "."
-disabled = false
+
+[directory]
+format = "[ $path ]($style)"
+style = "fg:black bg:blue"
+truncation_length = 3
+truncation_symbol = "…/"
 
 [git_branch]
+format = '[ $branch(|$remote_branch) ]($style)'
 style = "fg:black bg:yellow"
-format = '[ $branch ]($style)'
+truncation_length = 25
+truncation_symbol = "…"
+
+[git_commit]
+disabled = false
+format = '[($hash$tag )]($style)'
+style = "fg:black bg:yellow"
+commit_hash_length = 7
+only_detached = true
+
+[git_state]
+format = '[($state )]($style)'
+style = "fg:black bg:yellow"
+rebase = "REBASE"
+merge = "MERGE"
+revert = "REVERT"
+cherry_pick = "CHERRY"
+bisect = "BISECT"
+am = "AM" # apply mailbox
+am_or_rebase = "AM|REBASE"
 
 [git_status]
+disabled = false
+format = '[($all_status )($ahead_behind )]($style)'
 style = "fg:black bg:yellow"
-format = '[$all_status$ahead_behind ]($style)'
+ahead = '${count}+'
+diverged = '${ahead_count}+${behind_count}-'
+behind = '${count}-'
+up_to_date = "up-to-date"
+conflicted = "${count}c"
+untracked = "${count}u"
+stashed = "${count}p"
+modified = "${count}m"
+staged = "${count}s"
+renamed = "${count}r"
+deleted = "${count}d"
+
+[cmd_duration]
+min_time = 3_000
+format = '[ $duration ]($style)'
+style = "fg:black bg:purple"
+show_notifications = false
+show_milliseconds = true
 
 [status]
+disabled = false
 style = "fg:black bg:red"
 success_symbol = "" # leave empty to only show in error case
-format = '[ $common_meaning$signal_name ($status) ]($style)'
-disabled = false
+format = '[ $common_meaning$signal_name ($status )]($style)'
 
-[time]
+[battery]
 disabled = false
-time_format = "%R" # Hour:Minute Format
+format = '[ $symbol$percentage ]($style)'
+[[battery.display]]
+threshold = 10
 style = "fg:black bg:purple"
-format = '[ ](bold $style)[$time ]($style)'
