@@ -1,0 +1,7 @@
+// cmdbar_bg
+// cmdbar_extra_lines_bg
+
+(
+    cmdbar_bg: Reset
+    cmdbar_extra_lines_bg: Reset
+)
