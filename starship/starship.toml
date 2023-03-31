@@ -91,5 +91,5 @@ format = '[ $common_meaning$signal_name ($status )]($style)'
 disabled = false
 format = '[ $symbol$percentage ]($style)'
 [[battery.display]]
-threshold = 10
+threshold = 15
 style = "fg:black bg:purple"
