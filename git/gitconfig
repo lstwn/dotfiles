@@ -53,3 +53,5 @@
     line-numbers-right-style = black
 [interactive]
     diffFilter = delta --color-only
+[init]
+	defaultBranch = trunk
