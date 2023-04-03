@@ -4,39 +4,39 @@ M.own = function()
     vim.g.mapleader = ","
 
     -- normal keymaps
-    vim.api.nvim_set_keymap("n", "~", [[<cmd>Explore ~<cr>]], {noremap = true})
+    vim.api.nvim_set_keymap("n", "~", [[<cmd>Explore ~<cr>]], { noremap = true })
     vim.api.nvim_set_keymap("n", "-", [[<cmd>Explore %:p:h<cr>]],
-        {noremap = true})
+        { noremap = true })
     vim.api.nvim_set_keymap("n", "<leader><tab>", [[<cmd>b#<cr>]],
-        {noremap = true})
+        { noremap = true })
     vim.api.nvim_set_keymap("n", "<leader>R",
         [[<cmd>source $MYVIMRC<cr> <cmd>filetype detect<cr> <cmd>echo "Reloaded"<cr>]],
-        {noremap = true})
+        { noremap = true })
     vim.api.nvim_set_keymap("n", "<C-w>c", [[<cmd>tabnew %<cr>]],
-        {noremap = true})
+        { noremap = true })
     vim.api.nvim_set_keymap("n", "<C-w>n", [[<cmd>tabnext<cr>]],
-        {noremap = true})
+        { noremap = true })
     vim.api.nvim_set_keymap("n", "<C-w>p", [[<cmd>tabprevious<cr>]],
-        {noremap = true})
+        { noremap = true })
 
     -- terminal keymaps
-    vim.api.nvim_set_keymap("t", "<C-w>N", [[<C-\><C-n>]], {noremap = true})
+    vim.api.nvim_set_keymap("t", "<C-w>N", [[<C-\><C-n>]], { noremap = true })
     vim.api.nvim_set_keymap("t", "<C-w>c", [[<C-\><C-n><cmd>tabnew %<cr>]],
-        {noremap = true})
+        { noremap = true })
     vim.api.nvim_set_keymap("t", "<C-w>n", [[<cmd>tabnext<cr>]],
-        {noremap = true})
+        { noremap = true })
     vim.api.nvim_set_keymap("t", "<C-w>p", [[<cmd>tabprevious<cr>]],
-        {noremap = true})
+        { noremap = true })
     vim.api.nvim_set_keymap("t", "<C-w>q", [[<C-\><C-n><C-w>q]],
-        {noremap = true})
+        { noremap = true })
     vim.api.nvim_set_keymap("t", "<C-w>l", [[<C-\><C-n><C-w>l]],
-        {noremap = true})
+        { noremap = true })
     vim.api.nvim_set_keymap("t", "<C-w>h", [[<C-\><C-n><C-w>h]],
-        {noremap = true})
+        { noremap = true })
     vim.api.nvim_set_keymap("t", "<C-w>k", [[<C-\><C-n><C-w>k]],
-        {noremap = true})
+        { noremap = true })
     vim.api.nvim_set_keymap("t", "<C-w>j", [[<C-\><C-n><C-w>j]],
-        {noremap = true})
+        { noremap = true })
 end
 
 M.lsp = function(bufnr)
@@ -44,7 +44,7 @@ M.lsp = function(bufnr)
         vim.api.nvim_buf_set_keymap(bufnr, ...)
     end
 
-    local keymap_options = {noremap = true, silent = true}
+    local keymap_options = { noremap = true, silent = true }
     buf_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>",
         keymap_options)
     buf_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>",
