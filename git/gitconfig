@@ -1,12 +1,10 @@
 [user]
 	name = Leo
 	email = lstwn@mailbox.org
-[merge]
-	tool = fugitive
-[mergetool "fugitive"]
-    cmd = nvim -f -c \"Gvdiffsplit!\" \"$MERGED\"
-[diff]
-    tool = vimdiff
+[init]
+	defaultBranch = trunk
+[pull]
+	rebase = false
 [alias]
     slog = log --abbrev-commit --pretty=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'
     mlog = log --graph --abbrev-commit --pretty=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)%n' --stat
@@ -19,14 +17,20 @@
     undo = checkout --
     wdiff = diff --stat --patch
     cdiff = diff --cached --stat --patch
-[pull]
-	rebase = false
+[diff]
+    tool = fugitive
+[difftool]
+    prompt = false
+[difftool "fugitive"]
+    cmd = nvim -c \"Git difftool\"
+[merge]
+	tool = fugitive
+[merge.tool "fugitive"]
+    cmd = nvim -c \"Gvdiffsplit!\" \"$MERGED\"
 [core]
     pager = delta
-[pager]
-    # status = true
-    # commit = true
-    # push = true
+[interactive]
+    diffFilter = delta --color-only
 [delta]
     features = line-numbers decorations # side-by-side
     syntax-theme = base16
@@ -51,7 +55,3 @@
     line-numbers-plus-style = green
     line-numbers-left-style = black
     line-numbers-right-style = black
-[interactive]
-    diffFilter = delta --color-only
-[init]
-	defaultBranch = trunk
