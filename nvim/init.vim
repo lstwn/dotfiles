@@ -75,6 +75,18 @@ augroup optiontweaks
     autocmd FileType qf if (getwininfo(win_getid())[0].loclist != 1) | wincmd J | endif
     autocmd FileType qf set norelativenumber | set colorcolumn=""
 augroup END
+augroup quickfix
+    " Automatically open, but do not go to (if there are errors) the quickfix /
+    " location list window, or close it when is has become empty.
+    "
+    " Note: Must allow nesting of autocmds to enable any customizations for quickfix
+    " buffers.
+    " Note: Normally, :cwindow jumps to the quickfix window if the command opens it
+    " (but not if it's already open). However, as part of the autocmd, this doesn't
+    " seem to happen.
+    autocmd QuickFixCmdPost [^l]* nested cwindow
+    autocmd QuickFixCmdPost    l* nested lwindow
+augroup END
 augroup highlight_yank
     autocmd!
     autocmd TextYankPost * silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=800 }

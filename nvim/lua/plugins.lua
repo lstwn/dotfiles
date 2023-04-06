@@ -28,6 +28,7 @@ return require("packer").startup(function(use)
     use "neovim/nvim-lspconfig"
     use "SirVer/ultisnips"
     use "honza/vim-snippets"
+    use "simrat39/symbols-outline.nvim"
     use {
         "hrsh7th/nvim-cmp",
         requires = {
