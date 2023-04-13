@@ -5,6 +5,8 @@ local previewers = require("telescope.previewers")
 
 require("mappings").telescope()
 
+vim.cmd "autocmd User TelescopePreviewerLoaded setlocal number"
+
 telescope.setup {
     defaults = {
         vimgrep_arguments = {
