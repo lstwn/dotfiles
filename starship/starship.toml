@@ -8,8 +8,7 @@ $git_commit\
 $git_state\
 $git_status\
 $cmd_duration\
-$status
-[>](reset) 
+$status \
 """
 
 # Disable the blank line at the start of the prompt

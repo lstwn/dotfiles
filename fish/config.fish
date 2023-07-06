@@ -65,11 +65,18 @@ if test (type npm 2>/dev/null)
     set -x MANPATH "$NPM_GLOBAL_DIR/share/man:"(manpath)
 end
 
+# pnpm
+set -gx PNPM_HOME "/Users/lstwn/Library/pnpm"
+if not string match -q -- $PNPM_HOME $PATH
+  set -gx PATH "$PNPM_HOME" $PATH
+end
+# pnpm end
+
 # starship prompt and vscode integration for interactive sessions
 if status --is-interactive
+    starship init fish | source
     string match -q "$TERM_PROGRAM" "vscode"
     and . (code --locate-shell-integration-path fish)
-    starship init fish | source
 end
  
 if status --is-interactive
@@ -81,10 +88,3 @@ and not string match -q "$TERM_PROGRAM" "vscode"
 and not set -q VSCODE_PID
     exec tmux
 end
-
-# pnpm
-set -gx PNPM_HOME "/Users/lstwn/Library/pnpm"
-if not string match -q -- $PNPM_HOME $PATH
-  set -gx PATH "$PNPM_HOME" $PATH
-end
-# pnpm end
