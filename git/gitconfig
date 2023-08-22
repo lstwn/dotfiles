@@ -3,6 +3,8 @@
 	email = lstwn@mailbox.org
 [init]
 	defaultBranch = trunk
+[push]
+	autoSetupRemote = true
 [pull]
 	rebase = false
 [alias]
@@ -18,15 +20,19 @@
     wdiff = diff --stat --patch
     cdiff = diff --cached --stat --patch
 [diff]
-    tool = fugitive
+    tool = vscode
 [difftool]
     prompt = false
 [difftool "fugitive"]
     cmd = nvim -c \"Git difftool\"
+[difftool "vscode"]
+    cmd = code --wait --diff $LOCAL $REMOTE
 [merge]
-	tool = fugitive
-[merge.tool "fugitive"]
+	tool = vscode
+[mergetool "fugitive"]
     cmd = nvim -c \"Gvdiffsplit!\" \"$MERGED\"
+[mergetool "vscode"]
+    cmd = code --wait --merge $REMOTE $LOCAL $BASE $MERGED
 [core]
     pager = delta
 [interactive]
@@ -55,5 +61,3 @@
     line-numbers-plus-style = green
     line-numbers-left-style = black
     line-numbers-right-style = black
-[push]
-	autoSetupRemote = true
