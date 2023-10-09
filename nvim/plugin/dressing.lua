@@ -12,9 +12,6 @@ dressing.setup({
         insert_only = false,
         -- When true, input will start in insert mode.
         start_in_insert = false,
-        -- These are passed to nvim_open_win
-        anchor = "NW",
-        border = "rounded",
         -- 'editor' and 'win' will default to being centered
         relative = "cursor",
         -- These can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
@@ -47,6 +44,8 @@ dressing.setup({
         override = function(conf)
             -- This is the config that will be passed to nvim_open_win.
             -- Change values here to customize the layout
+            conf.anchor = "NW"
+            conf.border = "rounded"
             return conf
         end,
         -- see :help dressing_get_config
@@ -99,9 +98,6 @@ dressing.setup({
         },
         -- Options for built-in selector
         builtin = {
-            -- These are passed to nvim_open_win
-            anchor = "NW",
-            border = "rounded",
             -- 'editor' and 'win' will default to being centered
             relative = "editor",
             buf_options = {},
@@ -127,6 +123,8 @@ dressing.setup({
             override = function(conf)
                 -- This is the config that will be passed to nvim_open_win.
                 -- Change values here to customize the layout
+                conf.anchor = "NW"
+                -- conf.border = "none"
                 return conf
             end,
         },

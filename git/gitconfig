@@ -20,7 +20,7 @@
     wdiff = diff --stat --patch
     cdiff = diff --cached --stat --patch
 [diff]
-    tool = vscode
+    tool = fugitive
 [difftool]
     prompt = false
 [difftool "fugitive"]

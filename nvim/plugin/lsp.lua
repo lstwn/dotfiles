@@ -8,7 +8,7 @@ endfunction
 
 augroup on_save
   autocmd!
-  autocmd BufWritePre *.js,*.ts,*.vue,*.rs,*.py,*.c,*.lua,*.md,*.json,*.html,*.css call g:OnSave()
+  autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.vue,*.rs,*.py,*.c,*.lua,*.md,*.json,*.html,*.css call g:OnSave()
 augroup end
 ]], false)
 
@@ -89,18 +89,20 @@ local luafmt = {
 local rustfmt = { formatCommand = "rustfmt", formatStdin = true }
 
 local languages = {
-    typescript = { eslint, prettier },
-    javascript = { eslint, prettier },
-    typescriptreact = { eslint, prettier },
-    javascriptreact = { eslint, prettier },
+    typescript = { prettier, eslint },
+    typescriptreact = { prettier, eslint },
+    ['typescript.tsx'] = { prettier, eslint },
+    javascript = { prettier, eslint },
+    javascriptreact = { prettier, eslint },
+    ['javascript.jsx'] = { prettier, eslint },
     vue = { prettier, eslint },
     yaml = { prettier },
     json = { prettier },
+    jsonc = { prettier },
     html = { prettier },
     scss = { prettier },
     css = { prettier },
     markdown = { prettier },
-    -- rust = {rustfmt},
 }
 
 lspconfig.efm.setup {

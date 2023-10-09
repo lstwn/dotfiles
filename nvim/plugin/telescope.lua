@@ -2,10 +2,14 @@ local telescope = require("telescope")
 local actions = require("telescope.actions")
 local sorters = require("telescope.sorters")
 local previewers = require("telescope.previewers")
+local themes = require("telescope.themes")
 
 require("mappings").telescope()
 
 vim.cmd "autocmd User TelescopePreviewerLoaded setlocal number"
+
+telescope.load_extension("aerial")
+telescope.load_extension('lsp_handlers')
 
 telescope.setup {
     defaults = {
@@ -21,10 +25,11 @@ telescope.setup {
         sorting_strategy = "descending",
         layout_strategy = "horizontal",
         layout_config = {
-            height = 0.7,
+            height = 0.8,
             width = 0.9,
             horizontal = { mirror = false },
             vertical = { mirror = false },
+            prompt_position = "bottom",
         },
         file_sorter = sorters.get_fuzzy_file,
         file_ignore_patterns = {},
@@ -62,4 +67,14 @@ telescope.setup {
             mappings = { i = { ["<C-x>"] = actions.delete_buffer } },
         },
     },
+    extensions = {
+        aerial = {
+            -- Display symbols as <root>.<parent>.<symbol>
+            show_nesting = {
+                ['_'] = true, -- This key will be the default
+                json = true,  -- You can set the option for specific filetypes
+                yaml = true,
+            }
+        },
+    }
 }

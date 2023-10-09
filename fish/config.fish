@@ -2,6 +2,7 @@ fish_vi_key_bindings
 set -g fish_prompt_pwd_dir_length 1
 set fish_greeting
 
+set -x TERM "screen-256color"
 set -x BAT_THEME "base16"
 set -x LESS_TERMCAP_md (tput bold; tput setaf 3)               # begin bold
 set -x LESS_TERMCAP_me (tput sgr0)                             # reset bold/blink

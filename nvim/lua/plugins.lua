@@ -25,10 +25,10 @@ return require("packer").startup(function(use)
     use "lervag/vimtex"
     use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
     -- semantic lang support
+    use "github/copilot.vim"
     use "neovim/nvim-lspconfig"
     use "SirVer/ultisnips"
     use "honza/vim-snippets"
-    use "simrat39/symbols-outline.nvim"
     use {
         "hrsh7th/nvim-cmp",
         requires = {
@@ -45,7 +45,9 @@ return require("packer").startup(function(use)
             { "nvim-lua/plenary.nvim" }, { "kyazdani42/nvim-web-devicons" },
         },
     }
+    use { 'gbrlsnchs/telescope-lsp-handlers.nvim' }
     use { 'stevearc/dressing.nvim' }
+    use { 'stevearc/aerial.nvim' }
     -- vim sane defaults
     use "tpope/vim-commentary"
     use "tpope/vim-unimpaired"
@@ -61,9 +63,4 @@ return require("packer").startup(function(use)
     use "~/Projects/terminal.vim"
     use "~/Projects/galaxyline.nvim"
     use "tpope/vim-abolish"
-    use "itspriddle/vim-marked"
-    use({
-        "iamcco/markdown-preview.nvim",
-        run = function() vim.fn["mkdp#util#install"]() end,
-    })
 end)

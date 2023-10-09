@@ -88,6 +88,7 @@ M.telescope = function()
     nnoremap <leader>fb  <cmd>Telescope buffers<cr>
     tnoremap <leader>fb  <cmd>Telescope buffers<cr>
     nnoremap <leader>fc  <cmd>Telescope commands<cr>
+    nnoremap <leader>fm  <cmd>Telescope marks<cr>
 
     nnoremap <leader>fq  <cmd>Telescope quickfix<cr>
     nnoremap <leader>fl  <cmd>Telescope loclist<cr>
@@ -96,8 +97,10 @@ M.telescope = function()
     nnoremap <leader>fgw <cmd>Telescope live_grep<cr>
     nnoremap <leader>fgb <cmd>Telescope current_buffer_fuzzy_find<cr>
 
-    nnoremap <leader>fdw <cmd>Telescope lsp_workspace_diagnostics<cr>
-    nnoremap <leader>fdb <cmd>Telescope lsp_document_diagnostics<cr>
+    nnoremap <leader>fo  <cmd>Telescope aerial<cr>
+    nnoremap <leader>ft  <cmd>Telescope treesitter<cr>
+    nnoremap <leader>fdw <cmd>Telescope diagnostics<cr>
+    nnoremap <leader>fdb <cmd>Telescope diagnostics bufnr=0<cr>
     nnoremap <leader>fsw <cmd>Telescope lsp_dynamic_workspace_symbols<cr>
     nnoremap <leader>fsb <cmd>Telescope lsp_document_symbols<cr>
 
@@ -105,6 +108,7 @@ M.telescope = function()
     nnoremap <leader>gcb <cmd>Telescope git_bcommits<cr>
     nnoremap <leader>gs  <cmd>Telescope git_status<cr>
     nnoremap <leader>gb  <cmd>Telescope git_branches<cr>
+    nnoremap <leader>gp  <cmd>Telescope git_stash<cr>
     ]], false)
 end
 
