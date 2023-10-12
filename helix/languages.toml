@@ -1,67 +1,64 @@
 [[language]]
 name = "html"
-formatter = { command = 'prettierd', args = ["--parser", "html"] }
 auto-format = true
+language-servers = [ "efm-lsp-prettier" ]
 
 [[language]]
 name = "json"
-formatter = { command = 'prettierd', args = ["--parser", "json"] }
 auto-format = true
+language-servers = [ "efm-lsp-prettier" ]
+
+[[language]]
+name = "yaml"
+auto-format = true
+language-servers = [ "efm-lsp-prettier" ]
 
 [[language]]
 name = "css"
-formatter = { command = 'prettierd', args = ["--parser", "css"] }
 auto-format = true
-
-[[language]]
-name = "javascript"
-formatter = { command = 'prettierd', args = ["--parser", "typescript"] }
-auto-format = true
-
-[[language]]
-name = "jsx"
-formatter = { command = 'prettierd', args = ["--parser", "typescript"] }
-auto-format = true
-
-[[language]]
-name = "typescript"
-formatter = { command = 'prettierd', args = ["--parser", "typescript"] }
-auto-format = true
-
-[[language]]
-name = "tsx"
-formatter = { command = 'prettierd', args = ["--parser", "typescript"] }
-auto-format = true
+language-servers = [ "efm-lsp-prettier" ]
 
 [[language]]
 name = "markdown"
-formatter = { command = 'prettierd', args = ["--parser", "markdown"] }
+auto-format = true
+language-servers = [ "efm-lsp-prettier" ]
+
+[[language]]
+name = "javascript"
+auto-format = true
+language-servers = [ { name = "typescript-language-server", except-features = [ "format" ] }, "efm-lsp-eslint-prettier" ]
+
+[[language]]
+name = "jsx"
+auto-format = true
+language-servers = [ { name = "typescript-language-server", except-features = [ "format" ] }, "efm-lsp-eslint-prettier" ]
+
+[[language]]
+name = "typescript"
+auto-format = true
+language-servers = [ { name = "typescript-language-server", except-features = [ "format" ] }, "efm-lsp-eslint-prettier" ]
+
+[[language]]
+name = "tsx"
+auto-format = true
+language-servers = [ { name = "typescript-language-server", except-features = [ "format" ] }, "efm-lsp-eslint-prettier" ]
+
+[[language]]
+name = "rust"
 auto-format = true
 
 [[language]]
 name = "graphql"
-formatter = { command = 'prettierd', args = ["--parser", "graphql"] }
 auto-format = true
+language-servers = [ "efm-lsp-prettier" ]
 
 [[language]]
 name = "fish"
+auto-format = true
 formatter = { command = "fish_indent" }
-auto-format = true
 
-# AstroJS
-[[language]]
-name = "astro"
-scope = "source.astro"
-file-types = ["astro"]
-auto-format = true
-language-server = { command = "astro-ls", args = ["--stdio"]}
-config = {typescript = {tsdk = "/Users/user/.bun/install/global/node_modules/typescript/lib"}, environment = "node"}
-
-# Latex
-[[language]]
-name = "latex"
-
-[language.config.texlab.build]
+# texlab language server
+[language-server.texlab.config.texlab.build]
 onSave = true
 forwardSearchAfter = true
 executable = "latexmk"
@@ -70,7 +67,39 @@ auxDirectory = "./build"
 logDirectory = "./build"
 pdfDirectory = "./build"
 
-[language.config.texlab.forwardSearch]
+[language-server.texlab.config.texlab.forwardSearch]
 executable = "/Applications/Skim.app/Contents/SharedSupport/displayline"
 args = ["-g", "%l", "%p", "%f"]
+
+# EFM language server for prettier only
+[language-server.efm-lsp-prettier]
+command = "efm-langserver"
+
+[language-server.efm-lsp-prettier.config]
+documentFormatting = true
+
+[[language-server.efm-lsp-prettier.config.languages."="]]
+formatCommand = "prettierd ${INPUT}"
+formatStdin = true
+environment = { "PRETTIERD_DEFAULT_CONFIG" = "/Users/lstwn/.config/nvim/linter-config/.prettierrc.json" }
+
+# EFM language server for eslint and followed by prettier
+[language-server.efm-lsp-eslint-prettier]
+command = "efm-langserver"
+
+[language-server.efm-lsp-eslint-prettier.config]
+documentFormatting = true
+
+[[language-server.efm-lsp-eslint-prettier.config.languages."="]]
+lintCommand = "eslint_d -f unix --stdin --stdin-filename ${INPUT}"
+lintFormats = [ "%f:%l:%c: %m" ]
+lintStdin = true
+lintIgnoreExitCode = true
+formatCommand = "eslint_d --fix-to-stdout --stdin --stdin-filename ${INPUT}"
+formatStdin = true
+
+[[language-server.efm-lsp-eslint-prettier.config.languages."="]]
+formatCommand = "prettierd ${INPUT}"
+formatStdin = true
+environment = { "PRETTIERD_DEFAULT_CONFIG" = "/Users/lstwn/.config/nvim/linter-config/.prettierrc.json" }
 
