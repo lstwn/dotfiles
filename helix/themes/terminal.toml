@@ -1,0 +1,11 @@
+inherits = "base16_terminal"
+
+"ui.window" = { fg = "black" }
+"ui.menu" = { }
+"ui.popup" = { }
+"ui.help" = { }
+"comment" = { fg = "gray", modifiers = ["italic"] }
+"ui.linenr.selected" = { fg = "yellow", bg = "black", modifiers = ["bold"] }
+"ui.linenr" = { fg = "gray", bg = "black" }
+
+"diagnostic.error" = { underline = { style = "curl" } }

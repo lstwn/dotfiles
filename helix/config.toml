@@ -1,0 +1,17 @@
+theme = "terminal"
+
+[editor]
+true-color = false
+line-number = "relative"
+
+[editor.statusline]
+left = ["mode", "version-control", "spinner"]
+center = ["file-name", "file-modification-indicator"]
+right = ["diagnostics", "selections", "position", "total-line-numbers", "file-encoding", "file-line-ending", "file-type"]
+separator = "│"
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
+
+[editor.lsp]
+display-inlay-hints = false

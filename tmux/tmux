@@ -44,6 +44,8 @@ bind R source-file ~/.tmux.conf \; display "Reloaded"
 bind s split-window -c "#{pane_current_path}" -v
 bind v split-window -c "#{pane_current_path}" -h
 
+bind f display-popup -E -h 75% -w 90% -d "#{pane_current_path}"
+
 # use <prefix> hjkl for pane navigation
 bind h select-pane -L
 bind j select-pane -D
@@ -75,6 +77,7 @@ set -g window-status-current-style      fg=black,bg=blue
 set -g window-status-activity-style     fg=black,bg=blue
 set -g pane-active-border-style         fg=black,bg=default
 set -g pane-border-style                fg=black,bg=default
+set -g popup-border-style               fg=black,bg=default
 
 set -g base-index 1
 set -g pane-base-index 1

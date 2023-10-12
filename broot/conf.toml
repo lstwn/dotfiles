@@ -23,7 +23,7 @@
 # A popular flag is the `g` one which displays git related info.
 #
 default_flags = "g"
-modal = true
+modal = false
 
 ###############################################################
 # Date/Time format
@@ -159,7 +159,7 @@ external = "git status"
 [[verbs]]
 name = "view"
 invocation = "view"
-keys = ["v", "ctrl-p"]
+keys = ["v", "ctrl-v"]
 external = "bat --paging=always {file}"
 leave_broot = false
 apply_to = "file"
@@ -177,11 +177,11 @@ key = "ctrl-home"
 internal = ":focus ~"
 
 [[verbs]]
-key = "ctrl-j"
+key = "ctrl-n"
 internal = ":line_down"
 
 [[verbs]]
-key = "ctrl-k"
+key = "ctrl-p"
 internal = ":line_up"
 
 [[verbs]]
@@ -211,10 +211,6 @@ internal = ":select_last"
 [[verbs]]
 keys = ["ctrl-q"]
 internal = ":close_panel_cancel"
-
-# [[verbs]]
-# key = "ctrl-p"
-# execution = ":toggle_preview"
 
 ###############################################################
 # Special paths
