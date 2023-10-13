@@ -1,7 +1,8 @@
 local M = {}
 
 M.own = function()
-    vim.g.mapleader = ","
+    -- space as leader key
+    vim.g.mapleader = " "
 
     -- normal keymaps
     vim.api.nvim_set_keymap("n", "~", [[<cmd>Explore ~<cr>]], { noremap = true })
@@ -51,6 +52,8 @@ M.lsp = function(bufnr)
         keymap_options)
     buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>",
         keymap_options)
+    buf_set_keymap("n", "gR", "<cmd>lua vim.lsp.buf.incoming_calls()<CR>",
+        keymap_options)
     buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>",
         keymap_options)
     buf_set_keymap("n", "gy", "<cmd>lua vim.lsp.buf.type_definition()<CR>",
@@ -77,38 +80,37 @@ M.lsp = function(bufnr)
         keymap_options)
     buf_set_keymap("n", "<leader>cf", "<cmd>lua vim.lsp.buf.formatting()<CR>",
         keymap_options)
-    buf_set_keymap("n", "<leader>q",
-        "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", keymap_options)
+    -- buf_set_keymap("n", "<leader>q",
+    --     "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", keymap_options)
 end
 
 M.telescope = function()
     vim.api.nvim_exec([[
-    nnoremap <leader>ff  <cmd>Telescope find_files<cr>
-    tnoremap <leader>ff  <cmd>Telescope find_files<cr>
-    nnoremap <leader>fb  <cmd>Telescope buffers<cr>
-    tnoremap <leader>fb  <cmd>Telescope buffers<cr>
-    nnoremap <leader>fc  <cmd>Telescope commands<cr>
-    nnoremap <leader>fm  <cmd>Telescope marks<cr>
+    nnoremap <leader>f  <cmd>Telescope find_files<cr>
+    tnoremap <leader>f  <cmd>Telescope find_files<cr>
+    nnoremap <leader>b  <cmd>Telescope buffers<cr>
+    tnoremap <leader>b  <cmd>Telescope buffers<cr>
 
-    nnoremap <leader>fq  <cmd>Telescope quickfix<cr>
-    nnoremap <leader>fl  <cmd>Telescope loclist<cr>
-    nnoremap <leader>fh  <cmd>Telescope help_tags<cr>
+    nnoremap <leader>m  <cmd>Telescope marks<cr>
+    nnoremap <leader>j  <cmd>Telescope jumplist<cr>
 
-    nnoremap <leader>fgw <cmd>Telescope live_grep<cr>
-    nnoremap <leader>fgb <cmd>Telescope current_buffer_fuzzy_find<cr>
+    nnoremap <leader>q  <cmd>Telescope quickfix<cr>
+    nnoremap <leader>l  <cmd>Telescope loclist<cr>
 
-    nnoremap <leader>fo  <cmd>Telescope aerial<cr>
-    nnoremap <leader>ft  <cmd>Telescope treesitter<cr>
-    nnoremap <leader>fdw <cmd>Telescope diagnostics<cr>
-    nnoremap <leader>fdb <cmd>Telescope diagnostics bufnr=0<cr>
-    nnoremap <leader>fsw <cmd>Telescope lsp_dynamic_workspace_symbols<cr>
-    nnoremap <leader>fsb <cmd>Telescope lsp_document_symbols<cr>
+    nnoremap <leader>/ <cmd>Telescope live_grep<cr>
 
-    nnoremap <leader>gcw <cmd>Telescope git_commits<cr>
-    nnoremap <leader>gcb <cmd>Telescope git_bcommits<cr>
-    nnoremap <leader>gs  <cmd>Telescope git_status<cr>
-    nnoremap <leader>gb  <cmd>Telescope git_branches<cr>
-    nnoremap <leader>gp  <cmd>Telescope git_stash<cr>
+    nnoremap <leader>o <cmd>Telescope aerial<cr>
+    nnoremap <leader>t <cmd>Telescope treesitter<cr>
+    nnoremap <leader>d <cmd>Telescope diagnostics bufnr=0<cr>
+    nnoremap <leader>D <cmd>Telescope diagnostics<cr>
+    nnoremap <leader>s <cmd>Telescope lsp_document_symbols<cr>
+    nnoremap <leader>S <cmd>Telescope lsp_dynamic_workspace_symbols<cr>
+
+    nnoremap <leader>gc <cmd>Telescope git_bcommits<cr>
+    nnoremap <leader>gC <cmd>Telescope git_commits<cr>
+    nnoremap <leader>gs <cmd>Telescope git_status<cr>
+    nnoremap <leader>gb <cmd>Telescope git_branches<cr>
+    nnoremap <leader>gp <cmd>Telescope git_stash<cr>
     ]], false)
 end
 

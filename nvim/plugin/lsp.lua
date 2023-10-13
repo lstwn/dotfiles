@@ -194,10 +194,19 @@ lspconfig.texlab.setup {
     settings = {
         texlab = {
             build = {
-                executable = "tectonic",
-                args = { "-X", "build", "--keep-logs", "--keep-intermediates" },
+                executable = "latexmk",
+                args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "-outdir=./build" },
                 onSave = true,
+                auxDirectory = "./build",
+                logDirectory = "./build",
+                pdfDirectory = "./build",
+                forwardSearchAfter = true,
             },
+            forwardSearch = {
+                -- use skim as previewer that supports forward search
+                executable = "/Applications/Skim.app/Contents/SharedSupport/displayline",
+                args = { "-g", "%l", "%p", "%f" },
+            }
         },
     },
 }

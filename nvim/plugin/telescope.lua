@@ -11,6 +11,19 @@ vim.cmd "autocmd User TelescopePreviewerLoaded setlocal number"
 telescope.load_extension("aerial")
 telescope.load_extension('lsp_handlers')
 
+local delta_file = previewers.new_termopen_previewer {
+    get_command = function(entry)
+        return { 'git', '-c', 'core.pager=delta', '-c', 'delta.side-by-side=false', 'diff', entry.value .. '^!', '--',
+            entry.current_file }
+    end
+}
+
+local delta_commit = previewers.new_termopen_previewer {
+    get_command = function(entry)
+        return { 'git', '-c', 'core.pager=delta', '-c', 'delta.side-by-side=false', 'diff', entry.value }
+    end
+}
+
 telescope.setup {
     defaults = {
         vimgrep_arguments = {
@@ -65,6 +78,15 @@ telescope.setup {
             show_all_buffers = true,
             sort_lastused = true,
             mappings = { i = { ["<C-x>"] = actions.delete_buffer } },
+        },
+        git_commits = {
+            previewer = delta_file,
+        },
+        git_bcommits = {
+            previewer = delta_file,
+        },
+        git_status = {
+            previewer = delta_commit,
         },
     },
     extensions = {

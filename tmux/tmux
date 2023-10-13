@@ -3,6 +3,7 @@ set-window-option -g mode-keys vi
 set-option -g mouse on
 set -g focus-events on
 set -sg escape-time 10
+set-option -g detach-on-destroy off
 # set -sa terminal-overrides ',xterm-256color:RGB'
 
 # make copy mode more vim like and copy to system clipboard
@@ -44,6 +45,7 @@ bind R source-file ~/.tmux.conf \; display "Reloaded"
 bind s split-window -c "#{pane_current_path}" -v
 bind v split-window -c "#{pane_current_path}" -h
 
+# popup window at current working dir of pane
 bind f display-popup -E -h 75% -w 90% -d "#{pane_current_path}"
 
 # use <prefix> hjkl for pane navigation
@@ -57,16 +59,20 @@ bind K select-pane -U \; swap-pane -s !
 bind L select-pane -R \; swap-pane -s !
 bind q kill-pane
 bind e last-pane
-bind m resize-pane -Z
+bind -r m resize-pane -Z
 bind Tab last-window
 
 # resize panes more easily
-bind < resize-pane -L 5
-bind > resize-pane -R 5
-bind - resize-pane -D 5
-bind + resize-pane -U 5
-bind ! resize-pane -y 5
+bind -r < resize-pane -L 5
+bind -r > resize-pane -R 5
+bind -r - resize-pane -D 5
+bind -r + resize-pane -U 5
+bind -r ! resize-pane -y 5
 bind -r Space next-layout
+
+# window move
+bind -r c-p swap-window -t -1\; select-window -t -1
+bind -r c-n swap-window -t +1\; select-window -t +1
 
 # theming
 set -g status-style                     fg=default,bg=default

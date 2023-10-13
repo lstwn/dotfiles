@@ -15,3 +15,6 @@ mode.select = "SELECT"
 
 [editor.lsp]
 display-inlay-hints = false
+
+[keys.normal.space]
+"_" = "file_picker_in_current_buffer_directory"
