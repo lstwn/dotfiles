@@ -79,15 +79,15 @@ telescope.setup {
             sort_lastused = true,
             mappings = { i = { ["<C-x>"] = actions.delete_buffer } },
         },
-        git_commits = {
-            previewer = delta_file,
-        },
-        git_bcommits = {
-            previewer = delta_file,
-        },
-        git_status = {
-            previewer = delta_commit,
-        },
+        -- git_commits = {
+        --     previewer = delta_file,
+        -- },
+        -- git_bcommits = {
+        --     previewer = delta_file,
+        -- },
+        -- git_status = {
+        --     previewer = delta_commit,
+        -- },
     },
     extensions = {
         aerial = {

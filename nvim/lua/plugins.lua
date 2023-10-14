@@ -61,6 +61,5 @@ return require("packer").startup(function(use)
     -- ux improvements
     -- use "lstwn/terminal.vim"
     use "~/Projects/terminal.vim"
-    use "~/Projects/galaxyline.nvim"
     use "tpope/vim-abolish"
 end)

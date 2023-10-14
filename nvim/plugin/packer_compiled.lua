@@ -129,11 +129,6 @@ _G.packer_plugins = {
     path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/dressing.nvim",
     url = "https://github.com/stevearc/dressing.nvim"
   },
-  ["galaxyline.nvim"] = {
-    loaded = true,
-    path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/galaxyline.nvim",
-    url = "/Users/lstwn/Projects/galaxyline.nvim"
-  },
   ["gitsigns.nvim"] = {
     loaded = true,
     path = "/Users/lstwn/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",

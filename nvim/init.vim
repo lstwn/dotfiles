@@ -199,7 +199,6 @@ let g:broot_shell_command = "sh -c"
 let g:broot_redirect_command = ">"
 let g:broot_vim_conf = [
     \ 'default_flags = "gh"',
-    \ 'modal = true',
     \ '',
 	\ '[[verbs]]',
     \ 'key = "enter"',
