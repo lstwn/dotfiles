@@ -1,4 +1,5 @@
 local utils = require("utils")
+local diagnostic = vim.diagnostic
 
 local provider = {}
 
@@ -12,7 +13,7 @@ function provider.mode()
     return "%{b:mode}"
 end
 
-vim.api.nvim_create_autocmd({ "VimEnter", "ModeChanged", "BufEnter" }, {
+vim.api.nvim_create_autocmd({ "VimEnter", "BufEnter", "ModeChanged" }, {
     callback = function()
         vim.b.mode = utils.current_mode().long_name:upper()
     end
@@ -22,10 +23,35 @@ function provider.git_branch()
     return "%{b:git_branch}"
 end
 
-vim.api.nvim_create_autocmd({ "VimEnter", "FileType", "BufEnter", "FocusGained" }, {
+vim.api.nvim_create_autocmd({ "VimEnter", "BufEnter", "FileType", "FocusGained" }, {
     callback = function()
         vim.b.git_branch = utils.git_branch() or ""
     end
+})
+
+vim.api.nvim_create_autocmd({ "VimEnter", "BufEnter", "DiagnosticChanged" }, {
+    callback = function()
+        local err_cnt = #diagnostic.get(vim.api.nvim_get_current_buf(), {
+            severity = diagnostic.severity[diagnostic.severity.ERROR],
+        })
+        vim.b.diag_err_cnt = err_cnt or 0
+        local warn_cnt = #diagnostic.get(vim.api.nvim_get_current_buf(), {
+            severity = diagnostic.severity[diagnostic.severity.WARN],
+        })
+        vim.b.diag_warn_cnt = warn_cnt or 0
+
+        if err_cnt > 0 then
+            vim.b.diag_colorbox = "%#StatusLineMode# %{b:diag_err_cnt} %#StatusLine#"
+            return
+        end
+
+        if warn_cnt > 0 then
+            vim.b.diag_colorbox = "%#StatusLineInfo# %{b:diag_warn_cnt} %#StatusLine#"
+            return
+        end
+
+        vim.b.diag_colorbox = ""
+    end,
 })
 
 function provider.file() return "%f" end
@@ -41,6 +67,8 @@ function provider.file_format() return "%{&fileformat}" end
 function provider.position() return "%l/%L:%2v" end
 
 function provider.term_title() return "%.80{b:term_title}" end
+
+function provider.diag_summary() return "%{%b:diag_colorbox%}" end
 
 local fmt = {}
 
@@ -77,11 +105,43 @@ local function map(f, l)
     return mapped
 end
 
+local active_buf_stl = {
+    -- left
+    {
+        fmt.highlight(fmt.wrap(provider.current_working_dir()), "StatusLineEnc"),
+        fmt.highlight(fmt.wrap(provider.mode()), "StatusLineBufNo"),
+        -- fmt.group makes the whole thing disappear if vim isn't in a git folder
+        fmt.highlight(fmt.group(fmt.wrap(provider.git_branch())), "StatusLineInfo"),
+        fmt.highlight("", "StatusLine"),
+    },
+    -- mid
+    {
+        fmt.truncation_marker,
+        provider.file(),
+        " ",
+        provider.modified()
+    },
+    -- right
+    {
+        provider.diag_summary(),
+        fmt.highlight("", "StatusLineFile"),
+        " ",
+        provider.file_type(),
+        " ",
+        provider.file_encoding(),
+        " ",
+        provider.file_format(),
+        " ",
+        provider.position(),
+        " ",
+    },
+}
+
 local active_term_stl = {
     -- left
     {
         fmt.highlight(fmt.wrap(provider.term_label), "StatusLineEnc"),
-        fmt.highlight(fmt.wrap(provider.mode()), "StatusLineMode"),
+        fmt.highlight(fmt.wrap(provider.mode()), "StatusLineBufNo"),
         fmt.highlight("", "StatusLine"),
     },
     -- mid
@@ -98,41 +158,19 @@ local active_term_stl = {
 local stringified_active_term_stl = fmt.join(
     map(function(l) return fmt.join(l, "") end, active_term_stl), fmt.separation_marker)
 
-local active_buf_stl = {
-    -- left
-    {
-        fmt.highlight(fmt.wrap(provider.current_working_dir()), "StatusLineEnc"),
-        fmt.highlight(fmt.wrap(provider.mode()), "StatusLineMode"),
-        -- fmt.group makes the whole thing disappear if vim isn't in a git folder
-        fmt.highlight(fmt.group(fmt.wrap(provider.git_branch())), "StatusLineInfo"),
-        fmt.highlight("", "StatusLine"),
-    },
-    -- mid
-    {
-        fmt.truncation_marker,
-        provider.file(),
-        " ",
-        provider.modified()
-    },
-    -- right
-    {
-        fmt.highlight("", "StatusLineFile"),
-        " ",
-        provider.file_type(),
-        " ",
-        provider.file_encoding(),
-        " ",
-        provider.file_format(),
-        " ",
-        provider.position(),
-        " ",
-    },
-}
-
 local stringified_active_buf_stl = fmt.join(
     map(function(l) return fmt.join(l, "") end, active_buf_stl), fmt.separation_marker)
 
 -- inactive part
+
+local inactive_buf_stl = {
+    -- left
+    { provider.current_working_dir() },
+    -- mid
+    { fmt.truncation_marker,         provider.file(), provider.modified() },
+    -- right
+    { provider.position() },
+}
 
 local inactive_term_stl = {
     -- left
@@ -144,15 +182,6 @@ local inactive_term_stl = {
 }
 local stringified_inactive_term_stl = fmt.wrap(fmt.join(
     map(function(l) return fmt.join(l, " ") end, inactive_term_stl), fmt.separation_marker))
-
-local inactive_buf_stl = {
-    -- left
-    { provider.current_working_dir() },
-    -- mid
-    { fmt.truncation_marker,         provider.file(), provider.modified() },
-    -- right
-    { provider.position() },
-}
 
 local stringified_inactive_buf_stl = fmt.wrap(fmt.join(
     map(function(l) return fmt.join(l, " ") end, inactive_buf_stl), fmt.separation_marker))

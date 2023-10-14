@@ -115,12 +115,13 @@ function s:make_session() abort
 endfunction
 
 function s:restore_session() abort
-    let l:session_file_path = s:get_session_file_path(s:get_session_dir())
+    let l:session_dir = s:get_session_dir()
+    let l:session_file_path = s:get_session_file_path(l:session_dir)
     if (filereadable(l:session_file_path))
         silent execute 'source ' . l:session_file_path
-        echo 'Session restored for ' . getcwd()
+        echo 'Session restored for ' . fnamemodify(getcwd(), ":~") . '@' . luaeval('require("utils").git_branch()')
     else
-        echo 'No session restored for ' . getcwd()
+        echo 'No session restored for ' . fnamemodify(getcwd(), ":~") . '@' . luaeval('require("utils").git_branch()')
     endif
 endfunction
 

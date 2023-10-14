@@ -25,7 +25,6 @@ local modes = nil
 local function resolve_modes()
     if modes == nil then
         modes = setmetatable({
-            -- LuaFormatter off
             ['n']  = M.modes.normal,
             ['no'] = M.modes.normal_pending,
             ['v']  = M.modes.visual,
@@ -46,7 +45,6 @@ local function resolve_modes()
             ['r?'] = M.modes.confirm,
             ['!']  = M.modes.shell,
             ['t']  = M.modes.terminal
-            -- LuaFormatter on
         }, {
             __index = function(_, key)
                 print("Unknown mode '" .. key .. "'")
@@ -59,6 +57,7 @@ end
 
 M.current_mode = function() return resolve_modes()[vim.fn.mode()] end
 
+-- watch out when renaming: this is also used in init.vim for session management
 M.git_branch = function()
     local branch = vim.fn.system("git branch --show-current 2> /dev/null | tr -d '\n'")
     if branch ~= "" then
@@ -66,6 +65,5 @@ M.git_branch = function()
     end
     return nil
 end
-
 
 return M
