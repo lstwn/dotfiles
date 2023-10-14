@@ -13,6 +13,7 @@ function provider.mode()
     return "%{b:mode}"
 end
 
+-- BufEnter is required to have the buffer local variable initalized
 vim.api.nvim_create_autocmd({ "VimEnter", "BufEnter", "ModeChanged" }, {
     callback = function()
         vim.b.mode = utils.current_mode().long_name:upper()
@@ -23,12 +24,14 @@ function provider.git_branch()
     return "%{b:git_branch}"
 end
 
+-- BufEnter is required to have the buffer local variable initalized
 vim.api.nvim_create_autocmd({ "VimEnter", "BufEnter", "FileType", "FocusGained" }, {
     callback = function()
         vim.b.git_branch = utils.git_branch() or ""
     end
 })
 
+-- BufEnter is required to have the buffer local variable initalized
 vim.api.nvim_create_autocmd({ "VimEnter", "BufEnter", "DiagnosticChanged" }, {
     callback = function()
         local err_cnt = #diagnostic.get(vim.api.nvim_get_current_buf(), {
