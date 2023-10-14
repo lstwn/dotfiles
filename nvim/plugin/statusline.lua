@@ -24,12 +24,7 @@ end
 
 vim.api.nvim_create_autocmd({ "VimEnter", "FileType", "BufEnter", "FocusGained" }, {
     callback = function()
-        local branch = vim.fn.system("git branch --show-current 2> /dev/null | tr -d '\n'")
-        if branch ~= "" then
-            vim.b.git_branch = branch
-        else
-            vim.b.git_branch = ""
-        end
+        vim.b.git_branch = utils.git_branch() or ""
     end
 })
 

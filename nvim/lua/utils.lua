@@ -59,4 +59,13 @@ end
 
 M.current_mode = function() return resolve_modes()[vim.fn.mode()] end
 
+M.git_branch = function()
+    local branch = vim.fn.system("git branch --show-current 2> /dev/null | tr -d '\n'")
+    if branch ~= "" then
+        return branch
+    end
+    return nil
+end
+
+
 return M

@@ -125,7 +125,7 @@ function s:restore_session() abort
 endfunction
 
 function s:get_session_dir()
-    return stdpath('data') . '/sessions' . getcwd()
+    return stdpath('data') . '/sessions' . getcwd() . luaeval('require("utils").git_branch()')
 endfunction
 
 function s:get_session_file_path(base_dir)
