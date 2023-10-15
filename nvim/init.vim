@@ -51,7 +51,6 @@ set winminheight=3
 set scrolloff=10
 set autoread " automatically load file changes, undo with 'u'
 set title
-set colorcolumn=80
 set t_Co=256
 set cmdheight=2
 set showtabline=2
