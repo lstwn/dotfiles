@@ -1,6 +1,6 @@
 local M = {}
 
-M.own = function()
+M.native = function()
     -- space as leader key
     vim.g.mapleader = " "
 
@@ -87,9 +87,7 @@ end
 M.telescope = function()
     vim.api.nvim_exec([[
     nnoremap <leader>f  <cmd>Telescope find_files<cr>
-    tnoremap <leader>f  <cmd>Telescope find_files<cr>
     nnoremap <leader>b  <cmd>Telescope buffers<cr>
-    tnoremap <leader>b  <cmd>Telescope buffers<cr>
 
     nnoremap <leader>m  <cmd>Telescope marks<cr>
     nnoremap <leader>j  <cmd>Telescope jumplist<cr>

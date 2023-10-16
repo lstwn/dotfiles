@@ -52,7 +52,7 @@ local on_attach = function(client, bufnr)
     -- Enable completion triggered by <c-x><c-o>
     buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 
-    require("mappings").lsp(bufnr)
+    require("keymaps").lsp(bufnr)
 end
 
 -- NOTE: when having any problems with formatting/linting try running 'eslint_d restart'.

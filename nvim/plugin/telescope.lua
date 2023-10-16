@@ -4,7 +4,7 @@ local sorters = require("telescope.sorters")
 local previewers = require("telescope.previewers")
 local themes = require("telescope.themes")
 
-require("mappings").telescope()
+require("keymaps").telescope()
 
 vim.cmd "autocmd User TelescopePreviewerLoaded setlocal number"
 
