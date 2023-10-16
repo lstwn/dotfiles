@@ -1,16 +1,12 @@
-vim.api.nvim_exec([[
-function g:OnSave()
-  if exists(":OrganizeImports")
-    OrganizeImports
-  endif
-  lua vim.lsp.buf.format()
-endfunction
+local lsp_augroup = vim.api.nvim_create_augroup('lsp_tweaks', { clear = true })
 
-augroup on_save
-  autocmd!
-  autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.vue,*.rs,*.py,*.c,*.lua,*.md,*.json,*.html,*.css call g:OnSave()
-augroup end
-]], false)
+vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = "*",
+    group = lsp_augroup,
+    callback = function()
+        vim.lsp.buf.format()
+    end,
+})
 
 -- set borders for lsp floats in line with dressing.nvim and telescope
 -- see :h nvim_open_win() and search for border for available options
@@ -195,7 +191,7 @@ lspconfig.texlab.setup {
         texlab = {
             build = {
                 executable = "latexmk",
-                args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "-outdir=./build" },
+                args = { "-lualatex", "-interaction=nonstopmode", "-synctex=1", "-outdir=./build" },
                 onSave = true,
                 auxDirectory = "./build",
                 logDirectory = "./build",

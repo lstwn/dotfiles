@@ -82,6 +82,7 @@ opt.shiftwidth = 4
 opt.softtabstop = 4
 -- use spaces instead of tabs
 opt.expandtab = true
+opt.clipboard = "unnamedplus"
 -- disable netrw (must happen early in the init process)
 vim.g.loaded_netrwPlugin = 1
 

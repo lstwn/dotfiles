@@ -1,6 +1,8 @@
 local utils = require("utils")
 local diagnostic = vim.diagnostic
 
+local stl_augroup = vim.api.nvim_create_augroup('stl', { clear = true })
+
 local provider = {}
 
 -- makes vim evaluate the expression in e
@@ -14,6 +16,7 @@ provider.current_working_dir = provider.make_expr("g:stl_cwd")
 
 -- BufEnter is required to have the buffer local variable initalized
 vim.api.nvim_create_autocmd({ "VimEnter", "DirChanged" }, {
+    group = stl_augroup,
     callback = function()
         vim.g.stl_cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
     end
@@ -25,6 +28,7 @@ provider.mode = provider.make_expr("b:stl_mode")
 
 -- BufEnter is required to have the buffer local variable initalized
 vim.api.nvim_create_autocmd({ "BufEnter", "ModeChanged" }, {
+    group = stl_augroup,
     callback = function()
         vim.b.stl_mode = utils.current_mode().long_name:upper()
     end
@@ -34,6 +38,7 @@ provider.git_branch = provider.make_expr("b:git_branch")
 
 -- BufEnter is required to have the buffer local variable initalized
 vim.api.nvim_create_autocmd({ "BufEnter", "FileType", "FocusGained" }, {
+    group = stl_augroup,
     callback = function()
         vim.b.git_branch = utils.git_branch() or ""
     end
@@ -43,6 +48,7 @@ provider.diag_summary = provider.make_re_reactive("b:stl_diag_colorbox")
 
 -- BufEnter is required to have the buffer local variable initalized
 vim.api.nvim_create_autocmd({ "BufEnter", "DiagnosticChanged" }, {
+    group = stl_augroup,
     callback = function()
         local err_cnt = #diagnostic.get(vim.api.nvim_get_current_buf(), {
             severity = diagnostic.severity[diagnostic.severity.ERROR],
