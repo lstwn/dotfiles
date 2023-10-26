@@ -1,5 +1,5 @@
 vim.g.broot_replace_netrw = true
-vim.g.broot_open_command = "osopen"
+vim.g.broot_open_command = "open"
 vim.g.broot_shell_command = "sh -c"
 vim.g.broot_redirect_command = ">"
 vim.g.broot_vim_conf = {
