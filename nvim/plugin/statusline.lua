@@ -122,8 +122,8 @@ local active_buf_stl = {
         fmt.highlight(fmt.wrap(provider.current_working_dir), "MagentaBlock"),
         fmt.highlight(fmt.wrap(provider.mode), "GreenBlock"),
         -- fmt.group makes the whole thing disappear if vim isn't in a git folder
-        fmt.highlight(fmt.group(fmt.wrap(provider.git_branch)), "YellowBlock"),
-        fmt.highlight("", "StatusLine"),
+        fmt.highlight(fmt.group(fmt.wrap(fmt.truncation_marker .. provider.git_branch)), "YellowBlock"),
+        fmt.highlight(" ", "StatusLine"),
     },
     -- mid
     {
