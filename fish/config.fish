@@ -59,7 +59,7 @@ if test -d ~/.local/bin
 end
 
 # npm path
-if test (type npm 2>/dev/null)
+if test (type --query npm)
     set -x NPM_GLOBAL_DIR "$HOME/.npm/global"
     fish_add_path "$NPM_GLOBAL_DIR/bin"
     set -e MANPATH
@@ -78,6 +78,11 @@ if status --is-interactive
     starship init fish | source
     string match -q "$TERM_PROGRAM" "vscode"
     and . (code --locate-shell-integration-path fish)
+    # automatically load ssh keys from keychain in interactive session
+    if test (type --query ssh-add)
+        and test (uname) = Darwin
+        ssh-add --apple-load-keychain &> /dev/null
+    end
 end
  
 if status --is-interactive
