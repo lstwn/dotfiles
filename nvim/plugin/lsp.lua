@@ -4,7 +4,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     pattern = "*",
     group = lsp_augroup,
     callback = function()
-        vim.lsp.buf.format()
+        local _status = pcall(vim.lsp.buf.format)
     end,
 })
 

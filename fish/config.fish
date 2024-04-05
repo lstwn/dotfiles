@@ -38,11 +38,6 @@ set -g fish_pager_color_description white             # the color of the complet
 #set -g fish_pager_color_progress              # the color of the progress bar at the bottom left corner
 #set -g fish_pager_color_secondary              # the background color of the every second completion
 
-# vim default editor
-set -x EDITOR "nvim"
-set -x VISUAL $EDITOR
-set -x PAGER "less"
-
 # brew path
 if test -d /usr/local/bin
     fish_add_path "/usr/local/bin"
@@ -56,6 +51,11 @@ end
 # python path
 if test -d ~/.local/bin
     fish_add_path "$HOME/.local/bin"
+end
+
+# anaconda path
+if test -d /usr/local/anaconda3/bin
+    fish_add_path "/usr/local/anaconda3/bin"
 end
 
 # npm path
@@ -73,15 +73,51 @@ if not string match -q -- $PNPM_HOME $PATH
 end
 # pnpm end
 
-# starship prompt and vscode integration for interactive sessions
-if status --is-interactive
-    starship init fish | source
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+if test -f /usr/local/anaconda3/bin/conda
+    eval /usr/local/anaconda3/bin/conda "shell.fish" "hook" $argv | source
+end
+# <<< conda initialize <<<
+
+function __is_within_vscode
+    # if launched from shell
     string match -q "$TERM_PROGRAM" "vscode"
-    and . (code --locate-shell-integration-path fish)
+    # if launched from GUI
+    or set -q VSCODE_PID
+end
+
+function __is_within_zed
+    set -q ZED
+end
+
+function __is_within_tmux
+    set -q TMUX
+end
+
+set -x EDITOR "nvim"
+set -x VISUAL "$EDITOR"
+set -x PAGER "less"
+
+# setup interactive sessions
+if status --is-interactive
+    # load starship prompt
+    starship init fish | source
     # automatically load ssh keys from keychain in interactive session
     if test (type --query ssh-add)
         and test (uname) = Darwin
         ssh-add --apple-load-keychain &> /dev/null
+    end
+    if __is_within_vscode
+        set -x EDITOR "code --wait"
+        set -x VISUAL "$EDITOR"
+        . (code --locate-shell-integration-path fish)
+    end
+    if __is_within_zed
+        set -x EDITOR "zed --wait"
+        set -x VISUAL "$EDITOR"
+    end
+    if __is_within_tmux
     end
 end
  
@@ -92,5 +128,7 @@ and not set -q TMUX
 and not string match -q "$TERM_PROGRAM" "vscode"
 # no tmux when vscode tries to resolve shell if launched from GUI
 and not set -q VSCODE_PID
+# no tmux when a terminal is launched in zed
+and not set -q ZED
     exec tmux
 end
