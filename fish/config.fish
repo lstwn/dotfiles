@@ -95,6 +95,10 @@ function __is_within_tmux
     set -q TMUX
 end
 
+function __is_mac
+    test (uname) = "Darwin"
+end
+
 set -x EDITOR "nvim"
 set -x VISUAL "$EDITOR"
 set -x PAGER "less"
@@ -104,8 +108,7 @@ if status --is-interactive
     # load starship prompt
     starship init fish | source
     # automatically load ssh keys from keychain in interactive session
-    if test (type --query ssh-add)
-        and test (uname) = Darwin
+    if test (type --query ssh-add) -a (__is_mac)
         ssh-add --apple-load-keychain &> /dev/null
     end
     if __is_within_vscode
