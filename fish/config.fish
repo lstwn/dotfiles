@@ -107,31 +107,32 @@ set -x PAGER "less"
 if status --is-interactive
     # load starship prompt
     starship init fish | source
+
     # automatically load ssh keys from keychain in interactive session
     if test (type --query ssh-add) -a (__is_mac)
         ssh-add --apple-load-keychain &> /dev/null
     end
+
     if __is_within_vscode
+        # setup vs code options
         set -x EDITOR "code --wait"
         set -x VISUAL "$EDITOR"
         . (code --locate-shell-integration-path fish)
+        return
     end
+
     if __is_within_zed
+        # setup zed options
         set -x EDITOR "zed --wait"
         set -x VISUAL "$EDITOR"
+        return
     end
+
     if __is_within_tmux
+        # no nesting of tmux sessions
+        return
     end
-end
- 
-if status --is-interactive
-# no tmux nesting
-and not set -q TMUX
-# no tmux when a terminal is launched in vscode
-and not string match -q "$TERM_PROGRAM" "vscode"
-# no tmux when vscode tries to resolve shell if launched from GUI
-and not set -q VSCODE_PID
-# no tmux when a terminal is launched in zed
-and not set -q ZED
+
+    # otherwise, launch tmux automagically
     exec tmux
 end

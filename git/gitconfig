@@ -2,7 +2,7 @@
 	name = Leo
 	email = lstwn@mailbox.org
 [init]
-	defaultBranch = trunk
+	defaultBranch = main
 [push]
 	autoSetupRemote = true
 [pull]
