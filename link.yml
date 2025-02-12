@@ -30,6 +30,12 @@
           src: "{{ playbook_dir }}/starship/starship-truncated.toml",
           dest: "{{ starship_basepath }}/starship-truncated.toml",
         }
+    ssh_basepath: "{{ ansible_env.HOME }}/.ssh"
+    ssh_links:
+      - {
+          src: "{{ playbook_dir }}/ssh/config",
+          dest: "{{ ssh_basepath }}/config",
+        }
     git_basepath: "{{ ansible_env.HOME }}"
     git_links:
       - {
@@ -107,6 +113,20 @@
         dest: "{{ item.dest }}"
         state: link
       loop: "{{ starship_links }}"
+
+    - name: create ssh basepath
+      when: ssh_basepath is defined
+      ansible.builtin.file:
+        path: "{{ ssh_basepath }}"
+        state: directory
+    - name: link ssh
+      when: ssh_basepath is defined and ssh_links is defined
+      ansible.builtin.file:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        state: link
+        force: yes
+      loop: "{{ ssh_links }}"
 
     - name: link git
       when: git_links is defined
