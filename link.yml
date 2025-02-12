@@ -3,6 +3,7 @@
   hosts: localhost
   connection: local
   vars:
+    - projects_dir: "{{ ansible_env.home }}/Projects"
     - tmux_basepath: "{{ ansible_env.home }}"
     - tmux_links:
         - {
@@ -58,6 +59,26 @@
         - {
             src: "{{ playbook_dir }}/vscode/snippets",
             dest: "{{ vscode_basepath }}/snippets",
+          }
+    - git_repos:
+        - {
+            name: "mac_workstation",
+            url: "https://github.com/lstwn/mac-workstation",
+          }
+        - { name: "dotfiles", url: "git@github.com:lstwn/dotfiles.git" }
+        - { name: "blog", url: "git@github.com:lstwn/blog.git" }
+        - { name: "masterthesis", url: "git@github.com:lstwn/masterthesis.git" }
+        - {
+            name: "undo_redo_replicated_registers",
+            url: "git@github.com:lstwn/undo-redo-replicated-registers.git",
+          }
+        - { name: "lui", url: "ssh://git@git.lavego.de:7999/lui/lui.git" }
+        - { name: "lusi", url: "ssh://git@git.lavego.de:7999/lui/lusi.git" }
+        - { name: "levi", url: "ssh://git@git.lavego.de:7999/lui/levi.git" }
+        - { name: "loak", url: "ssh://git@git.lavego.de:7999/lui/loak.git" }
+        - {
+            name: "luilibs",
+            url: "ssh://git@git.lavego.de:7999/lui/luilibs.git",
           }
   tasks:
     - name: link tmux
@@ -122,3 +143,10 @@
         dest: "{{ item.dest }}"
         state: link
       loop: "{{ vscode_links }}"
+
+    - name: cloning git repos
+      ansible.builtin.git:
+        repo: "{{ item.url }}"
+        dest: "{{ projects_dir }}/{{ item.name }}"
+        update: no
+      loop: "{{ git_repos }}"

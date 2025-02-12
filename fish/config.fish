@@ -11,6 +11,7 @@ set -x LESS_TERMCAP_se (tput rmso; tput sgr0)                  # reset search
 set -x LESS_TERMCAP_us (tput smul; tput bold; tput setaf 15)   # begin underline
 set -x LESS_TERMCAP_ue (tput rmul; tput sgr0)                  # reset underline
 set -x GROFF_NO_SGR 1                                          # show colors in manpages
+set -x SSH_AUTH_SOCK ~/.bitwarden-ssh-agent.sock
 
 set -g fish_color_normal white # the default color
 set -g fish_color_command yellow --bold                                  # the color for commands
