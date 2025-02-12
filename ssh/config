@@ -1,0 +1,35 @@
+# lstwn's ssh config file
+
+Host *.lavego.de
+    HostkeyAlgorithms +ssh-rsa
+    PubkeyAcceptedAlgorithms +ssh-rsa
+
+Host leospi
+    User lstwn
+    HostName 192.168.178.10
+    # Allow forwarding of the local ssh agent to the remote machine.
+    ForwardAgent yes
+    # Allow forwarding of port 1337 from the remote machine to the local machine.
+    # LocalForward localhost:1337 localhost:1337
+
+Host gitlab.lrz.de
+    User git
+    ForwardAgent yes
+
+# DevPod Start masterthesis.devpod
+Host masterthesis.devpod
+  ForwardAgent yes
+  LogLevel error
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null
+  HostKeyAlgorithms rsa-sha2-256,rsa-sha2-512,ssh-rsa
+  ProxyCommand "/Applications/DevPod.app/Contents/MacOS/devpod-cli" ssh --stdio --context default --user user masterthesis
+  User user
+# DevPod End masterthesis.devpod
+
+Host *
+    IgnoreUnknown UseKeychain
+    UseKeychain yes
+    # enable if you want to add keys automatically to ssh-agent
+    # AddKeysToAgent yes
+    IdentityFile ~/.ssh/lstwn
