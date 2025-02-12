@@ -1,0 +1,193 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run the `open default settings` command
+// from the command palette or from `Zed` application menu.
+{
+  "icon_theme": "VSCode Icons (Dark)",
+  "restore_on_startup": "last_session",
+  "theme": {
+    "mode": "system",
+    "dark": "Ayu Dark",
+    "light": "Ayu Dark"
+  },
+  "centered_layout": {
+    "left_padding": 0.15,
+    "right_padding": 0.15
+  },
+  "base_keymap": "VSCode",
+  "vim_mode": true,
+  "cursor_blink": false,
+  "relative_line_numbers": true,
+  "buffer_font_size": 13.0,
+  "buffer_font_family": "Iosevka Term Extended",
+  "ui_font_family": "Iosevka Aile",
+  "use_smartcase_search": true,
+  "show_wrap_guides": true,
+  "wrap_guides": [80, 100],
+  "soft_wrap": "none",
+  "terminal": {
+    "font_family": "Iosevka Term Extended",
+    "copy_on_select": true,
+    "env": {
+      "ZED": "1"
+    }
+  },
+  "format_on_save": "on",
+  "inlay_hints": {
+    "enabled": true,
+    "show_type_hints": false,
+    "show_parameter_hints": true,
+    "show_other_hints": true
+  },
+  "ssh_connections": [
+    {
+      "host": "leospi",
+      "projects": [
+        {
+          "paths": ["~/config"]
+        }
+      ]
+    }
+  ],
+  "assistant": {
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "o3-mini"
+    },
+    "version": "2"
+  },
+  "languages": {
+    "JavaScript": {
+      "format_on_save": "on",
+      "formatter": [
+        {
+          "external": {
+            "command": "prettierd",
+            "arguments": ["--stdin-filepath", "{buffer_path}"]
+          }
+        }
+      ],
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true
+      }
+    },
+    "TypeScript": {
+      "format_on_save": "on",
+      "formatter": [
+        {
+          "external": {
+            "command": "prettierd",
+            "arguments": ["--stdin-filepath", "{buffer_path}"]
+          }
+        }
+      ],
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true
+      }
+    },
+    "Markdown": {
+      "format_on_save": "on",
+      "formatter": {
+        "external": {
+          "command": "prettierd",
+          "arguments": ["--stdin-filepath", "{buffer_path}"]
+        }
+      }
+    },
+    "Vue.js": {
+      "format_on_save": "on",
+      "formatter": {
+        "external": {
+          "command": "prettierd",
+          "arguments": ["--stdin-filepath", "{buffer_path}"]
+        }
+      },
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true
+      }
+    },
+    "Astro": {
+      "format_on_save": "on",
+      "formatter": "prettier"
+    },
+    "Rust": {
+      "format_on_save": "on",
+      "formatter": [{ "language_server": { "name": "rust-analyzer" } }]
+    },
+    "LaTeX": {
+      "format_on_save": "on",
+      "formatter": [{ "language_server": { "name": "texlab" } }],
+      "inlay_hints": {
+        "enabled": false
+      }
+    }
+  },
+  "lsp": {
+    "typescript-language-server": {
+      "initialization_options": {
+        "preferences": {
+          "includeInlayParameterNameHints": "all",
+          "includeInlayParameterNameHintsWhenArgumentMatchesName": false,
+          "includeInlayFunctionParameterTypeHints": true,
+          "includeInlayVariableTypeHints": true,
+          "includeInlayVariableTypeHintsWhenTypeMatchesName": false,
+          "includeInlayPropertyDeclarationTypeHints": true,
+          "includeInlayFunctionLikeReturnTypeHints": true,
+          "includeInlayEnumMemberValueHints": true
+        }
+      }
+    },
+    "rust-analyzer": {
+      "initialization_options": {
+        "inlayHints": {
+          "maxLength": null,
+          "lifetimeElisionHints": {
+            "useParameterNames": true,
+            "enable": "skip_trivial"
+          },
+          "closureReturnTypeHints": {
+            "enable": "always"
+          }
+        }
+      }
+    },
+    "texlab": {
+      "settings": {
+        "texlab": {
+          "latexFormatter": "latexindent",
+          "latexindent": { "modifyLineBreaks": true },
+          "formatterLineLength": 80,
+          "bibtexFormatter": "latexindent",
+          "build": {
+            "onSave": true,
+            "executable": "tectonic",
+            "args": [
+              "-X",
+              "compile",
+              "%f",
+              "--untrusted",
+              "--synctex",
+              "--keep-logs",
+              "--keep-intermediates",
+              "--outdir",
+              "build"
+            ],
+            "pdfDirectory": "build",
+            "auxDirectory": "build",
+            "logDirectory": "build",
+            "forwardSearchAfter": true
+          },
+          "forwardSearch": {
+            "executable": "/Applications/Skim.app/Contents/SharedSupport/displayline",
+            // -g forces Skim to stay in the background
+            "args": ["-g", "-r", "%l", "%p", "%f"]
+          }
+        }
+      }
+    }
+  }
+}
