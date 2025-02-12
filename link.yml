@@ -3,25 +3,62 @@
   hosts: localhost
   connection: local
   vars:
-    - tmux_basepath: "{{ ansible_env.HOME }}"
+    - tmux_basepath: "{{ ansible_env.home }}"
     - tmux_links:
-      - { src: "{{ playbook_dir }}/tmux/tmux",               dest: "{{ tmux_basepath }}/.tmux.conf" }
-    - fish_basepath: "{{ ansible_env.HOME }}/.config/fish"
+        - {
+            src: "{{ playbook_dir }}/tmux/tmux",
+            dest: "{{ tmux_basepath }}/.tmux.conf",
+          }
+    - fish_basepath: "{{ ansible_env.home }}/.config/fish"
     - fish_links:
-      - { src: "{{ playbook_dir }}/fish/config.fish",        dest: "{{ fish_basepath }}/config.fish" }
-      - { src: "{{ playbook_dir }}/fish/functions",          dest: "{{ fish_basepath }}/functions" }
-    - nvim_config_folder: "{{ ansible_env.HOME }}/.config/nvim"
-    - git_basepath: "{{ ansible_env.HOME }}"
+        - {
+            src: "{{ playbook_dir }}/fish/config.fish",
+            dest: "{{ fish_basepath }}/config.fish",
+          }
+        - {
+            src: "{{ playbook_dir }}/fish/functions",
+            dest: "{{ fish_basepath }}/functions",
+          }
+    - starship_basepath: "{{ ansible_env.home }}/.config"
+    - starship_links:
+        - {
+            src: "{{ playbook_dir }}/starship/starship.toml",
+            dest: "{{ starship_basepath }}/starship.toml",
+          }
+        - {
+            src: "{{ playbook_dir }}/starship/starship-truncated.toml",
+            dest: "{{ starship_basepath }}/starship-truncated.toml",
+          }
+    - git_basepath: "{{ ansible_env.home }}"
     - git_links:
-      - { src: "{{ playbook_dir }}/git/gitconfig",           dest: "{{ git_basepath }}/.gitconfig" }
-    - broot_basepath: "{{ ansible_env.HOME }}/.config/broot"
-    - broot_links:
-      - { src: "{{ playbook_dir }}/broot/conf.toml",         dest: "{{ broot_basepath }}/conf.toml" }
-    #- vscode_basepath: "{{ ansible_env.HOME }}/.config/Code/User"
+        - {
+            src: "{{ playbook_dir }}/git/gitconfig",
+            dest: "{{ git_basepath }}/.gitconfig",
+          }
+    - zed_basepath: "{{ ansible_env.home }}/.config/zed"
+    - zed_links:
+        - {
+            src: "{{ playbook_dir }}/zed/settings.json",
+            dest: "{{ zed_basepath }}/settings.json",
+          }
+        - {
+            src: "{{ playbook_dir }}/zed/keymap.json",
+            dest: "{{ zed_basepath }}/keymap.json",
+          }
+    - vscode_basepath: "{{ ansible_env.home }}/.config/code/user"
     - vscode_links:
-      - { src: "{{ playbook_dir }}/vscode/settings.json",    dest: "{{ vscode_basepath }}/settings.json" }
-      - { src: "{{ playbook_dir }}/vscode/keybindings.json", dest: "{{ vscode_basepath }}/keybindings.json" }
-      - { src: "{{ playbook_dir }}/vscode/snippets",         dest: "{{ vscode_basepath }}/snippets" }
+        - {
+            src: "{{ playbook_dir }}/vscode/settings.json",
+            dest: "{{ vscode_basepath }}/settings.json",
+          }
+        - {
+            src: "{{ playbook_dir }}/vscode/keybindings.json",
+            dest: "{{ vscode_basepath }}/keybindings.json",
+          }
+        - {
+            src: "{{ playbook_dir }}/vscode/snippets",
+            dest: "{{ vscode_basepath }}/snippets",
+          }
   tasks:
     - name: link tmux
       when: tmux_links is defined
@@ -44,12 +81,13 @@
         state: link
       loop: "{{ fish_links }}"
 
-    - name: link nvim folder
-      when: nvim_config_folder is defined
+    - name: link starship
+      when: starship_links is defined
       ansible.builtin.file:
-        src: "{{ playbook_dir }}/nvim"
-        dest: "{{ nvim_config_folder }}"
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
         state: link
+      loop: "{{ starship_links }}"
 
     - name: link git
       when: git_links is defined
@@ -59,18 +97,18 @@
         state: link
       loop: "{{ git_links }}"
 
-    - name: create broot basepath
-      when: broot_basepath is defined
+    - name: create zed basepath
+      when: zed_basepath is defined
       ansible.builtin.file:
-        path: "{{ broot_basepath }}"
+        path: "{{ zed_basepath }}"
         state: directory
-    - name: link broot
-      when: broot_basepath is defined and broot_links is defined
+    - name: link zed
+      when: zed_basepath is defined and zed_links is defined
       ansible.builtin.file:
         src: "{{ item.src }}"
         dest: "{{ item.dest }}"
         state: link
-      loop: "{{ broot_links }}"
+      loop: "{{ zed_links }}"
 
     - name: create vscode basepath
       when: vscode_basepath is defined
@@ -84,4 +122,3 @@
         dest: "{{ item.dest }}"
         state: link
       loop: "{{ vscode_links }}"
-
