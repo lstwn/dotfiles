@@ -64,7 +64,7 @@ if test -d ~/.local/bin
 end
 
 # npm path
-if test (type --query npm)
+if command --query npm
     set -x NPM_GLOBAL_DIR "$HOME/.npm/global"
     fish_add_path "$NPM_GLOBAL_DIR/bin"
     set -e MANPATH
