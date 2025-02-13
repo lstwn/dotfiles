@@ -36,6 +36,10 @@
           src: "{{ playbook_dir }}/ssh/config",
           dest: "{{ ssh_basepath }}/config",
         }
+      - {
+          src: "{{ playbook_dir }}/ssh/known_hosts",
+          dest: "{{ ssh_basepath }}/known_hosts",
+        }
     git_basepath: "{{ ansible_env.HOME }}"
     git_links:
       - {

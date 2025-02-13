@@ -1,3 +1,6 @@
+# Clear last login message.
+printf '\33c\e[3J'
+
 fish_vi_key_bindings
 set -g fish_prompt_pwd_dir_length 1
 set fish_greeting
@@ -60,11 +63,6 @@ if test -d ~/.local/bin
     fish_add_path "$HOME/.local/bin"
 end
 
-# anaconda path
-if test -d /usr/local/anaconda3/bin
-    fish_add_path "/usr/local/anaconda3/bin"
-end
-
 # npm path
 if test (type --query npm)
     set -x NPM_GLOBAL_DIR "$HOME/.npm/global"
@@ -79,13 +77,6 @@ if not string match -q -- $PNPM_HOME $PATH
   set -gx PATH "$PNPM_HOME" $PATH
 end
 # pnpm end
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-if test -f /usr/local/anaconda3/bin/conda
-    eval /usr/local/anaconda3/bin/conda "shell.fish" "hook" $argv | source
-end
-# <<< conda initialize <<<
 
 function __is_within_vscode
     # if launched from shell
@@ -106,22 +97,22 @@ function __is_mac
     test (uname) = "Darwin"
 end
 
-set -x EDITOR "nvim"
+set -x EDITOR "vim"
 set -x VISUAL "$EDITOR"
 set -x PAGER "less"
 
-# setup interactive sessions
+# Setup interactive sessions.
 if status --is-interactive
-    # load starship prompt
+    # Load starship prompt.
     starship init fish | source
 
-    # automatically load ssh keys from keychain in interactive session
+    # Automatically load ssh keys from keychain in interactive session.
     if test (type --query ssh-add) -a (__is_mac)
         ssh-add --apple-load-keychain &> /dev/null
     end
 
     if __is_within_vscode
-        # setup vs code options
+        # Setup vs code options.
         set -x EDITOR "code --wait"
         set -x VISUAL "$EDITOR"
         . (code --locate-shell-integration-path fish)
@@ -129,17 +120,17 @@ if status --is-interactive
     end
 
     if __is_within_zed
-        # setup zed options
+        # Setup zed options.
         set -x EDITOR "zed --wait"
         set -x VISUAL "$EDITOR"
         return
     end
 
     if __is_within_tmux
-        # no nesting of tmux sessions
+        # No nesting of tmux sessions.
         return
     end
 
-    # otherwise, launch tmux automagically
+    # Otherwise, launch tmux automagically.
     exec tmux
 end

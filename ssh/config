@@ -1,5 +1,3 @@
-# lstwn's ssh config file
-
 Host *.lavego.de
     HostkeyAlgorithms +ssh-rsa
     PubkeyAcceptedAlgorithms +ssh-rsa
