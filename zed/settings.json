@@ -7,12 +7,29 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
-  "icon_theme": "VSCode Icons (Dark)",
+  "features": {
+    "edit_prediction_provider": "copilot"
+  },
+  "collaboration_panel": {
+    "dock": "right"
+  },
+  "outline_panel": {
+    "dock": "left"
+  },
+  "icon_theme": "Catppuccin Latte",
   "restore_on_startup": "last_session",
   "theme": {
     "mode": "system",
-    "dark": "Ayu Dark",
-    "light": "Ayu Dark"
+    "dark": "Github Dark",
+    "light": "Github Light"
+  },
+  "experimental.theme_overrides": {
+    "terminal.ansi.green": "#3fb950ff",
+    "terminal.ansi.bright_green": "#56d364ff",
+    "terminal.ansi.dim_green": "#3fb950ff",
+    "terminal.ansi.yellow": "#d29922ff",
+    "terminal.ansi.bright_yellow": "#e3b341ff",
+    "terminal.ansi.dim_yellow": "#d29922ff"
   },
   "centered_layout": {
     "left_padding": 0.15,
@@ -43,6 +60,8 @@
     "show_parameter_hints": true,
     "show_other_hints": true
   },
+  "auto_signature_help": false,
+  "show_signature_help_after_edits": false,
   "ssh_connections": [
     {
       "host": "leospi",
@@ -56,7 +75,7 @@
   "assistant": {
     "default_model": {
       "provider": "copilot_chat",
-      "model": "o3-mini"
+      "model": "gpt-4o"
     },
     "version": "2"
   },
@@ -152,6 +171,9 @@
           "closureReturnTypeHints": {
             "enable": "always"
           }
+        },
+        "checkOnSave": {
+          "command": "clippy"
         }
       }
     },

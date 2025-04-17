@@ -1,9 +1,9 @@
 [
   {
     "bindings": {
-      // i like index
-      "cmd-shift-i": "project_symbols::Toggle"
-      // "cmd-alt-t": "task::Spawn"
+      // "cmd-shift-o": "outline::Toggle" // use default "g s" instead
+      // "cmd-shift-i": "project_symbols::Toggle" // use default "g shift-s" instead
+      "cmd-shift-g": "git_panel::ToggleFocus"
     }
   },
   {
@@ -24,16 +24,17 @@
       "ctrl-w g shift-d": "editor::GoToTypeDefinitionSplit",
       "g i": "editor::GoToImplementation",
       "ctrl-w g i": "editor::GoToImplementationSplit",
+      "g shift-h": "editor::ShowSignatureHelp",
       "g r": "editor::FindAllReferences",
       "] d": "editor::GoToDiagnostic",
-      "[ d": "editor::GoToPrevDiagnostic",
+      "[ d": "editor::GoToPreviousDiagnostic",
       "] c": "editor::GoToHunk",
-      "[ c": "editor::GoToPrevHunk",
+      "[ c": "editor::GoToPreviousHunk",
+      "g z": "editor::OpenDocs"
       // space is "leaderkey"
-      "space h p": "editor::ToggleHunkDiff",
-      "space c a": "editor::ToggleCodeActions",
-      "space r n": "editor::Rename",
-      "space d": "editor::OpenDocs"
+      // "space h p": "editor::ToggleSelectedDiffHunks" // use default "d o" instead
+      // "space c a": "editor::ToggleCodeActions", // use default "g ." instead
+      // "space r n": "editor::Rename", // use default "c d" instead
     }
   },
   {
@@ -65,10 +66,10 @@
     }
   },
   {
-    "context": "Editor && vim_mode == insert && inline_completion && !showing_completions",
+    "context": "Editor && vim_mode == insert && edit_prediction && !showing_completions",
     "bindings": {
-      "ctrl-a": "editor::AcceptInlineCompletion",
-      "ctrl-n": "editor::AcceptPartialInlineCompletion"
+      "ctrl-a": "editor::AcceptEditPrediction",
+      "ctrl-n": "editor::AcceptPartialEditPrediction"
     }
   },
   {
@@ -76,10 +77,10 @@
     "bindings": {
       "ctrl-w n": "workspace::NewTerminal",
       "ctrl-w z": "workspace::ToggleZoom",
-      "ctrl-w h": ["workspace::ActivatePaneInDirection", "Left"],
-      "ctrl-w l": ["workspace::ActivatePaneInDirection", "Right"],
-      "ctrl-w k": ["workspace::ActivatePaneInDirection", "Up"],
-      "ctrl-w j": ["workspace::ActivatePaneInDirection", "Down"],
+      "ctrl-w h": "workspace::ActivatePaneLeft",
+      "ctrl-w l": "workspace::ActivatePaneRight",
+      "ctrl-w k": "workspace::ActivatePaneUp",
+      "ctrl-w j": "workspace::ActivatePaneDown",
       "cmd-shift-u": "terminal::ScrollLineUp",
       "cmd-shift-d": "terminal::ScrollLineDown"
     }
@@ -87,7 +88,7 @@
   {
     "context": "ProjectPanel && not_editing",
     "bindings": {
-      "k": "menu::SelectPrev",
+      "k": "menu::SelectPrevious",
       "j": "menu::SelectNext",
       "h": "project_panel::CollapseSelectedEntry",
       "l": "project_panel::ExpandSelectedEntry",
@@ -103,8 +104,8 @@
       "d": "project_panel::Delete",
       "n": "project_panel::NewFile",
       "shift-n": "project_panel::NewDirectory",
-      "shift-y": "project_panel::CopyRelativePath",
-      "g y": "project_panel::CopyPath",
+      "shift-y": "workspace::CopyRelativePath",
+      "g y": "workspace::CopyPath",
       "ctrl-w l": "project_panel::ToggleFocus"
     }
   }

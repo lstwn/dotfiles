@@ -53,10 +53,7 @@ if not test (type --query brew)
     if not contains "/opt/homebrew/share/info" $INFOPATH; set --global --export INFOPATH "/opt/homebrew/share/info" $INFOPATH; end;
 end
 
-# rust path
-if test -d ~/.cargo/bin
-    fish_add_path "$HOME/.cargo/bin"
-end
+# rust is managed via rustup
 
 # python path
 if test -d ~/.local/bin

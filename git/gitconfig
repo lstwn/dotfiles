@@ -1,6 +1,7 @@
 [user]
-	name = Leo
+	name = Leo Stewen
 	email = lstwn@mailbox.org
+	signingkey = /Users/lstwn/.ssh/lstwn
 [init]
 	defaultBranch = main
 [push]
@@ -61,3 +62,7 @@
     line-numbers-plus-style = green
     line-numbers-left-style = black
     line-numbers-right-style = black
+[gpg]
+	format = ssh
+[commit]
+	gpgsign = true
