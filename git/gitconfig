@@ -40,6 +40,7 @@
     diffFilter = delta --color-only
 [delta]
     features = line-numbers decorations # side-by-side
+    navigate = true
     syntax-theme = base16
     plus-style = syntax
     plus-emph-style = black green

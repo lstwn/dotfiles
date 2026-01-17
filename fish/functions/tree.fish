@@ -6,4 +6,3 @@ function tree --description "List contents of directory in tree format"
         command tree $argv | less
     end
 end
-

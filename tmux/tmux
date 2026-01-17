@@ -12,6 +12,8 @@ bind -T copy-mode-vi i     send-keys -X cancel
 bind -T copy-mode-vi a     send-keys -X cancel
 bind -T copy-mode-vi q     send-keys -X cancel
 bind -T copy-mode-vi v     send-keys -X begin-selection
+bind -T copy-mode-vi n     send-keys -X next-prompt
+bind -T copy-mode-vi p     send-keys -X previous-prompt
 bind i paste-buffer
 if-shell "uname | grep -q 'Darwin'" "\
         bind -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel 'pbcopy'; \
@@ -23,14 +25,13 @@ if-shell "uname | grep -q 'Linux'" "\
         bind y run 'tmux save-buffer - | wl-copy'"
 
 # enable activity alerts and color settings
-#setw -g monitor-activity on
 set -g visual-activity off
 set-option -g default-terminal "screen-256color"
 
 # set appropriate titles
 set-window-option -g automatic-rename on
 set-option -g set-titles on
-set -g set-titles-string "#{session_name} #(echo $USER)@#H:#{pane_current_path} [#{session_windows}]"
+set -g set-titles-string "#{session_name} #(echo $USER)@#H:#{pane_current_path}"
 
 # allow ctrl+b for other things, set prefix and pass on to other apps
 unbind C-b
@@ -60,7 +61,7 @@ bind L select-pane -R \; swap-pane -s !
 bind q kill-pane
 bind e last-pane
 bind -r m resize-pane -Z
-bind Tab last-window
+bind -r Tab last-window
 
 # resize panes more easily
 bind -r < resize-pane -L 5
@@ -70,21 +71,39 @@ bind -r + resize-pane -U 5
 bind -r ! resize-pane -y 5
 bind -r Space next-layout
 
-# window move
-bind -r c-p swap-window -t -1\; select-window -t -1
-bind -r c-n swap-window -t +1\; select-window -t +1
+# revert some default keybindings
+unbind %
+unbind t
+unbind '"'
+unbind $
+
+# renaming sessions and windows
+unbind .
+bind . command-prompt -I "#S" "rename-session '%%'"
+
+# window movement
+unbind [
+unbind ]
+bind -r ] next-window
+bind -r [ previous-window
+unbind \}
+unbind \{
+bind -r \} swap-window -t +1\; select-window -t +1
+bind -r \{ swap-window -t -1\; select-window -t -1
+# bind -r c-p swap-window -t -1\; select-window -t -1
+# bind -r c-n swap-window -t +1\; select-window -t +1
 
 # theming
 set -g status-style                     fg=default,bg=default
-set -g message-style                    fg=brightblack,bg=default
-set -g message-command-style            fg=brightblack,bg=default
+set -g message-style                    fg=default,bg=default
+set -g message-command-style            fg=default,bg=default
 set -g mode-style                       fg=black,bg=blue # selection color
 set -g window-status-style              fg=brightblack,bg=default
 set -g window-status-current-style      fg=black,bg=blue
 set -g window-status-activity-style     fg=black,bg=blue
-set -g pane-active-border-style         fg=black,bg=default
-set -g pane-border-style                fg=black,bg=default
-set -g popup-border-style               fg=black,bg=default
+set -g pane-active-border-style         fg=brightwhite,bg=default
+set -g pane-border-style                fg=brightwhite,bg=default
+set -g popup-border-style               fg=brightwhite,bg=default
 
 set -g base-index 1
 set -g pane-base-index 1
@@ -95,13 +114,13 @@ set -g status-position bottom
 set -g status-interval 10
 set -g status-keys vi
 set -g status-justify left
-set -g status-left "#[bg=magenta,fg=black] #S "
+set -g status-left "#[bg=brightwhite,fg=black] #S "
 set -g status-left-length 20
-set -g status-right '#[bg=blue,fg=black] %H:%M %a %d. %b %Y '
+set -g status-right '#[bg=default,fg=brightwhite] %H:%M %a %d. %b %Y'
 set -g status-right-length 40
 set -g window-status-separator ""
-set -g window-status-format " #I #W [#P] "
-set -g window-status-current-format " #I #W [#P] "
+set -g window-status-format " #I #W "
+set -g window-status-current-format " #I #W "
 
 # message duration length
-set -g display-time 1250
+set -g display-time 1500

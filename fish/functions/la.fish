@@ -7,4 +7,3 @@ function la --description "List contents of directory, including hidden files in
         command ls -la --group-directories-first --color=auto $argv
     end
 end
-

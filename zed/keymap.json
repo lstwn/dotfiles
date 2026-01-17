@@ -11,7 +11,8 @@
     "bindings": {
       // clashes with reopen closed tab..
       "cmd-?": "workspace::NewSearch",
-      "alt-t": ["task::Rerun", { "reevaluate_context": true }]
+      "alt-t": ["task::Rerun", { "reevaluate_context": true }],
+      "cmd-shift-s": "terminal_panel::ToggleFocus"
     }
   },
   {
@@ -30,7 +31,9 @@
       "[ d": "editor::GoToPreviousDiagnostic",
       "] c": "editor::GoToHunk",
       "[ c": "editor::GoToPreviousHunk",
-      "g z": "editor::OpenDocs"
+      "g z": "editor::OpenDocs",
+      "g y": "workspace::CopyRelativePath",
+      "g Y": "workspace::CopyPath"
       // space is "leaderkey"
       // "space h p": "editor::ToggleSelectedDiffHunks" // use default "d o" instead
       // "space c a": "editor::ToggleCodeActions", // use default "g ." instead
@@ -90,22 +93,21 @@
     "bindings": {
       "k": "menu::SelectPrevious",
       "j": "menu::SelectNext",
-      "h": "project_panel::CollapseSelectedEntry",
-      "l": "project_panel::ExpandSelectedEntry",
       "z c": "project_panel::CollapseSelectedEntry",
+      "z C": "project_panel::CollapseAllEntries",
       "z o": "project_panel::ExpandSelectedEntry",
-      "o": "project_panel::Open",
-      "shift-o": "project_panel::RevealInFileManager",
+      "o": "workspace::OpenWithSystem",
+      "O": "project_panel::RevealInFileManager",
       "r": "project_panel::Rename",
-      "x": "project_panel::Cut",
-      "c": "project_panel::Copy",
-      "shift-c": "project_panel::Duplicate",
+      "d": "project_panel::Cut",
+      "y y": "project_panel::Copy",
+      "y p": "project_panel::Duplicate",
       "p": "project_panel::Paste",
-      "d": "project_panel::Delete",
+      "x": "project_panel::Delete",
       "n": "project_panel::NewFile",
-      "shift-n": "project_panel::NewDirectory",
-      "shift-y": "workspace::CopyRelativePath",
-      "g y": "workspace::CopyPath",
+      "N": "project_panel::NewDirectory",
+      "g y": "workspace::CopyRelativePath",
+      "g Y": "workspace::CopyPath",
       "ctrl-w l": "project_panel::ToggleFocus"
     }
   }

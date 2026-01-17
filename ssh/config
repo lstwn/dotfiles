@@ -4,7 +4,7 @@ Host *.lavego.de
 
 Host leospi
     User lstwn
-    HostName 192.168.178.10
+    HostName 192.168.178.11
     # Allow forwarding of the local ssh agent to the remote machine.
     ForwardAgent yes
     # Allow forwarding of port 1337 from the remote machine to the local machine.

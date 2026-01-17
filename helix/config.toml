@@ -1,0 +1,25 @@
+theme = "base16_transparent"
+
+[editor]
+true-color = true
+line-number = "relative"
+
+[editor.file-picker]
+hidden = false
+
+[editor.search]
+smart-case = true
+
+[editor.whitespace.render]
+space = "none"
+tab = "all"
+nbsp = "none"
+nnbsp = "none"
+newline = "none"
+
+[keys.select]
+y = ":clipboard-yank"
+
+[keys.normal]
+"q" = ":quit"
+"Q" = ":quit!"

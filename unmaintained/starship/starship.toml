@@ -1,5 +1,5 @@
 format = """
-$battery\
+$prompt_start\
 $username\
 $hostname\
 $directory\
@@ -9,6 +9,7 @@ $git_state\
 $git_status\
 $cmd_duration\
 $status \
+$prompt_end\
 """
 
 # Disable the blank line at the start of the prompt
@@ -92,3 +93,15 @@ format = '[ $symbol$percentage ]($style)'
 [[battery.display]]
 threshold = 15
 style = "fg:black bg:purple"
+
+[custom.prompt_start]
+command = '''printf '\e]133;A; click_events=1\e\\''''
+format = '$output'
+when = true
+unsafe_no_escape = true
+
+[custom.prompt_end]
+command = '''printf '\e]133;B\e\\''''
+format = '$output'
+when = true
+unsafe_no_escape = true
